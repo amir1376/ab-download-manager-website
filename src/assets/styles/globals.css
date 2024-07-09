@@ -1,0 +1,14 @@
+@import "fonts.css";
+@import "tailwind.css";
+[data-theme] {
+    --primary-gradient-start: #4DC4FE;
+    --primary-gradient-end: #C631FF;
+}
+
+.text-gradient {
+    @apply bg-clip-text text-transparent;
+}
+
+.my-primary-gradient-colors {
+    @apply from-[var(--primary-gradient-start)] to-[var(--primary-gradient-end)]
+}

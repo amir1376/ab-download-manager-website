@@ -2,7 +2,7 @@ import {PropsWithChildren, useEffect} from "react";
 import {useLocalStorage} from 'usehooks-ts';
 
 export function useTheme(){
-    const [theme,setTheme]=useLocalStorage("theme","")
+    const [theme,setTheme]=useLocalStorage("theme","dark")
     const isDark = theme === "dark"
     return {
         theme,setTheme,isDark

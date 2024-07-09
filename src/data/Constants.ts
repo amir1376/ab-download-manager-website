@@ -2,7 +2,7 @@ import {SocialLink} from "~/utils/SocialLink.tsx";
 
 const githubInfo = {
     user: "amir1376",
-    repo: "ABDownloadManager",
+    repo: "ab-download-manager",
 }
 const developerInfo = {
     name: "Amir Ab",

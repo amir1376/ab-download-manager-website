@@ -1,8 +1,11 @@
 {
-  "name": "abdm-website",
-  "private": true,
-  "version": "0.0.0",
+  "name": "ab-download-manager-website",
+  "version": "1.0.0",
   "type": "module",
+  "homepage": "https://abdownloadmanager.com",
+  "repository": "https://github.com/amir1376/ab-download-manager-website",
+  "license": "Apache-2.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

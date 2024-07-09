@@ -42,7 +42,7 @@ export function getFooterData(): FooterData {
         },
         copyright: {
             since: "2024",
-            for: "ABDownloadManager App"
+            for: "AB Download Manager App"
         },
     }
 }

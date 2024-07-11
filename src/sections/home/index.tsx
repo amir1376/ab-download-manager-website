@@ -103,7 +103,7 @@ function Feature({feature}: {
         "py-8 px-8 rounded-lg cursor-default",
         "bg-base-200 text-base-content",
         "border border-base-content/10",
-        "shadow",
+        "shadow hover:shadow-lg",
         "gradient-border"
     )}>
         <div className="text-2xl font-bold">

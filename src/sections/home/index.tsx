@@ -31,7 +31,7 @@ function Hero(props: { icon: ImageProp, title: string, description: string }) {
                 "text-5xl md:text-6xl font-extrabold"
             )}>{props.title}</h2>
             <h5 className={classNames(
-                "text-3xl font-medium"
+                "text-3xl font-medium leading-normal"
             )}>{props.description}</h5>
             <div className="flex flex-row flex-wrap space-x-4">
                 <MyLink href={`/#download`}>

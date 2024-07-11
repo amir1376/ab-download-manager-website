@@ -138,7 +138,7 @@ function CommunityForMobile() {
     return <details dir={useCurrentDirection()}>
         <summary>
             <Icon icon="iconoir:community" height={24} width={24}/>
-            {t("socialAndCommunity")}
+            {t("social_and_community")}
         </summary>
         <ul>
             {socials.map(l => (
@@ -156,7 +156,7 @@ function CommunityDesktop() {
     return <div dir={useCurrentDirection()} className="dropdown">
         <div tabIndex={0} className="dropdown-bottom btn btn-ghost">
             <Icon icon="iconoir:community" height={24} width={24}/>
-            {t("socialAndCommunity")}
+            {t("social_and_community")}
         </div>
         <ul tabIndex={0} className="dropdown-content menu-lg rounded shadow-lg menu bg-base-200">
             {social.map(l => (

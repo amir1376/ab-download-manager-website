@@ -25,8 +25,8 @@ const data: ILanguageData = {
     home_hero_see_guides: "User Guide",
 
     home_features: "Features",
-    home_feature_multi_threaded_title: "Multi Threaded Downloads",
-    home_feature_multi_threaded_description: "by download file at multiple chunks increase download speed up to 500%",
+    home_feature_multi_threaded_title: "Faster Download Speed",
+    home_feature_multi_threaded_description: "Download files with multiple connections increase download speed up to 500%",
     home_feature_multiplatform_title: "Multiplatform",
     home_feature_multiplatform_description: "This software available for windows / linux at the moment, Others platforms are on the way!",
     home_feature_open_source_title: "Free & Open Source",
@@ -34,11 +34,11 @@ const data: ILanguageData = {
     home_feature_queue_title: "Download Queue",
     home_feature_queue_description: "Create and manage your downloads in queues ,It will download all of your files in a sequential manner",
     home_feature_scheduler_title: "Download Scheduler",
-    home_feature_scheduler_description: "You can setup scheduler to all of your queues to start and stop the queue automatically",
+    home_feature_scheduler_description: "You can setup scheduler on your queues to start and stop the queue automatically",
     home_feature_simple_ui_title: "Simple and Modern UI",
     home_feature_simple_ui_description: "Simple UI and dark mode by default",
     home_feature_speed_limiter_title: "Speed Limiter",
-    home_feature_speed_limiter_description: "you can set a limit your download speeds to let other use the same network:)",
+    home_feature_speed_limiter_description: "You can set a limit to your download speeds, to let others use the same network:)",
     home_feature_browser_integration_title: "Browser Integration",
     home_feature_browser_integration_description: "You can install the browser extension and automatically capture links from your web browser",
 
@@ -51,7 +51,7 @@ const data: ILanguageData = {
     or: "or",
     download_for: "Download for {name}",
 
-    socialAndCommunity: "Social & Community",
+    social_and_community: "Social & Community",
     social_email: "Email",
     social_instagram: "Instagram",
     social_telegram_channel: "Telegram Channel",

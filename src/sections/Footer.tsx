@@ -47,7 +47,7 @@ export default function Footer() {
             "items-center"
         )}>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-24 gap-y-12">
-                <FooterSection title={t("socialAndCommunity")}>
+                <FooterSection title={t("social_and_community")}>
                     {
                         data.socials.map(i=>{
                             return <FooterItem key={i.link} name={useGetNameForSocialLink(i)} link={i.link}/>

@@ -60,7 +60,7 @@ export type ILanguageData = {
     or:string
     download_for:string
 
-    socialAndCommunity:string
+    social_and_community:string
     social_telegram_group:string
     social_telegram_channel:string
     social_instagram:string

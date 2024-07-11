@@ -26,7 +26,7 @@ function Hero(props: { icon: ImageProp, title: string, description: string }) {
                  alt={props.icon.alt}
             />
         </div>
-        <div className="flex flex-col space-y-10 p-4 md:max-w-[50%]">
+        <div className="flex flex-col space-y-10 p-4 md:max-w-[55%]">
             <h2 className={classNames(
                 "text-5xl md:text-6xl font-extrabold"
             )}>{props.title}</h2>

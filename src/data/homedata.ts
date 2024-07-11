@@ -1,5 +1,5 @@
 import appIcon from "~/assets/icons/app_icon_simple.svg"
-import appIconBordered from "~/assets/icons/app_icon_bordered.svg"
+import appIconWithBackground from "~/assets/icons/app_icon_with_background.svg"
 import {getIcoifyLink} from "~/utils/IconifyUtil";
 import {Translatable} from "~/i18n/Translatable.ts";
 import appHomeDarkScreenshot from "~/assets/screenshots/app-home_dark.png"
@@ -47,7 +47,7 @@ export function getHomeData():HomeData {
             alt:"App Icon",
         },
         borderedIcon:{
-            src:appIconBordered,
+            src:appIconWithBackground,
             alt:"App Icon",
         },
 

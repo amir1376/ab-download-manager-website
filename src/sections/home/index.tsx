@@ -106,7 +106,7 @@ function Feature({feature}: {
         "shadow",
         "gradient-border"
     )}>
-        <div className="text-2xl">
+        <div className="text-2xl font-bold">
             {t(feature.title)}
         </div>
         <div className="mt-2"/>

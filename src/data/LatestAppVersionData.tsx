@@ -173,7 +173,7 @@ export async function getLatestVersionData(): Promise<ApiResult> {
             // TODO add extensions here
             {
                 browserType: "firefox",
-                link: ""
+                link: "https://addons.mozilla.org/en-US/firefox/addon/ab-download-manager/"
             },
             {
                 browserType: "chrome",

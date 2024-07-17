@@ -28,7 +28,7 @@ const data: ILanguageData = {
     home_feature_multi_threaded_title: "Faster Download Speed",
     home_feature_multi_threaded_description: "Download files with multiple connections increase download speed up to 500%",
     home_feature_multiplatform_title: "Multiplatform",
-    home_feature_multiplatform_description: "This software available for windows / linux at the moment, Others platforms are on the way!",
+    home_feature_multiplatform_description: "This software is available for windows and linux at the moment, other platforms are on the way!",
     home_feature_open_source_title: "Free & Open Source",
     home_feature_open_source_description: "This is a completely free and open source software",
     home_feature_queue_title: "Download Queue",

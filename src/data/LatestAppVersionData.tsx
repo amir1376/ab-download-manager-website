@@ -177,7 +177,7 @@ export async function getLatestVersionData(): Promise<ApiResult> {
             },
             {
                 browserType: "chrome",
-                link: ""
+                link: "https://chromewebstore.google.com/detail/ab-download-manager-brows/bbobopahenonfdgjgaleledndnnfhooj?authuser=0&hl=en"
             },
             // {
             //     browserType:"opera",

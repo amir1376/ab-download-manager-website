@@ -2,10 +2,10 @@ import React, {PropsWithChildren, useContext, useEffect, useMemo} from "react";
 import {IntlProvider, useIntl} from "react-intl";
 import {FlattenKeys} from "~/utils/types";
 import {ILanguageData} from "~/i18n/ILanguageData";
-import {useLocalStorage} from "react-use";
+import {useLocalStorage} from "usehooks-ts";
 import {runWith} from "~/utils/functionalUtils";
 import {useSearchParams} from "react-router-dom";
-import {getLanguageDirection, useCurrentDirection} from "~/abstraction/i18n";
+import {getLanguageDirection} from "~/abstraction/i18n";
 
 interface I18NContext {
     currentLocale: string,

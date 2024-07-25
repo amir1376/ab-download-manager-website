@@ -1,6 +1,6 @@
 @import "fonts.css";
 @import "tailwind.css";
-[data-theme] {
+:root {
     --primary-gradient-start: #4DC4FE;
     --primary-gradient-end: #C631FF;
 }

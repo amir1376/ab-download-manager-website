@@ -123,7 +123,7 @@ export interface BrowserExtensionVersionData {
     link: string
 }
 
-export type ApiResult = {
+export type VersionData = {
     app: ReadonlyArray<AppVersionData>,
     browser_extension: ReadonlyArray<BrowserExtensionVersionData>,
 }
@@ -161,7 +161,7 @@ function mergeWithPredefined(appVersionData: AppVersionData[]){
     }
     return out
 }
-export async function getLatestVersionData(): Promise<ApiResult> {
+export async function getLatestVersionData(): Promise<VersionData> {
     return {
         app:mergeWithPredefined(
             await getLatestReleaseFromGithubRelease(

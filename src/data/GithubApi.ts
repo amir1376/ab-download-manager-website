@@ -1,5 +1,5 @@
 import {extractPlatformAndVersion} from "~/data/ArtiffactUtil.ts";
-import {AppVersionData} from "~/data/LatestAppVersionData.tsx";
+import {AppVersionData} from "~/data/LatestAppVersionData.ts";
 import _ from "lodash";
 import {run} from "~/utils/functionalUtils.ts";
 
@@ -18,7 +18,11 @@ async function hitRemote(
     repo: string
 ): Promise<GithubRelease> {
     const input = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
-    return (await fetch(input)).json()
+    const response = await fetch(input);
+    if (!_.inRange(response.status,200,299)){
+        throw Error(`fail to get latest version data code:${response.status} ${response.statusText}`);
+    }
+    return response.json()
 }
 
 export async function getLatestReleaseFromGithubRelease(

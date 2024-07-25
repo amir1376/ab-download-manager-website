@@ -8,6 +8,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import DownloadModal from "~/sections/download/DownloadModal.tsx";
 import {ProvideDownloadData} from "~/sections/download/DownloadDataContext.tsx";
 import {useTheme} from "~/abstraction/theme/useTheme.tsx";
+import {VersionData} from "~/data/LatestAppVersionData.ts";
 
 function Hero(props: { icon: ImageProp, title: string, description: string }) {
     const t = useTranslate()
@@ -44,7 +45,7 @@ function Hero(props: { icon: ImageProp, title: string, description: string }) {
                         {t("home_hero_get_app")}
                     </div>
                 </MyLink>
-{/*
+                {/*
                 <div className={classNames(
                     "btn btn-outline btn-primary btn-lg rounded-full border-2",
                     "min-w-48",
@@ -80,8 +81,8 @@ function SectionWithTitle(
 }
 
 function Screenshots(props: { images: MainAppScreenshot }) {
-    const {isDark}= useTheme()
-    const variant=isDark ?"dark":"light"
+    const {isDark} = useTheme()
+    const variant = isDark ? "dark" : "light"
     const homeScreenshot = props.images.home[variant]
     const downloadScreenshot = props.images.download[variant]
     return <div className="bg-base-200/25 py-8">
@@ -151,11 +152,18 @@ export default function Home(
     const showDownloadDialog = location.hash === "#download"
     const navigate = useNavigate()
     const close = () => {
-        location.hash=""
+        location.hash = ""
         navigate(location)
     }
     return (
-        <ProvideDownloadData>
+        <ProvideDownloadData
+            requestData={async () => {
+                const latestVersionData:VersionData = await (
+                    await fetch("/generated/latest_version_data.json")
+                ).json()
+                return latestVersionData
+            }}
+        >
             {showDownloadDialog && <DownloadModal onClose={() => close()}/>}
             <div dir={dir} className="pt-16 pb-16 px-4">
                 <Hero

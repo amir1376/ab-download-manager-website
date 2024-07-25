@@ -1,4 +1,4 @@
-import {PossiblePlatformsType} from "~/data/LatestAppVersionData.tsx";
+import {PossiblePlatformsType} from "~/data/LatestAppVersionData.ts";
 
 export function detectOS(): PossiblePlatformsType|null {
     const userAgent = window.navigator.userAgent;

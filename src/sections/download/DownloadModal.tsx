@@ -7,8 +7,8 @@ import {
     getLatestVersionData, isThirdPartyLink, LinkType,
     possiblePlatformNames,
     PossiblePlatformsType,
-    AppVersionData, osInfo, BrowserExtensionVersionData, browserInfo, PossibleBrowserType, ApiResult
-} from "~/data/LatestAppVersionData.tsx";
+    AppVersionData, osInfo, BrowserExtensionVersionData, browserInfo, PossibleBrowserType, VersionData
+} from "~/data/LatestAppVersionData.ts";
 import {MyLink} from "~/abstraction/navigation";
 import {useCurrentDirection, useTranslate} from "~/abstraction/i18n";
 import {detectOS} from "~/utils/OsDetector.ts";
@@ -259,7 +259,7 @@ export default function DownloadModal(props: DownloadModalProps) {
 
 function LoadedDownloadModal(
     props: {
-        data: ApiResult
+        data: VersionData
     }
 ) {
     const {app, browser_extension} = props.data

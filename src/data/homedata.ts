@@ -6,6 +6,7 @@ import appHomeDarkScreenshot from "~/assets/screenshots/app-home_dark.png"
 import appHomeLightScreenshot from "~/assets/screenshots/app-home_light.png"
 import appDownloadDarkScreenshot from "~/assets/screenshots/app-download_dark.png"
 import appDownloadLightScreenshot from "~/assets/screenshots/app-download_light.png"
+import {VersionData, AppVersionData} from "~/data/LatestAppVersionData.ts";
 
 export interface ImageProp {
     src: string
@@ -37,7 +38,6 @@ export interface HomeData{
     borderedIcon:ImageProp
     features:FeatureProp[]
     screenshots:MainAppScreenshot
-    browserExtensions:BrowserProp[],
 }
 
 export function getHomeData():HomeData {
@@ -77,18 +77,6 @@ export function getHomeData():HomeData {
         longName:"app_long_name",
         title:"home_hero_title",
         description:"home_hero_description",
-        browserExtensions:[
-            {
-                icon:getIcoifyLink("logos:firefox"),
-                title:"Firefox",
-                link:"https://google.com"
-            },
-            {
-                icon:getIcoifyLink("logos:chrome"),
-                title:"Chrome",
-                link:"https://google.com"
-            },
-        ],
         features:[
             {
                 title:"home_feature_simple_ui_title",

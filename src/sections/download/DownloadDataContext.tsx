@@ -1,10 +1,10 @@
 import {useAsync} from "react-use";
-import {ApiResult, getLatestVersionData} from "~/data/LatestAppVersionData.tsx";
+import {VersionData, getLatestVersionData} from "~/data/LatestAppVersionData.ts";
 import React, {PropsWithChildren, useContext, useEffect, useState} from "react";
 import {AsyncState} from "react-use/lib/useAsyncFn";
 
 interface DownloadData {
-    remoteData: AsyncState<ApiResult>
+    remoteData: AsyncState<VersionData>
     refresh: () => void
 }
 
@@ -12,11 +12,13 @@ interface DownloadData {
 const DownloadDataContext = React.createContext<DownloadData>(undefined)
 
 export function ProvideDownloadData(
-    props: PropsWithChildren
+    props: PropsWithChildren & {
+        requestData:(refreshCount:number)=>Promise<VersionData>
+    }
 ) {
     const [refreshCount, setRefreshCount] = useState(0)
     const remoteData = useAsync(async () => {
-        return await getLatestVersionData()
+        return props.requestData(refreshCount)
     }, [refreshCount])
 
     return <DownloadDataContext.Provider value={{

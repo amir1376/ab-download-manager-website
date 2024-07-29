@@ -66,5 +66,7 @@ const data: ILanguageData = {
 
     attention: "توجه",
     experimental_platform_warning: "این برنامه روی {platform} در وضعیت آزمایشی قرار دارد و ممکن است برخی قسمت های برنامه به درستی عمل نکند!",
+
+    file_checksum: "چک سام فایل",
 }
 export default data

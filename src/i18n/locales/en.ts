@@ -65,5 +65,7 @@ const data: ILanguageData = {
 
     attention: "Attention",
     experimental_platform_warning: "App on {platform} is in experimental stage, some parts of the app may not work properly!",
+
+    file_checksum: "File checksum"
 }
 export default data

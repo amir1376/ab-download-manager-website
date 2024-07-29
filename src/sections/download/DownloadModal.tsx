@@ -1,18 +1,27 @@
 import {Modal, ModalContent, ModalHeader} from "~/components/Modal";
 import classNames from "classnames";
 import {Icon} from "@iconify/react";
-import {PropsWithChildren, ReactNode, useMemo, useState} from "react";
+import {PropsWithChildren, ReactElement, ReactNode, useMemo, useState} from "react";
 import {
     providerInfo,
-    isThirdPartyLink, LinkType,
+    isThirdPartyLink,
+    LinkType,
     PossiblePlatformsType,
-    AppVersionData, osInfo, BrowserExtensionVersionData, browserInfo, VersionData
+    AppVersionData,
+    osInfo,
+    BrowserExtensionVersionData,
+    browserInfo,
+    VersionData,
+    isDirectLink,
+    DirectLink,
+    ChecksumHash
 } from "~/data/LatestAppVersionData.ts";
 import {MyLink} from "~/abstraction/navigation";
 import {useCurrentDirection, useTranslate} from "~/abstraction/i18n";
 import {detectOS} from "~/utils/OsDetector.ts";
 import {useDownloadData} from "~/sections/download/DownloadDataContext";
 import {run} from "~/utils/functionalUtils.ts";
+import {useCopyToClipboard} from "usehooks-ts";
 
 export type DownloadModalProps = {
     onClose: () => void
@@ -185,13 +194,60 @@ function RenderAppDownloadLink(
             return m
         })
     }
-    return <RenderDownloadLinkBase
-        link={link.link}
-        icon={icon}
-        title={title}
-    />
+    return <div className="flex flex-col">
+        <RenderDownloadLinkBase
+            link={link.link}
+            icon={icon}
+            title={title}
+        />
+        {isDirectLink(link) && (
+            <Checksums
+                className="mt-1"
+                btnExtraClassName="ms-4"
+                checksums={link.checksums}/>
+        )}
+    </div>
 }
 
+function Checksums(props: {
+    checksums: ChecksumHash[],
+    btnExtraClassName?: string,
+    className?: string
+}) {
+    if (props.checksums.length == 0) {
+        return null
+    }
+    const t = useTranslate()
+    const [, copyToClipboard] = useCopyToClipboard()
+    return <div className={props.className}>
+        <div className="flex flex-col dropdown dropdown-bottom">
+            <div tabIndex={0} className={classNames(
+                "self-start hover:underline cursor-pointer text-sm",
+                props.btnExtraClassName,
+            )}>
+                {t("file_checksum")}
+            </div>
+            <div tabIndex={0} className="z-50 shadow-xl dropdown-content rounded-full bg-base-300">
+                {props.checksums.map((checksum,) => {
+                    return <div
+                        dir="ltr"
+                        key={checksum.type}
+                        className="p-1 flex flex-row items-center space-x-1"
+                    >
+                        <div className="px-1">{checksum.type.toUpperCase()}</div>
+                        <div className="text-sm ps-2 bg-base-200 rounded-full items-center flex flex-row">
+                            <code>{checksum.value}</code>
+                            <div className="btn btn-sm btn-circle btn-ghost"
+                                 onClick={() => copyToClipboard(checksum.value)}>
+                                <Icon height={16} width={16} icon="ic:round-content-copy"/>
+                            </div>
+                        </div>
+                    </div>
+                })}
+            </div>
+        </div>
+    </div>
+}
 
 function DownloadSection(
     props: {

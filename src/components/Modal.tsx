@@ -37,7 +37,7 @@ export function Modal(
     return <div className="modal modal-open" role="dialog">
         <div className={classNames(
             "modal-box bg-base-200 text-base-content",
-            "rounded-3xl w-auto max-w-full container",
+            "rounded-3xl sm:w-auto max-w-full container",
             "p-0",//we want to use padding for each section
         )}>
             <div className="">

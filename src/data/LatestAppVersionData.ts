@@ -27,8 +27,13 @@ export interface LinkType<Type extends PossibleLinkType = PossibleLinkType> {
     ext?: string
 }
 
+export interface ChecksumHash{
+    value: string
+    type: string // "md5" | "sha" etc.
+}
+
 export interface DirectLink extends LinkType<"direct"> {
-    hash: string
+    checksums: ChecksumHash[]
 }
 
 export const osInfo: Record<PossiblePlatformsType, { icon: string, name: string }> = {

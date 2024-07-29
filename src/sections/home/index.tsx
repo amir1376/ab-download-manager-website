@@ -42,7 +42,8 @@ function Hero(props: { icon: ImageProp, title: string, description: string }) {
                         "font-bold",
                         "shadow-btn-blur shadow-primary/50"
                     )}>
-                        {t("home_hero_get_app")}
+                        <Icon height={32} width={32} icon="material-symbols:download"/>
+                        <span>{t("home_hero_get_app")}</span>
                     </div>
                 </MyLink>
                 {/*

@@ -34,7 +34,7 @@ export function Modal(
         onClickOutside?: () => void
     }
 ) {
-    return <div className="modal modal-open" role="dialog">
+    return <div className="modal modal-bottom md:modal-top sm:pt-16 modal-open" role="dialog">
         <div className={classNames(
             "modal-box bg-base-200 text-base-content",
             "rounded-3xl sm:w-auto max-w-full container",

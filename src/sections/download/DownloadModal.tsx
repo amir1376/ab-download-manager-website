@@ -376,7 +376,7 @@ function LoadedDownloadModal(
     return <div dir={dir} className="flex flex-col md:flex-row gap-8">
         <div className="flex flex-col space-y-8">
             <TopOfSection step={1} title={t("download_select_platform")}>
-                <div className="flex flex-col space-y-8">
+                <div className="flex flex-col space-y-4">
                     <OsSection
                         availablePlatforms={appForPlatforms}
                         selectedPlatform={selectedPlatform} setSelectedOs={setSelectedPlatform}

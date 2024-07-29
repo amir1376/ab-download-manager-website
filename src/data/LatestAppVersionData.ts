@@ -179,7 +179,7 @@ function mergeWithPredefined(appVersionData: AppVersionData[]){
     for (const appVersionData of out){
         appVersionData.experimental = appVersionData.experimental || isPlatformExperimental(appVersionData.platform)
     }
-    return out
+    return _.sortBy(out, l => l.experimental)
 }
 export async function getLatestVersionData(): Promise<VersionData> {
     return {

@@ -71,4 +71,7 @@ export type ILanguageData = {
     source_code: string
 
     coming_soon:string
+
+    attention:string
+    experimental_platform_warning:string
 }

@@ -63,7 +63,8 @@ export async function getLatestReleaseFromGithubRelease(
                             return p[p.length-1]
                         })
                     }
-                })
+                }),
+                experimental:false,
             } as AppVersionData
         })
 }

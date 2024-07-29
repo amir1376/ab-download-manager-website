@@ -63,5 +63,8 @@ const data: ILanguageData = {
     source_code: "سورس کد",
 
     coming_soon: "بزودی",
+
+    attention: "توجه",
+    experimental_platform_warning: "این برنامه روی {platform} در وضعیت آزمایشی قرار دارد و ممکن است برخی قسمت های برنامه به درستی عمل نکند!",
 }
 export default data

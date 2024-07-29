@@ -4,16 +4,15 @@ import {Icon} from "@iconify/react";
 import {PropsWithChildren, ReactNode, useMemo, useState} from "react";
 import {
     providerInfo,
-    getLatestVersionData, isThirdPartyLink, LinkType,
-    possiblePlatformNames,
+    isThirdPartyLink, LinkType,
     PossiblePlatformsType,
-    AppVersionData, osInfo, BrowserExtensionVersionData, browserInfo, PossibleBrowserType, VersionData
+    AppVersionData, osInfo, BrowserExtensionVersionData, browserInfo, VersionData
 } from "~/data/LatestAppVersionData.ts";
 import {MyLink} from "~/abstraction/navigation";
 import {useCurrentDirection, useTranslate} from "~/abstraction/i18n";
 import {detectOS} from "~/utils/OsDetector.ts";
 import {useDownloadData} from "~/sections/download/DownloadDataContext";
-import {run, runWith} from "~/utils/functionalUtils.ts";
+import {run} from "~/utils/functionalUtils.ts";
 
 export type DownloadModalProps = {
     onClose: () => void
@@ -25,44 +24,68 @@ function OSOption(
         icon: string,
         isSelected: boolean,
         onSelect: () => void,
+        isExperimental: boolean,
     }
 ) {
     return <div onClick={props.onSelect} className={classNames(
-        "flex flex-col items-center space-y-2 justify-center",
-        "transition-all",
-        "border-2 rounded",
+        "relative",
         "cursor-pointer select-none",
-        "py-2 px-4",
-        props.isSelected
-            ? ["bg-base-content/20", "border-primary"]
-            : ["border-base-content/20"],
-        !props.isSelected && "hover:bg-base-content/20",
     )}>
-        <Icon height={32} width={32} icon={props.icon}/>
         <div className={classNames(
-            props.isSelected ? "text-opacity-100" : "text-opacity-75"
-        )}>{props.name}</div>
+            "flex flex-col items-center space-y-2 justify-center",
+            "transition-all",
+            "border-2 rounded",
+            "py-2 px-4",
+            props.isSelected
+                ? ["bg-base-content/20", "border-primary"]
+                : ["border-base-content/20"],
+            !props.isSelected && "hover:bg-base-content/20",
+        )}>
+            <Icon height={32} width={32} icon={props.icon}/>
+            <div className={classNames(
+                props.isSelected ? "text-opacity-100" : "text-opacity-75"
+            )}>{props.name}</div>
+        </div>
+        {props.isExperimental && (
+            <WarningBadge isActive={props.isSelected}/>
+        )}
     </div>
 }
 
+function WarningBadge(
+    props: {
+        isActive: boolean
+    }
+) {
+    const direction = useCurrentDirection()
+    return <div className={classNames(
+        "absolute top-0 end-0",
+        "transform -translate-y-1/2",
+        direction == "ltr" ? "translate-x-1/2" : "-translate-x-1/2",
+        "badge badge-xs badge-warning",
+        "transition-all",
+        props.isActive && "scale-150",
+    )}>!</div>
+}
 
 function OsSection(
     props: {
-        availableOs: PossiblePlatformsType[],
-        selectedOs: PossiblePlatformsType,
+        availablePlatforms: readonly AppVersionData[],
+        selectedPlatform: PossiblePlatformsType,
         setSelectedOs: (os: PossiblePlatformsType) => void
     }
 ) {
-    const {selectedOs, setSelectedOs} = props
+    const {selectedPlatform, setSelectedOs} = props
     const osesToRender = useMemo(() => {
-            return props.availableOs
-                .map(v => {
+            return props.availablePlatforms
+                .map(({platform, experimental}) => {
                     return {
-                        code: v,
-                        ...osInfo[v]
+                        code: platform,
+                        isExperimental: experimental,
+                        ...osInfo[platform],
                     }
                 })
-        }, [props.availableOs]
+        }, [props.availablePlatforms]
     )
 
     return <div className="flex flex-row flex-wrap gap-4">
@@ -72,7 +95,8 @@ function OsSection(
                     key={os.code}
                     name={os.name}
                     icon={os.icon}
-                    isSelected={selectedOs == os.code}
+                    isExperimental={os.isExperimental}
+                    isSelected={selectedPlatform == os.code}
                     onSelect={() => setSelectedOs(os.code)}
                 />
             })
@@ -116,7 +140,7 @@ function RenderDownloadLinkBase(
                 "bg-base-content/10",
                 "hover:bg-base-content/20",
                 "w-72 justify-start",
-                haveLink? "cursor-pointer" : "cursor-not-allowed"
+                haveLink ? "cursor-pointer" : "cursor-not-allowed"
                 // "btn btn-ghost btn-outline w-72 justify-start"
             )}>
                 <Icon className="h-6 w-6" icon={props.icon}/>
@@ -126,8 +150,9 @@ function RenderDownloadLinkBase(
         {!haveLink && <ComingSoonBadge/>}
     </div>
 }
+
 function ComingSoonBadge() {
-    const t= useTranslate()
+    const t = useTranslate()
     return <div className="badge badge-primary absolute top-0 end-0 transform -translate-y-1/2">
         {t("coming_soon")}
     </div>
@@ -152,10 +177,10 @@ function RenderAppDownloadLink(
     } else {
         icon = osInfo[props.platform].icon
         // console.log(icon, props.platform)
-        title = run(()=>{
-            let m= t("download_direct_download")
-            if (props.downloadLink.ext){
-                m+=` (${props.downloadLink.ext})`
+        title = run(() => {
+            let m = t("download_direct_download")
+            if (props.downloadLink.ext) {
+                m += ` (${props.downloadLink.ext})`
             }
             return m
         })
@@ -232,7 +257,7 @@ function DownloadExtensionSection(
 }
 
 export default function DownloadModal(props: DownloadModalProps) {
-    const {remoteData,refresh}=useDownloadData()
+    const {remoteData, refresh} = useDownloadData()
     const t = useTranslate()
     let content: ReactNode
     if (remoteData.loading) {
@@ -257,34 +282,53 @@ export default function DownloadModal(props: DownloadModalProps) {
     </Modal>
 }
 
+function ExperimentalPlatformWarning(
+    props: {
+        platform: PossiblePlatformsType,
+    }
+) {
+    const t = useTranslate()
+    const os = osInfo[props.platform]
+    return <div className="w-72">
+        <div className="text-lg font-bold text-warning">{t("attention")}:</div>
+        <div className="text-base">{t("experimental_platform_warning", {
+            platform: os.name
+        })}</div>
+    </div>
+}
+
 function LoadedDownloadModal(
     props: {
         data: VersionData
     }
 ) {
-    const {app, browser_extension} = props.data
-    const availableOs = useMemo(
-        () => app.map(d => d.platform),
-        [app]
-    )
-    const [os, setOs] = useState<PossiblePlatformsType>(
+    const {app: appForPlatforms, browser_extension} = props.data
+    const [selectedPlatform, setSelectedPlatform] = useState<PossiblePlatformsType>(
         () => {
             const detectedOs = detectOS();
-            if (detectedOs && availableOs.includes(detectedOs)) {
+            if (detectedOs && appForPlatforms.find(v => v.platform === detectedOs)) {
                 return detectedOs
             }
-            return availableOs[0]
+            return appForPlatforms[0].platform
         }
     )
     const currentOsData = useMemo(
-        () => app.find(item => item.platform == os)
-        , [os, app])
+        () => appForPlatforms.find(item => item.platform == selectedPlatform)
+        , [selectedPlatform, appForPlatforms])
     const dir = useCurrentDirection()
-    const t=useTranslate()
+    const t = useTranslate()
     return <div dir={dir} className="flex flex-col md:flex-row gap-8">
         <div className="flex flex-col space-y-8">
             <TopOfSection step={1} title={t("download_select_platform")}>
-                <OsSection availableOs={availableOs} selectedOs={os} setSelectedOs={setOs}/>
+                <div className="flex flex-col space-y-8">
+                    <OsSection
+                        availablePlatforms={appForPlatforms}
+                        selectedPlatform={selectedPlatform} setSelectedOs={setSelectedPlatform}
+                    />
+                    {currentOsData?.experimental && (
+                        <ExperimentalPlatformWarning platform={currentOsData.platform}/>
+                    )}
+                </div>
             </TopOfSection>
 
             <TopOfSection step={2} title={t("download_select_download_method")}>
@@ -293,23 +337,25 @@ function LoadedDownloadModal(
         </div>
         <div className="flex flex-col space-x-8">
             {
-                browser_extension.length>0 && <TopOfSection step={3} title={t("download_extension_for_browser")}>
+                browser_extension.length > 0 && <TopOfSection step={3} title={t("download_extension_for_browser")}>
                     <DownloadExtensionSection extensionLinks={browser_extension!}/>
                 </TopOfSection>
             }
         </div>
     </div>
 }
-function LoadingContent(){
+
+function LoadingContent() {
     return <div className="flex flex-col justify-center items-center p-16">
         <div className="loading"></div>
         <div>Please Wait...</div>
     </div>
 }
-function ErrorContent(props:{
-    error:string,
-    refresh:()=>void
-}){
+
+function ErrorContent(props: {
+    error: string,
+    refresh: () => void
+}) {
     return <div className="flex flex-col justify-center items-center p-16">
         <div>Error!</div>
         <div className="opacity-75">{props.error}</div>

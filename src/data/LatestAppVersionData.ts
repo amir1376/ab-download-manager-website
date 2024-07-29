@@ -1,6 +1,7 @@
 import {getLatestReleaseFromGithubRelease} from "~/data/GithubApi.ts";
 import _ from "lodash";
 import Constants from "~/data/Constants.ts";
+import fa from "~/i18n/locales/fa.ts";
 
 export type PossiblePlatformsType =
     | "android"
@@ -81,7 +82,8 @@ export interface AppVersionData {
     platform: PossiblePlatformsType
     version: string
     changeLog: string
-    links: LinkType[]
+    links: LinkType[],
+    experimental:boolean,
 }
 
 export type PossibleBrowserType =
@@ -142,6 +144,15 @@ const defaultVersionData: {
     //     platform: "android",
     // }
 ]
+
+const experimentalPlatforms:PossiblePlatformsType[] = [
+    "linux"
+]
+
+function isPlatformExperimental(platform:PossiblePlatformsType){
+    return experimentalPlatforms.includes(platform)
+}
+
 function mergeWithPredefined(appVersionData: AppVersionData[]){
     const out=appVersionData
     const defaultGrouped=_
@@ -153,11 +164,15 @@ function mergeWithPredefined(appVersionData: AppVersionData[]){
                 platform:k as PossiblePlatformsType,
                 links:[],
                 changeLog:"",
-                version:""
+                version:"",
+                experimental:false,
             }
             out.push(found)
         }
         found.links.push(...v.map(l=>l.link))
+    }
+    for (const appVersionData of out){
+        appVersionData.experimental = appVersionData.experimental || isPlatformExperimental(appVersionData.platform)
     }
     return out
 }

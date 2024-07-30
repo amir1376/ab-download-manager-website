@@ -1,6 +1,12 @@
 export type ILanguageData = {
     code: string
     languageName: string
+
+    seo_title: string
+    seo_description: string
+    seo_keywords: string
+
+
     app_long_name: string
     app_short_name: string
     not_found: string

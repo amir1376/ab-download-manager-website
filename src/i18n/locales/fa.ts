@@ -4,6 +4,11 @@ const data: ILanguageData = {
 
     code: "fa",
     languageName: "فارسی",
+
+    seo_title:"AB Download Manager",
+    seo_description:"با این برنامه, فایل های مورد نظرتان را در هر جا به راحتی دانلود کنید. سریع و رایگانه و از افزونه مرورگر هم پشتیبانی میکنه!",
+    seo_keywords: "دانلود منجیر,دانلود,افزونه مرورگر,کروم,فایرفاکس,ای بی دانلود منیجر,اوپن سورس,رایگان",
+
     not_found: "پیدا نشد",
     app_long_name: "AB Download Manager",
     app_short_name: "ABDM",

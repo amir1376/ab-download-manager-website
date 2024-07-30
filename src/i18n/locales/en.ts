@@ -3,6 +3,11 @@ import {ILanguageData} from "~/i18n/ILanguageData";
 const data: ILanguageData = {
     code: "en",
     languageName: "English",
+
+    seo_title:`AB Download Manager`,
+    seo_description:"With this app, Download any files from anywhere easily. It's fast and free and supports Browser Extensions!",
+    seo_keywords:"download manager,download,browser extension,chrome,firefox,ab download manager,open source,free",
+
     not_found: "Not found",
     app_short_name: "AB DM",
     app_long_name: "AB Download Manager",

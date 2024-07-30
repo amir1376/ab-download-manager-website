@@ -1,7 +1,7 @@
 import React from "react";
 import {Providers} from "~/components/Providers.tsx";
 import {AppLayout} from "~/sections/AppLayout.tsx";
-import {ILanguageData} from "~/i18n/ILanguageData.ts";
+import CommonMetaTags from "~/components/CommonMetaTags.tsx";
 
 export function ClientLayout(
     props: {
@@ -9,6 +9,7 @@ export function ClientLayout(
     }
 ) {
     return <Providers>
+        <CommonMetaTags/>
         <AppLayout>
             <div className="content">
                 {props.children}

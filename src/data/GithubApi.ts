@@ -43,7 +43,7 @@ export async function getLatestReleaseFromGithubRelease(
 
     const appReleaseAsset = release.assets.filter(f => {
         //make sure to add new file extensions here if we have new target
-        return /^.+\.(exe|msi|deb|rpm|dmg|zip|apk)$/.test(f.name)
+        return /^.+\.(exe|msi|deb|rpm|dmg|apk|zip|gz)$/.test(f.name)
     })
     // don't forget to update regex if change this
     const hashExtensions = ["md5","sha"]

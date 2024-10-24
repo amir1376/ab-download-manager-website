@@ -1,0 +1,86 @@
+import { ILanguageData } from "~/i18n/ILanguageData";
+
+const data: ILanguageData = {
+  code: "zh",
+  languageName: "Chinese",
+
+  seo_title: `AB Download Manager`,
+  seo_description:
+    "通过与浏览器的无缝集成从任何地方轻松下载文件，享受快速、免费的下载体验",
+  seo_keywords:
+    "下载管理器,下载,浏览器扩展,chrome,firefox,ab download manager,开源,免费",
+
+  not_found: "Not found",
+  app_short_name: "AB DM",
+  app_long_name: "AB Download Manager",
+  footer_issues: "问题反馈",
+  footer_source_code: "源代码",
+  footer_discussion: "讨论",
+  footer_developer: "开发者",
+  footer_project: "项目",
+  footer_developed_with_love: "为爱发电 ❤️ by",
+  footer_my_personal_website: "我的个人网站",
+  footer_my_github: "Github 主页",
+  footer_contact_me: "联系我",
+  footer_released_under: "基于",
+
+  home: "主页",
+
+  home_hero_get_app: "获取应用",
+  home_hero_title: "下载从未这么简单",
+  home_hero_description:
+    "通过与浏览器的无缝集成从任何地方轻松下载文件，享受快速、免费的下载体验",
+  home_hero_see_guides: "用户指南",
+
+  home_features: "特性",
+  home_feature_multi_threaded_title: "更快的下载速度",
+  home_feature_multi_threaded_description:
+    "支持多线程下载文件，下载速度最高提升500%！",
+  home_feature_multiplatform_title: "跨平台支持",
+  home_feature_multiplatform_description:
+    "该软件目前可用于 Windows 和 Linux，其他平台也即将推出！",
+  home_feature_open_source_title: "开源 & 免费",
+  home_feature_open_source_description: "这是一个完全开源免费的软件",
+  home_feature_queue_title: "下载队列",
+  home_feature_queue_description:
+    "创建和管理队列中的下载，允许按顺序下载所有文件",
+  home_feature_scheduler_title: "下载计划",
+  home_feature_scheduler_description:
+    "您可以为队列设置下载计划以自动开始或停止下载",
+  home_feature_simple_ui_title: "现代化的简洁界面",
+  home_feature_simple_ui_description: "简洁的界面，且支持深色模式",
+  home_feature_speed_limiter_title: "速度限制",
+  home_feature_speed_limiter_description:
+    "您可以设置下载速度限制，以防止其他人遇到连接不良的情况:)",
+  home_feature_browser_integration_title: "浏览器集成",
+  home_feature_browser_integration_description:
+    "您可以安装浏览器扩展程序以自动接管网络浏览器中的链接",
+
+  download_from_provider: "从 {name} 下载",
+  download_direct_download: "点击下载",
+  download_select_platform: "选择平台",
+  download_select_download_method: "选择下载方式",
+  download_version: "版本",
+  download_extension_for_browser: "下载浏览器扩展",
+  or: "或",
+  download_for: "为 {name} 下载",
+
+  social_and_community: "社区",
+  social_email: "Email",
+  social_instagram: "Instagram",
+  social_telegram_channel: "Telegram 频道",
+  social_telegram_group: "Telegram 群组",
+  social_x: "X",
+
+  theme: "主题",
+  source_code: "源代码",
+
+  coming_soon: "敬请期待",
+
+  attention: "注意",
+  experimental_platform_warning:
+    "{platform} 版本的软件还在实验阶段, 应用的某些部分可能无法正常工作!",
+
+  file_checksum: "文件 checksum",
+};
+export default data;

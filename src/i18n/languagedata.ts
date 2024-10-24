@@ -23,6 +23,10 @@ export const definedLanguages: Record<AvailableLanguage, DefinedLanguageData> = 
         ...definedLanguageCodeAndName.it,
         getData: async () => (await import("~/i18n/locales/it")).default
     },
+    "zh": {
+        ...definedLanguageCodeAndName.zh,
+        getData: async () => (await import("~/i18n/locales/zh")).default
+    },
 }
 export function getLanguageDefinition(code: string) {
     // @ts-ignore

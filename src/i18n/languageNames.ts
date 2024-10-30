@@ -4,6 +4,7 @@ export type AvailableLanguage =
     | "fa"
     | "it"
     | "zh"
+    | "ar"
 
 export type LanguageInfo = {
     code: string
@@ -18,6 +19,7 @@ export const availableCodesList: AvailableLanguage[] = [
     "fa",
     "it",
     "zh",
+    "ar",
 ]
 
 export const definedLanguageCodeAndName: Record<AvailableLanguage, LanguageInfo> = {
@@ -30,6 +32,11 @@ export const definedLanguageCodeAndName: Record<AvailableLanguage, LanguageInfo>
         code: "en",
         name: "English",
         dir: "ltr",
+    },
+    "ar": {
+        code: "ar",
+        name: "Arabic",
+        dir: "rtl",
     },
     "fa": {
         code: "fa",

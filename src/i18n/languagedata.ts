@@ -19,6 +19,10 @@ export const definedLanguages: Record<AvailableLanguage, DefinedLanguageData> = 
         ...definedLanguageCodeAndName.fa,
         getData: async () => (await import("~/i18n/locales/fa")).default
     },
+    "ar": {
+        ...definedLanguageCodeAndName.ar,
+        getData: async () => (await import("~/i18n/locales/ar")).default
+    },
     "it": {
         ...definedLanguageCodeAndName.it,
         getData: async () => (await import("~/i18n/locales/it")).default

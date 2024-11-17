@@ -4,13 +4,12 @@ import {Icon} from "@iconify/react";
 import {useWindowScroll} from "react-use";
 import classNames from "classnames";
 import {
-    getAvailableLanguages,
+    getLanguageNames,
     useChangeLanguage,
     useCurrentDirection,
     useCurrentLocale,
     useTranslate
 } from "~/abstraction/i18n";
-import type {LanguageInfo} from "~/i18n/languageNames";
 import {MyLink} from "~/abstraction/navigation";
 import {useTheme} from "~/abstraction/theme/useTheme";
 import Constants from "~/data/Constants.ts";
@@ -73,10 +72,10 @@ function Theme() {
     </div>
 }
 
-function LanguageItem(props: { lang: LanguageInfo, active: boolean }) {
+function LanguageItem(props: { name:string, active: boolean }) {
     return <div
         className="flex flex-row justify-between">
-        {props.lang.name}
+        {props.name}
         {props.active && (
             <Icon icon="mdi:done"/>
         )}
@@ -95,18 +94,18 @@ function SocialItem(props: { socialLink: SocialLink }) {
 }
 
 function LanguageDropDown() {
-    const languages = getAvailableLanguages()
+    const languages = getLanguageNames()
     const activeLocale = useCurrentLocale()
     const currentLang = languages[activeLocale]
     const changeLang = useChangeLanguage()
     return <div dir={useCurrentDirection()} className="dropdown">
         <div tabIndex={0} className="dropdown-bottom btn btn-ghost">
-            <Icon height={24} width={24} icon="mdi:language"/> {currentLang?.name}
+            <Icon height={24} width={24} icon="mdi:language"/> {currentLang?.native}
         </div>
         <ul tabIndex={0} className="dropdown-content menu-lg rounded shadow-lg menu bg-base-200">
-            {Object.values(languages).map(l => (
-                <li onClick={() => changeLang(l.code)} key={l.code}>
-                    <LanguageItem lang={l} active={currentLang?.code == l.code}/>
+            {Object.entries(languages).map(([code,value]) => (
+                <li onClick={() => changeLang(code)} key={code}>
+                    <LanguageItem name={value.native} active={activeLocale == code}/>
                 </li>
             ))}
         </ul>
@@ -114,18 +113,18 @@ function LanguageDropDown() {
 }
 
 function LanguageForMobile() {
-    const languages = getAvailableLanguages()
+    const languages = getLanguageNames()
     const activeLocale = useCurrentLocale()
     const currentLang = languages[activeLocale]
     const changeLang = useChangeLanguage()
     return <details dir={useCurrentDirection()}>
         <summary>
-            <Icon icon="mdi:language"/> {currentLang?.name}
+            <Icon icon="mdi:language"/> {currentLang?.native}
         </summary>
         <ul>
-            {Object.values(languages).map(l => (
-                <li onClick={() => changeLang(l.code)} key={l.code}>
-                    <LanguageItem lang={l} active={currentLang?.code == l.code}/>
+            {Object.entries(languages).map(([code,value]) => (
+                <li onClick={() => changeLang(code)} key={code}>
+                    <LanguageItem name={value.native} active={activeLocale == code}/>
                 </li>
             ))}
         </ul>

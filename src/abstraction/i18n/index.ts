@@ -1,12 +1,11 @@
-import {availableCodesList, AvailableLanguage, definedLanguageCodeAndName} from "~/i18n/languageNames";
+import {definedLanguageCodeAndName, LocaleString, rtlLanguages} from "~/i18n/LanguageInfo.ts";
 import {useIntl} from "react-intl";
-import {FlattenKeys} from "~/utils/types";
-import {ILanguageData} from "~/i18n/ILanguageData";
 import {useTranslationContext} from "~/i18n/TranslationContext";
 import {Translatable} from "~/i18n/Translatable.ts";
+import {getAvailableLocaleStrings} from "~/i18n/TranslationRegistry.ts";
 
-export function useCurrentLocale(): AvailableLanguage {
-    return useIntl().locale as AvailableLanguage
+export function useCurrentLocale(): LocaleString {
+    return useIntl().locale
 }
 
 export function useTranslate() {
@@ -21,26 +20,22 @@ export function useTranslate() {
 export function useChangeLanguage() {
     const translationContext = useTranslationContext()
     return (l: string) => {
-        // @ts-ignore
-        if (!getAvailableLocales().includes(l)) {
+        if (!getAvailableLocaleStrings().includes(l)) {
             return
         }
         translationContext.changeLanguage(l)
     }
 }
 
-export function getAvailableLocales() {
-    return availableCodesList
-}
 
-export function getAvailableLanguages() {
+export function getLanguageNames() {
     return definedLanguageCodeAndName
 }
 
 export function getLanguageDirection(code: string): "ltr"|"rtl" {
-    const lang = definedLanguageCodeAndName[code]
-    if (lang) {
-        return lang.dir
+    const isRtl = rtlLanguages.includes(code)
+    if (isRtl) {
+        return "rtl"
     } else {
         return "ltr"
     }

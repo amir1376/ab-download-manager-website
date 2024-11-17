@@ -4,7 +4,7 @@ import de from "./locales/de";
 import it from "./locales/it";
 import zh from "./locales/zh";
 import ar from "./locales/ar";
-import { addLocales, setDefaultLocale } from "./TranslationContext";
+import { addLocales, setDefaultLocale } from "./TranslationRegistry.ts";
 
 export function setUpIntl() {
   addLocales({

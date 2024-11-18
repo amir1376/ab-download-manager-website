@@ -1,6 +1,4 @@
-import {ILanguageData} from "~/i18n/ILanguageData";
-
-const data: ILanguageData = {
+{
     "code": "it",
     "languageName": "Italian",
     "seo_title": "AB Download Manager",
@@ -60,6 +58,5 @@ const data: ILanguageData = {
     "coming_soon": "In arrivo",
     "attention": "Attenzione",
     "experimental_platform_warning": "L'app su {platform} è in fase sperimentale. Alcune parti dell'app potrebbero non funzionare correttamente!",
-    "file_checksum": "Checksum del file",
+    "file_checksum": "Checksum del file"
 }
-export default data

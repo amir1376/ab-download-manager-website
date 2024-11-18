@@ -1,9 +1,7 @@
-import {ILanguageData} from "~/i18n/ILanguageData";
-
-const data: ILanguageData = {
+{
     "code": "en",
     "languageName": "English",
-    "seo_title":`AB Download Manager`,
+    "seo_title":"AB Download Manager",
     "seo_description":"With this app, you can easily download files from anywhere. Enjoy fast, free downloads with seamless browser extension support.",
     "seo_keywords":"download manager,download,browser extension,chrome,firefox,ab download manager,open source,free",
     "not_found": "Not found",
@@ -62,4 +60,3 @@ const data: ILanguageData = {
     "experimental_platform_warning": "App on {platform} is in experimental stage, some parts of the app may not work properly!",
     "file_checksum": "File checksum"
 }
-export default data

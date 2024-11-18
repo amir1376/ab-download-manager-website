@@ -1,6 +1,4 @@
-import {ILanguageData} from "~/i18n/ILanguageData";
-
-const data: ILanguageData = {
+{
     "code": "ar",
     "languageName": "العربیه",
     "seo_title":"AB Download Manager",
@@ -42,13 +40,13 @@ const data: ILanguageData = {
     "home_feature_speed_limiter_title": "إمكانية تحديد السرعة",
     "home_feature_speed_limiter_description": "يمكنك السماح للآخرين باستخدام الانترنت الخاص بك عن طريق تحديد السرعة :)",
     "download_direct_download": "تحميل مباشر",
-    "download_from_provider": "تحميل من " + "{name}",
+    "download_from_provider": "تحميل من {name}",
     "download_select_platform": "حدد نظام التشغيل",
     "download_select_download_method": "حدد طريقة التنزيل",
     "download_extension_for_browser": "تحميل البرنامج ملحق للمتصفح",
     "download_version": "إصدار",
     "or": "أو",
-    "download_for": "تحميل ل " + "{name}",
+    "download_for": "تحميل ل {name}",
     "social_and_community": "الإعلام والمجتمع",
     "social_email": "بريد إلكتروني",
     "social_instagram": "انستقرام",
@@ -60,6 +58,5 @@ const data: ILanguageData = {
     "coming_soon": "قريباً",
     "attention": "انتباه",
     "experimental_platform_warning": "هذا التطبيق في حالة تجريبية على {platform} وقد لا تعمل بعض أجزاء التطبيق بشكل صحيح!",
-    "file_checksum": "تحقق من ملف المجموع",
+    "file_checksum": "تحقق من ملف المجموع"
 }
-export default data

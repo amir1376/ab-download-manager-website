@@ -1,9 +1,7 @@
-import {ILanguageData} from "~/i18n/ILanguageData";
-
-const data: ILanguageData = {
+{
     "code": "de",
     "languageName": "German",
-    "seo_title":`AB Download Manager`,
+    "seo_title":"AB Download Manager",
     "seo_description": "Mit dieser App können Sie mühelos Dateien von überall herunterladen. Sie bietet eine schnelle und kostenlose Lösung und unterstützt zudem Browsererweiterungen.",
     "seo_keywords": "download manager,download,browsererweiterung,chrome,firefox,ab download manager,open source,kostenlos",
     "not_found": "Nicht gefunden",
@@ -62,4 +60,3 @@ const data: ILanguageData = {
     "experimental_platform_warning": "Die App auf {platform} befindet sich in der experimentellen Phase. Einige Teile der App funktionieren möglicherweise nicht richtig!",
     "file_checksum": "Datei-Checksumme"
 }
-export default data

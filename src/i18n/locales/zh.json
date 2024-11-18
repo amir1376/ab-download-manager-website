@@ -1,9 +1,7 @@
-import { ILanguageData } from "~/i18n/ILanguageData";
-
-const data: ILanguageData = {
+{
   "code": "zh",
   "languageName": "Chinese",
-  "seo_title": `AB Download Manager`,
+  "seo_title": "AB Download Manager",
   "seo_description": "通过与浏览器的无缝集成从任何地方轻松下载文件，享受快速、免费的下载体验",
   "seo_keywords": "下载管理器,下载,浏览器扩展,chrome,firefox,ab download manager,开源,免费",
   "not_found": "Not found",
@@ -60,6 +58,5 @@ const data: ILanguageData = {
   "coming_soon": "敬请期待",
   "attention": "注意",
   "experimental_platform_warning": "{platform} 版本的软件还在实验阶段, 应用的某些部分可能无法正常工作!",
-  "file_checksum": "文件 checksum",
-};
-export default data;
+  "file_checksum": "文件 checksum"
+}

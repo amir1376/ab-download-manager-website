@@ -1,7 +1,7 @@
 import {getLatestReleaseFromGithubRelease} from "~/data/GithubApi.ts";
 import _ from "lodash";
 import Constants from "~/data/Constants.ts";
-import fa from "~/i18n/locales/fa.ts";
+import fa from "~/i18n/locales/fa.json";
 
 export type PossiblePlatformsType =
     | "android"

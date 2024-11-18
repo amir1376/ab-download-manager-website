@@ -33,6 +33,10 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Arabic",
         native: "العربية",
     },
+    "fr": {
+        english: "French",
+        native: "Français",
+    },
     "fa": {
         english: "Persian",
         native: "فارسی",
@@ -41,9 +45,13 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Italian",
         native: "Italiano",
     },
-    "zh": {
-        english: "Chinese",
-        native: "中文",
+    "ru": {
+        english: "Russian",
+        native: "Русский",
+    },
+    "zh-CN": {
+        english: "Simplified Chinese",
+        native: "简体中文",
     },
 };
 
@@ -61,7 +69,8 @@ export function isRtl(locale:MyLocale) {
 
 export function getLocaleName(localeName:MyLocale):LanguageName|undefined {
     if (localeName.country){
-        const found = languageNames[`${localeName.language}-${localeName.country}}`]
+        const found = languageNames[`${localeName.language}-${localeName.country}`]
+        console.log(`${localeName.language}-${localeName.country}`,languageNames)
         if (found){
             return found
         }

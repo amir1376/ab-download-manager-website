@@ -1,4 +1,4 @@
-import {getLocaleName, isRtl, LanguageInfo, LocaleString} from "~/i18n/LanguageInfo.ts";
+import {countryCodeToFlag, getLocaleName, isRtl, LanguageInfo, LocaleString} from "~/i18n/LanguageInfo.ts";
 import {useIntl} from "react-intl";
 import {useTranslationContext} from "~/i18n/TranslationContext";
 import {Translatable} from "~/i18n/Translatable.ts";
@@ -24,10 +24,16 @@ export function useCurrentLocale(): MyLocale {
     )
 }
 
-export function useCurrentLanguageInfo(): LanguageInfo|undefined {
+export function useCurrentLanguageInfo(): LanguageInfo {
     const localeString = useCurrentLocaleString()
     return useMemo(
-        () => getBestLanguageForThisLocale(localeString??getDefaultLocale()),
+        () => {
+            const result= getBestLanguageForThisLocale(localeString ?? getDefaultLocale())
+            if (!result){
+                console.error("[BUG] current language info is null!")
+            }
+            return result!
+        },
         [localeString]
     )
 }
@@ -70,15 +76,17 @@ export function getLanguageInfo(localeString: LocaleString) {
     return getLanguagesInfo().find(l => l.code == localeString)
 }
 
-let languageInfo:LanguageInfo[]|undefined = undefined
+let languageInfo: LanguageInfo[] | undefined = undefined
+
 export function getLanguagesInfo(): LanguageInfo[] {
-    if (!languageInfo){
+    if (!languageInfo) {
         languageInfo = getAvailableLocaleStrings().map(localeString => {
             const locale = toMyLocale(localeString)
             return {
                 code: localeString,
                 name: getLocaleName(locale) ?? {english: localeString, native: localeString},
-                isRTL: isRtl(locale)
+                isRTL: isRtl(locale),
+                flag:locale?.country && countryCodeToFlag(locale.country)
             }
         })
     }
@@ -94,7 +102,16 @@ export function getLanguageDirection(code: string): "ltr" | "rtl" {
     }
 }
 
-export function useCurrentDirection() {
-    const currentLanguage = useCurrentLocaleString();
-    return getLanguageDirection(currentLanguage)
+export function useCurrentLangIsRtl() {
+    const currentLanguage = useCurrentLanguageInfo();
+    return currentLanguage.isRTL
 }
+
+export function useCurrentDirection(): "ltr" | "rtl" {
+    if (useCurrentLangIsRtl()) {
+        return "rtl"
+    } else {
+        return "ltr"
+    }
+}
+

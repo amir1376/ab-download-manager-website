@@ -4,6 +4,7 @@ export type LanguageInfo = {
     code: string,
     name: LanguageName,
     isRTL: boolean,
+    flag?:string
 }
 
 export type LanguageName = {
@@ -15,7 +16,7 @@ export type LocaleString =
     | `${string}-${string}`
 
 const rtlLanguages: LocaleString[] = [
-    "de",
+    "ar",
     "fa",
 ]
 
@@ -45,6 +46,14 @@ const languageNames: Record<LocaleString, LanguageName> = {
         native: "中文",
     },
 };
+
+export function countryCodeToFlag(countryCode:string) {
+    return countryCode
+        .toUpperCase()
+        .split('')
+        .map(char => String.fromCodePoint(127397 + char.charCodeAt(0)))
+        .join('');
+}
 
 export function isRtl(locale:MyLocale) {
     return rtlLanguages.includes(locale.language)

@@ -14,6 +14,7 @@ import {MyLink} from "~/abstraction/navigation";
 import {useTheme} from "~/abstraction/theme/useTheme";
 import Constants from "~/data/Constants.ts";
 import {SocialLink, useGetNameForSocialLink} from "~/utils/SocialLink.tsx";
+import {LanguageInfo} from "~/i18n/LanguageInfo.ts";
 
 export default function Header() {
     const {y} = useWindowScroll()
@@ -72,10 +73,19 @@ function Theme() {
     </div>
 }
 
-function LanguageItem(props: { name:string, active: boolean }) {
+function LanguageItem(props: { language: LanguageInfo, active: boolean }) {
     return <div
-        className="flex flex-row justify-between">
-        {props.name}
+        dir="ltr"
+        className="flex flex-row">
+        <div className="text-2xl">
+            {props.language.flag}
+        </div>
+        <div className="w-1"/>
+        <div>
+            {props.language.name.native}
+        </div>
+        <div className="w-2"/>
+        <div className="flex-1"/>
         {props.active && (
             <Icon icon="mdi:done"/>
         )}
@@ -89,7 +99,7 @@ function SocialItem(props: { socialLink: SocialLink }) {
         target="_blank"
         className="flex flex-row">
         <span className="text-nowrap">{name}</span>
-        <Icon className="opacity-25 self-start" icon="gg:external" height={24} width={24} />
+        <Icon className="opacity-25 self-start" icon="gg:external" height={24} width={24}/>
     </a>
 }
 
@@ -97,14 +107,24 @@ function LanguageDropDown() {
     const languages = getLanguagesInfo()
     const currentLanguageInfo = useCurrentLanguageInfo()
     const changeLang = useChangeLanguage()
-    return <div dir={useCurrentDirection()} className="dropdown">
-        <div tabIndex={0} className="dropdown-bottom btn btn-ghost">
-            <Icon height={24} width={24} icon="mdi:language"/> {currentLanguageInfo?.name?.native}
+    return <div dir={useCurrentDirection()} className={classNames(
+        "dropdown",
+        !currentLanguageInfo.isRTL && "dropdown-end",
+    )}>
+        <div tabIndex={0} className="btn btn-ghost">
+            {/*<Icon height={24} width={24} icon="mdi:language"/>*/}
+            <div className="text-2xl">
+                {currentLanguageInfo?.flag}
+            </div>
+            <div className="w-1"></div>
+            <div>
+                {currentLanguageInfo?.name?.native}
+            </div>
         </div>
         <ul tabIndex={0} className="dropdown-content menu-lg rounded shadow-lg menu bg-base-200">
             {Object.values(languages).map(lang => (
-                <li onClick={() => changeLang(lang.code)} key={lang.code}>
-                    <LanguageItem name={lang.name.native} active={currentLanguageInfo?.code == lang.code}/>
+                <li className="min-w-36" onClick={() => changeLang(lang.code)} key={lang.code}>
+                    <LanguageItem language={lang} active={currentLanguageInfo?.code == lang.code}/>
                 </li>
             ))}
         </ul>
@@ -117,12 +137,16 @@ function LanguageForMobile() {
     const changeLang = useChangeLanguage()
     return <details dir={useCurrentDirection()}>
         <summary>
-            <Icon icon="mdi:language"/> {activeLocale?.name?.native}
+            <div className="text-2xl">
+                {activeLocale.flag}
+            </div>
+            <div className="w-1"/>
+            {activeLocale?.name?.native}
         </summary>
         <ul>
             {Object.values(languages).map(lang => (
                 <li onClick={() => changeLang(lang.code)} key={lang.code}>
-                    <LanguageItem name={lang.name.native} active={activeLocale?.code == lang.code}/>
+                    <LanguageItem language={lang} active={activeLocale?.code == lang.code}/>
                 </li>
             ))}
         </ul>
@@ -185,6 +209,7 @@ function OptionMobile() {
         </div>
     </div>
 }
+
 function OptionDesktop() {
     return <div className="hidden md:flex flex-row space-x-4">
         <SourceCode/>

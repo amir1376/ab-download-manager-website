@@ -5,7 +5,7 @@ import {ILanguageData} from "~/i18n/ILanguageData";
 import {useLocalStorage} from "usehooks-ts";
 import {runWith} from "~/utils/functionalUtils";
 import {useSearchParams} from "react-router-dom";
-import {getLanguageDirection} from "~/abstraction/i18n";
+import {getBestLanguageForThisLocale, getLanguageDirection} from "~/abstraction/i18n";
 import {getBrowserLanguageThatSupported} from "~/i18n/BrowserLocale.ts";
 import {getAvailableLocaleStrings, getDefaultLocale, getMessagesOfLocale} from "~/i18n/TranslationRegistry.ts";
 
@@ -34,7 +34,7 @@ export function TranslationWrapper(
         }
         return null
     })
-    const [locale, setLocale] = useLocalStorage("language", ()=>{
+    const [locale, setLocale] = useLocalStorage("language", () => {
         const locale = getBrowserLanguageThatSupported(getAvailableLocaleStrings())
         return locale ?? getDefaultLocale()
     })
@@ -53,34 +53,36 @@ export function TranslationWrapper(
             setLocale(paramLang)
         }
     }, [paramLang])
+    const bestLocale = useMemo(
+        () => getBestLanguageForThisLocale(locale)?.code ?? getDefaultLocale(),
+        [locale]
+    )
     const messages = useMemo(() => {
-        return getMessagesOfLocale(locale!)
-    }, [locale])
+        return getMessagesOfLocale(bestLocale!)
+    }, [bestLocale])
 
     function selectLanguage(localeCode: string) {
-        console.log(localeCode)
         if (getAvailableLocaleStrings().includes(localeCode)) {
-            console.log("selected",localeCode)
             setLocale(localeCode)
         }
     }
 
     return <TranslationContext.Provider value={
         {
-            currentLocale: locale!,
+            currentLocale: bestLocale!,
             translations: messages,
             changeLanguage: selectLanguage,
         }
     }>
-        <IntlProvider locale={locale!} messages={messages}>
+        <IntlProvider locale={bestLocale!} messages={messages}>
             {props.children}
         </IntlProvider>
     </TranslationContext.Provider>
 }
 
 export function useTranslationContext(): I18NHook {
-    const {$t, locale} = useIntl()
-    const {changeLanguage, translations} = useContext(TranslationContext)
+    const {changeLanguage, translations, currentLocale} = useContext(TranslationContext)
+    const {$t} = useIntl()
     return {
         t: (key, payload) => {
             return $t({
@@ -88,7 +90,7 @@ export function useTranslationContext(): I18NHook {
             }, payload)
         },
         translations: translations,
-        currentLocale: locale,
+        currentLocale: currentLocale,
         changeLanguage: changeLanguage
     }
 }

@@ -20,7 +20,9 @@ export function toMyLocale(myLocale: LocaleString):MyLocale {
         country: country,
     }
 }
-
+export function localeEquals(a:MyLocale,b:MyLocale){
+    return a.language == b.language && a.country == b.country
+}
 export function isLocaleContains(locale: MyLocale, localeToCheck: MyLocale): boolean {
     if (locale.language === localeToCheck.language) {
         if (locale.country) {

@@ -1,11 +1,11 @@
 import {Helmet} from "react-helmet";
-import {useCurrentLocale, useTranslate} from "~/abstraction/i18n";
+import {useCurrentLocaleString, useTranslate} from "~/abstraction/i18n";
 export default function CommonMetaTags(){
     const t = useTranslate()
     const title = t("seo_title")
     const description = t("seo_description")
 
-    const locale = useCurrentLocale()
+    const locale = useCurrentLocaleString()
     const bannerFullLink = new URL("/assets/banners/banner.png",import.meta.url).href
     return <Helmet>
         <title>{title}</title>

@@ -76,12 +76,12 @@ function Theme() {
 function LanguageItem(props: { language: LanguageInfo, active: boolean }) {
     return <div
         dir="ltr"
-        className="flex flex-row">
+        className="flex flex-row flex-nowrap">
         <div className="text-2xl">
             {props.language.flag}
         </div>
         <div className="w-1"/>
-        <div>
+        <div className="text-nowrap">
             {props.language.name.native}
         </div>
         <div className="w-2"/>

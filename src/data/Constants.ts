@@ -5,7 +5,7 @@ const githubInfo = {
     repo: "ab-download-manager",
 }
 const developerInfo = {
-    name: "Amir Ab",
+    name: "AmirHossein Abdolmotallebi",
     website: "https://amirab.ir",
     github: "https://github.com/amir1376"
 }

@@ -118,19 +118,20 @@ function SocialItem(props: { socialLink: SocialLink }) {
 function LanguageFlagIcon(
     props: { countryCode: string | undefined } & Omit<IconProps, "icon">
 ) {
+    const {countryCode, ...restProps} = props
     const iconName = useMemo(
         () => {
-            if (props.countryCode) {
-                return "flag:" + props.countryCode.toLowerCase() + "-4x3"
+            if (countryCode) {
+                return "flag:" + countryCode.toLowerCase() + "-4x3"
             } else {
                 return "mdi:language"
             }
         },
-        [props.countryCode]
+        [countryCode]
     )
     return <Icon
         icon={iconName}
-        {...props}
+        {...restProps}
     />
 }
 

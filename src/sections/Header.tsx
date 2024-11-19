@@ -1,12 +1,13 @@
 import {useMemo} from "react";
 import appIcon from "~/assets/icons/app_icon_simple.svg"
-import {Icon} from "@iconify/react";
+import {Icon, IconProps} from "@iconify/react";
 import {useWindowScroll} from "react-use";
 import classNames from "classnames";
 import {
     getLanguagesInfo,
     useChangeLanguage,
-    useCurrentDirection, useCurrentLanguageInfo, useCurrentLocale,
+    useCurrentDirection,
+    useCurrentLanguageInfo,
     useTranslate
 } from "~/abstraction/i18n";
 import {MyLink} from "~/abstraction/navigation";
@@ -14,6 +15,7 @@ import {useTheme} from "~/abstraction/theme/useTheme";
 import Constants from "~/data/Constants.ts";
 import {SocialLink, useGetNameForSocialLink} from "~/utils/SocialLink.tsx";
 import {LanguageInfo} from "~/i18n/LanguageInfo.ts";
+import {divide} from "lodash";
 
 export default function Header() {
     const {y} = useWindowScroll()
@@ -82,9 +84,10 @@ function LanguageItem(props: { language: LanguageInfo, active: boolean }) {
                 ? "bg-base-content/15 border-base-content/15"
                 : "border-transparent"
         )}>
-        <div className="text-2xl">
-            {props.language.flag}
-        </div>
+        {/*<div className="text-2xl">*/}
+        {/*    {props.language.flag}*/}
+        {/*</div>*/}
+        <LanguageFlagIcon height={24} width={24} countryCode={props.language?.country}/>
         <div className="w-1"/>
         <div className="text-nowrap">
             {props.language.name.native}
@@ -112,6 +115,25 @@ function SocialItem(props: { socialLink: SocialLink }) {
     </a>
 }
 
+function LanguageFlagIcon(
+    props: { countryCode: string | undefined } & Omit<IconProps, "icon">
+) {
+    const iconName = useMemo(
+        () => {
+            if (props.countryCode) {
+                return "flag:" + props.countryCode.toLowerCase() + "-4x3"
+            } else {
+                return "mdi:language"
+            }
+        },
+        [props.countryCode]
+    )
+    return <Icon
+        icon={iconName}
+        {...props}
+    />
+}
+
 function LanguageDropDown() {
     const languages = getLanguagesInfo()
     const currentLanguageInfo = useCurrentLanguageInfo()
@@ -122,9 +144,8 @@ function LanguageDropDown() {
     )}>
         <div tabIndex={0} className="btn btn-ghost">
             {/*<Icon height={24} width={24} icon="mdi:language"/>*/}
-            <div className="text-2xl">
-                {currentLanguageInfo?.flag}
-            </div>
+            {/*{currentLanguageInfo?.flag}*/}
+            <LanguageFlagIcon height={24} width={24} countryCode={currentLanguageInfo?.country}/>
             <div className="w-1"></div>
             <div>
                 {currentLanguageInfo?.name?.native}
@@ -146,9 +167,7 @@ function LanguageForMobile() {
     const changeLang = useChangeLanguage()
     return <details dir={useCurrentDirection()}>
         <summary>
-            <div className="text-2xl">
-                {activeLocale.flag}
-            </div>
+            <LanguageFlagIcon height={24} width={24} countryCode={activeLocale?.country}/>
             <div className="w-1"/>
             {activeLocale?.name?.native}
         </summary>

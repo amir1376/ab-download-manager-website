@@ -86,7 +86,9 @@ export function getLanguagesInfo(): LanguageInfo[] {
                 code: localeString,
                 name: getLocaleName(locale) ?? {english: localeString, native: localeString},
                 isRTL: isRtl(locale),
-                flag:locale?.country && countryCodeToFlag(locale.country)
+                country:locale?.country
+                // it seems that country flags not rendered in chrome!
+                // flag:locale?.country && countryCodeToFlag(locale.country)
             }
         })
     }

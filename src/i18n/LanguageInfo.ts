@@ -4,7 +4,7 @@ export type LanguageInfo = {
     code: string,
     name: LanguageName,
     isRTL: boolean,
-    flag?:string
+    country?:string
 }
 
 export type LanguageName = {

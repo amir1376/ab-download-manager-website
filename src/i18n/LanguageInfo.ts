@@ -70,7 +70,6 @@ export function isRtl(locale:MyLocale) {
 export function getLocaleName(localeName:MyLocale):LanguageName|undefined {
     if (localeName.country){
         const found = languageNames[`${localeName.language}-${localeName.country}`]
-        console.log(`${localeName.language}-${localeName.country}`,languageNames)
         if (found){
             return found
         }

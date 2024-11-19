@@ -7,7 +7,6 @@ import {
     getLanguagesInfo,
     useChangeLanguage,
     useCurrentDirection, useCurrentLanguageInfo, useCurrentLocale,
-    useCurrentLocaleString,
     useTranslate
 } from "~/abstraction/i18n";
 import {MyLink} from "~/abstraction/navigation";
@@ -76,7 +75,13 @@ function Theme() {
 function LanguageItem(props: { language: LanguageInfo, active: boolean }) {
     return <div
         dir="ltr"
-        className="flex flex-row flex-nowrap">
+        className={classNames(
+            "flex flex-row flex-nowrap",
+            "border",
+            props.active
+                ? "bg-base-content/15 border-base-content/15"
+                : "border-transparent"
+        )}>
         <div className="text-2xl">
             {props.language.flag}
         </div>
@@ -86,9 +91,13 @@ function LanguageItem(props: { language: LanguageInfo, active: boolean }) {
         </div>
         <div className="w-2"/>
         <div className="flex-1"/>
-        {props.active && (
-            <Icon icon="mdi:done"/>
-        )}
+        <Icon
+            className={classNames(
+                "transform transition",
+                !props.active && "scale-0 opacity-0",
+            )}
+            icon="mdi:done"
+        />
     </div>
 }
 
@@ -123,7 +132,7 @@ function LanguageDropDown() {
         </div>
         <ul tabIndex={0} className="dropdown-content menu-lg rounded shadow-lg menu bg-base-200">
             {Object.values(languages).map(lang => (
-                <li className="min-w-36" onClick={() => changeLang(lang.code)} key={lang.code}>
+                <li className="" onClick={() => changeLang(lang.code)} key={lang.code}>
                     <LanguageItem language={lang} active={currentLanguageInfo?.code == lang.code}/>
                 </li>
             ))}

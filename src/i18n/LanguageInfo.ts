@@ -21,6 +21,10 @@ const rtlLanguages: LocaleString[] = [
 ]
 
 const languageNames: Record<LocaleString, LanguageName> = {
+    "ar": {
+        english: "Arabic",
+        native: "العربية",
+    },
     "de": {
         english: "German",
         native: "Deutsch",
@@ -29,17 +33,13 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "English",
         native: "English",
     },
-    "ar": {
-        english: "Arabic",
-        native: "العربية",
+    "fa": {
+        english: "Persian",
+        native: "فارسی",
     },
     "fr": {
         english: "French",
         native: "Français",
-    },
-    "fa": {
-        english: "Persian",
-        native: "فارسی",
     },
     "it": {
         english: "Italian",

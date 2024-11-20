@@ -1,27 +1,27 @@
-import fa_IR from "./locales/fa-IR.json";
-import en_US from "./locales/en-US.json";
+import ar_SA from "./locales/ar-SA.json";
 import de_DE from "./locales/de-DE.json";
+import en_US from "./locales/en-US.json";
+import fa_IR from "./locales/fa-IR.json";
+import fr_FR from "./locales/fr-FR.json";
 import it_IT from "./locales/it-IT.json";
+import tr_TR from "./locales/tr-TR.json";
+import ru_RU from "./locales/ru-RU.json";
 import zh_CN from "./locales/zh-CN.json";
 import zh_TW from "./locales/zh-TW.json";
-import tr_TR from "./locales/tr-TR.json";
-import ar_SA from "./locales/ar-SA.json";
-import fr_FR from "./locales/fr-FR.json";
-import ru_RU from "./locales/ru-RU.json";
 import { addLocales, setDefaultLocale } from "./TranslationRegistry.ts";
 
 export function setUpIntl() {
   addLocales({
+    "ar-SA":ar_SA,
+    "de-DE":de_DE,
     "en-US":en_US,
     "fa-IR":fa_IR,
     "fr-FR":fr_FR,
-    "de-DE":de_DE,
     "it-IT":it_IT,
     "ru-RU":ru_RU,
     "tr-TR":tr_TR,
     "zh-CN":zh_CN,
     "zh-TW":zh_TW,
-    "ar-SA":ar_SA,
   });
   setDefaultLocale("en-US");
 }

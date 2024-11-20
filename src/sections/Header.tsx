@@ -1,6 +1,6 @@
 import {useMemo} from "react";
 import appIcon from "~/assets/icons/app_icon_simple.svg"
-import {Icon, IconProps} from "@iconify/react";
+import {Icon} from "@iconify/react";
 import {useWindowScroll} from "react-use";
 import classNames from "classnames";
 import {
@@ -15,7 +15,6 @@ import {useTheme} from "~/abstraction/theme/useTheme";
 import Constants from "~/data/Constants.ts";
 import {SocialLink, useGetNameForSocialLink} from "~/utils/SocialLink.tsx";
 import {LanguageInfo} from "~/i18n/LanguageInfo.ts";
-import {divide} from "lodash";
 
 export default function Header() {
     const {y} = useWindowScroll()
@@ -87,7 +86,7 @@ function LanguageItem(props: { language: LanguageInfo, active: boolean }) {
         {/*<div className="text-2xl">*/}
         {/*    {props.language.flag}*/}
         {/*</div>*/}
-        <LanguageFlagIcon height={24} width={24} countryCode={props.language?.country}/>
+        <LanguageFlagIcon height={24} countryCode={props.language?.country}/>
         <div className="w-1"/>
         <div className="text-nowrap">
             {props.language.name.native}
@@ -116,7 +115,10 @@ function SocialItem(props: { socialLink: SocialLink }) {
 }
 
 function LanguageFlagIcon(
-    props: { countryCode: string | undefined } & Omit<IconProps, "icon">
+    props: {
+        countryCode?: string,
+        height?: number,
+    }
 ) {
     const {countryCode, ...restProps} = props
     const iconName = useMemo(
@@ -131,6 +133,7 @@ function LanguageFlagIcon(
     )
     return <Icon
         icon={iconName}
+        className="rounded"
         {...restProps}
     />
 }
@@ -146,7 +149,7 @@ function LanguageDropDown() {
         <div tabIndex={0} className="btn btn-ghost">
             {/*<Icon height={24} width={24} icon="mdi:language"/>*/}
             {/*{currentLanguageInfo?.flag}*/}
-            <LanguageFlagIcon height={24} width={24} countryCode={currentLanguageInfo?.country}/>
+            <LanguageFlagIcon height={24} countryCode={currentLanguageInfo?.country}/>
             <div className="w-1"></div>
             <div>
                 {currentLanguageInfo?.name?.native}
@@ -168,7 +171,7 @@ function LanguageForMobile() {
     const changeLang = useChangeLanguage()
     return <details dir={useCurrentDirection()}>
         <summary>
-            <LanguageFlagIcon height={24} width={24} countryCode={activeLocale?.country}/>
+            <LanguageFlagIcon height={24} countryCode={activeLocale?.country}/>
             <div className="w-1"/>
             {activeLocale?.name?.native}
         </summary>

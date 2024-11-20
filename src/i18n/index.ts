@@ -3,6 +3,8 @@ import en_US from "./locales/en-US.json";
 import de_DE from "./locales/de-DE.json";
 import it_IT from "./locales/it-IT.json";
 import zh_CN from "./locales/zh-CN.json";
+import zh_TW from "./locales/zh-TW.json";
+import tr_TR from "./locales/tr-TR.json";
 import ar_SA from "./locales/ar-SA.json";
 import fr_FR from "./locales/fr-FR.json";
 import ru_RU from "./locales/ru-RU.json";
@@ -16,7 +18,9 @@ export function setUpIntl() {
     "de-DE":de_DE,
     "it-IT":it_IT,
     "ru-RU":ru_RU,
+    "tr-TR":tr_TR,
     "zh-CN":zh_CN,
+    "zh-TW":zh_TW,
     "ar-SA":ar_SA,
   });
   setDefaultLocale("en-US");

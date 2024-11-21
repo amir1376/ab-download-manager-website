@@ -1,12 +1,12 @@
 {
     "code": "zh-TW",
-    "languageName": "繁體中文",
-    "seo_title": "AB Download Manager",
+    "languageName": "正體中文",
+    "seo_title": "AB 下載管理員",
     "seo_description": "該應用程式，讓你無論在何處都能輕鬆下載檔案，配合瀏覽器擴充套件來達到無縫銜接的高速下載體驗。",
-    "seo_keywords": "下載管理器,下載,瀏覽器擴充套件,chrome,firefox,ab download manager,開源,免費",
-    "not_found": "找不到",
-    "app_short_name": "AB DM",
-    "app_long_name": "AB Download Manager",
+    "seo_keywords": "下載管理員，下載，瀏覽器擴充套件，chrome，firefox，ab下載管理員，開源，免費",
+    "not_found": "未找到",
+    "app_short_name": "AB 下載管理員",
+    "app_long_name": "AB 下載管理員",
     "footer_issues": "問題回報",
     "footer_source_code": "原始碼",
     "footer_discussion": "討論",
@@ -24,7 +24,7 @@
     "home_hero_see_guides": "使用者指南",
     "home_features": "特色功能",
     "home_feature_multi_threaded_title": "極速下載",
-    "home_feature_multi_threaded_description": "使用多線程下載檔案，下載速度最快提升 500%",
+    "home_feature_multi_threaded_description": "使用多執行緒下載檔案，下載速度最快提升 500%",
     "home_feature_multiplatform_title": "多平台支援",
     "home_feature_multiplatform_description": "該應用目前可適用於 Windows 及 Linux 作業系統，其他平台支援正在推出！",
     "home_feature_open_source_title": "免費 & 開源",
@@ -39,7 +39,7 @@
     "home_feature_speed_limiter_description": "你可以為你的下載作業設定下載速度限制，以避免影響到同連線環境下的其他使用者 :)",
     "home_feature_browser_integration_title": "瀏覽器整合",
     "home_feature_browser_integration_description": "你可以安裝瀏覽器擴充功能以自動擷取來自瀏覽器的下載事件",
-    "download_from_provider": "從 {name} 上下載",
+    "download_from_provider": "從 {name} 下載",
     "download_direct_download": "直接下載",
     "download_select_platform": "選擇你的作業系統",
     "download_select_download_method": "選擇下載方式",
@@ -58,5 +58,5 @@
     "coming_soon": "敬請期待",
     "attention": "注意",
     "experimental_platform_warning": "{platform} 版本目前還在實驗階段，部分功能可能無法正常運行！",
-    "file_checksum": "檔案 checksum"
+    "file_checksum": "檔案校驗碼"
 }

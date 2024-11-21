@@ -6,6 +6,7 @@ import fr_FR from "./locales/fr-FR.json";
 import it_IT from "./locales/it-IT.json";
 import tr_TR from "./locales/tr-TR.json";
 import ru_RU from "./locales/ru-RU.json";
+import es_ES from "./locales/es-ES.json";
 import zh_CN from "./locales/zh-CN.json";
 import zh_TW from "./locales/zh-TW.json";
 import { addLocales, setDefaultLocale } from "./TranslationRegistry.ts";
@@ -19,6 +20,7 @@ export function setUpIntl() {
     "fr-FR":fr_FR,
     "it-IT":it_IT,
     "ru-RU":ru_RU,
+    "es-ES":es_ES,
     "tr-TR":tr_TR,
     "zh-CN":zh_CN,
     "zh-TW":zh_TW,

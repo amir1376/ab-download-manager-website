@@ -218,13 +218,21 @@ function CommunityDesktop() {
             <Icon icon="iconoir:community" height={24} width={24}/>
             {t("social_and_community")}
         </div>
-        <ul tabIndex={0} className="dropdown-content menu-lg rounded shadow-lg menu bg-base-200">
-            {social.map(l => (
-                <li key={l.link}>
-                    <SocialItem socialLink={l}/>
-                </li>
-            ))}
-        </ul>
+        <div className={
+            classNames(
+                "dropdown-content mt-2",
+                "menu-lg rounded shadow-lg bg-base-200",
+                "rounded-box border border-base-content/25",
+            )
+        }>
+            <ul tabIndex={0} className="menu">
+                {social.map(l => (
+                    <li key={l.link}>
+                        <SocialItem socialLink={l}/>
+                    </li>
+                ))}
+            </ul>
+        </div>
     </div>
 }
 

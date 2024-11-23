@@ -25,6 +25,10 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Arabic",
         native: "العربية",
     },
+    "bn": {
+        english: "Bengali",
+        native: "বাংলা",
+    },
     "de": {
         english: "German",
         native: "Deutsch",

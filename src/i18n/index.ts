@@ -1,4 +1,5 @@
 import ar_SA from "./locales/ar-SA.json";
+import bn_BD from "./locales/bn-BD.json";
 import de_DE from "./locales/de-DE.json";
 import en_US from "./locales/en-US.json";
 import fa_IR from "./locales/fa-IR.json";
@@ -14,6 +15,7 @@ import { addLocales, setDefaultLocale } from "./TranslationRegistry.ts";
 export function setUpIntl() {
   addLocales({
     "ar-SA":ar_SA,
+    "bn-BD":bn_BD,
     "de-DE":de_DE,
     "en-US":en_US,
     "fa-IR":fa_IR,

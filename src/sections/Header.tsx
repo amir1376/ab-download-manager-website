@@ -155,13 +155,20 @@ function LanguageDropDown() {
                 {currentLanguageInfo?.name?.native}
             </div>
         </div>
-        <ul tabIndex={0} className="dropdown-content menu-lg rounded shadow-lg menu bg-base-200">
-            {Object.values(languages).map(lang => (
-                <li className="" onClick={() => changeLang(lang.code)} key={lang.code}>
-                    <LanguageItem language={lang} active={currentLanguageInfo?.code == lang.code}/>
-                </li>
-            ))}
-        </ul>
+        <div className={classNames(
+            "dropdown-content",
+            "max-h-[calc(100vh-5rem)] overflow-y-auto mt-2",
+            "shadow-lg bg-base-200",
+            "rounded-box border border-base-content/25"
+        )}>
+            <ul tabIndex={0} className="menu">
+                {Object.values(languages).map(lang => (
+                    <li className="" onClick={() => changeLang(lang.code)} key={lang.code}>
+                        <LanguageItem language={lang} active={currentLanguageInfo?.code == lang.code}/>
+                    </li>
+                ))}
+            </ul>
+        </div>
     </div>
 }
 

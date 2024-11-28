@@ -44,7 +44,7 @@ export default function Footer() {
         <div className={classNames(
             " px-4 pb-16 pt-8",
             "flex flex-col",
-            "items-center"
+            "sm:items-center"
         )}>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-24 gap-y-12">
                 <FooterSection title={t("social_and_community")}>
@@ -71,7 +71,7 @@ export default function Footer() {
                       href={data.developerSite}>{data.developerName}</MyLink>
             </div>
             <div className="h-8"/>
-            <div className="flex flex-col md:flex-row justify-center items-center">
+            <div className="flex flex-col md:flex-row justify-center sm:items-center">
                 <div>
                     {t("footer_released_under")} <MyLink className="text-blue-500" href={data.licence.link}>{data.licence.name}</MyLink>
                 </div>

@@ -12,7 +12,7 @@ function FooterItem(
     }
 ) {
     return <MyLink href={props.link} target="_blank">
-        <div className="text-base opacity-75">
+        <div className="text-sm sm:text-base opacity-75">
             {props.name}
         </div>
     </MyLink>
@@ -24,7 +24,7 @@ function FooterSection(
     }
 ) {
     return <div className="flex flex-col justify-start">
-        <div className="font-bold opacity-75 text-2xl">
+        <div className="font-bold opacity-75 text-xl sm:text-2xl">
             {props.title}
         </div>
         <div className="h-6"/>
@@ -66,12 +66,12 @@ export default function Footer() {
                 </FooterSection>
             </div>
             <div className="h-8"/>
-            <div className="text-lg font-bold">
+            <div className="text-base sm:text-lg font-bold">
                 {t("footer_developed_with_love")} <MyLink className="text-blue-500"
                       href={data.developerSite}>{data.developerName}</MyLink>
             </div>
             <div className="h-8"/>
-            <div className="flex flex-col md:flex-row justify-center sm:items-center">
+            <div className="flex flex-col md:flex-row justify-center sm:items-center text-sm sm:text-base">
                 <div>
                     {t("footer_released_under")} <MyLink className="text-blue-500" href={data.licence.link}>{data.licence.name}</MyLink>
                 </div>

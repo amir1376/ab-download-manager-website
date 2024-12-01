@@ -32,7 +32,7 @@ export default function Header() {
     )}>
         <div className={
             classNames(
-                "py-2 px-6 flex flex-row items-center container",
+                "py-2 px-4 lg:px-6 flex flex-row items-center container",
             )
         }>
             <Brand/>
@@ -258,7 +258,7 @@ function OptionMobile() {
 }
 
 function OptionDesktop() {
-    return <div className="hidden md:flex flex-row space-x-4">
+    return <div className="hidden md:flex flex-row  lg:space-x-4">
         <SourceCode/>
         <CommunityDesktop/>
         <LanguageDropDown/>

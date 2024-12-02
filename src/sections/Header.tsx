@@ -179,7 +179,7 @@ function LanguageForMobile() {
     return <details dir={useCurrentDirection()}>
         <summary>
             <LanguageFlagIcon height={24} countryCode={activeLocale?.country}/>
-            <div className="w-1"/>
+            {/* <div className="w-1"/> */}
             {activeLocale?.name?.native}
         </summary>
         <ul>

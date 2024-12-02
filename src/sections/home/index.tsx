@@ -23,19 +23,19 @@ function Hero(props: { icon: ImageProp, title: string, description: string }) {
                     `blur-3xl bg-gradient-to-br my-primary-gradient-colors`
                 )}
             />
-            <img className="h-64 w-64 z-[1]"
+            <img className="h-52 sm:h-64 w-52 sm:w-64 z-[1]"
                  src={iconSource}
                  alt={props.icon.alt}
             />
         </div>
         <div className="flex flex-col space-y-10 p-4 md:max-w-[55%]">
             <h2 className={classNames(
-                "text-5xl md:text-6xl font-extrabold"
+                "text-4xl md:text-5xl lg:text-6xl font-extrabold text-center md:text-left"
             )}>{props.title}</h2>
             <h5 className={classNames(
-                "text-3xl font-medium leading-normal"
+                "text-xl sm:text-2xl lg:text-3xl font-medium leading-normal text-center md:text-left"
             )}>{props.description}</h5>
-            <div className="flex flex-row flex-wrap gap-4">
+            <div className="flex flex-row flex-wrap gap-4 justify-center md:justify-start">
                 <MyLink href={`/#download`}>
                     <div className={classNames(
                         "btn btn-primary btn-lg rounded-full border-2",
@@ -84,7 +84,7 @@ function SectionWithTitle(
         "space-y-8"
     )}>
         <MyLink href={`#${props.id}`}>
-            <div className="inline-block font-bold text-4xl">
+            <div className="inline-block font-bold text-3xl sm:text-4xl">
                 {props.title}
             </div>
         </MyLink>
@@ -119,11 +119,11 @@ function Feature({feature}: {
         "shadow hover:shadow-lg",
         "gradient-border"
     )}>
-        <div className="text-2xl font-bold">
+        <div className="text-xl sm:text-2xl font-bold">
             {t(feature.title)}
         </div>
         <div className="mt-2"/>
-        <div className="text-base opacity-75">
+        <div className="text-sm sm:text-base opacity-75">
             {t(feature.description)}
         </div>
     </div>

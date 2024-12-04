@@ -159,6 +159,7 @@ function LanguageDropDown() {
             "dropdown-content",
             "max-h-[calc(100vh-5rem)] overflow-y-auto mt-2",
             "shadow-lg bg-base-200",
+            "overscroll-contain",
             "rounded-box border border-base-content/25"
         )}>
             <ul tabIndex={0} className="menu">

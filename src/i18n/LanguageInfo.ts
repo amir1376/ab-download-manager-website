@@ -49,6 +49,10 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Italian",
         native: "Italiano",
     },
+    "pt-BR": {
+        english: "Brazilian Portuguese",
+        native: "Português do Brasil",
+    },
     "ru": {
         english: "Russian",
         native: "Русский",

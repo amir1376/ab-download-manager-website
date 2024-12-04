@@ -30,10 +30,10 @@ function Hero(props: { icon: ImageProp, title: string, description: string }) {
         </div>
         <div className="flex flex-col space-y-10 p-4 md:max-w-[55%]">
             <h2 className={classNames(
-                "text-4xl md:text-5xl lg:text-6xl font-extrabold text-center md:text-left"
+                "text-4xl md:text-5xl lg:text-6xl font-extrabold text-center md:text-start"
             )}>{props.title}</h2>
             <h5 className={classNames(
-                "text-xl sm:text-2xl lg:text-3xl font-medium leading-normal text-center md:text-left"
+                "text-xl sm:text-2xl lg:text-3xl font-medium leading-normal text-center md:text-start"
             )}>{props.description}</h5>
             <div className="flex flex-row flex-wrap gap-4 justify-center md:justify-start">
                 <MyLink href={`/#download`}>

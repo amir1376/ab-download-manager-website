@@ -54,7 +54,7 @@ export function TranslationWrapper(
         }
     }, [paramLang])
     const bestLocale = useMemo(
-        () => getBestLanguageForThisLocale(locale)?.code ?? getDefaultLocale(),
+        () => getBestLanguageForThisLocale(locale)?.locale ?? getDefaultLocale(),
         [locale]
     )
     const messages = useMemo(() => {

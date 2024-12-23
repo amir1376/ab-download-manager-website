@@ -86,7 +86,7 @@ function LanguageItem(props: { language: LanguageInfo, active: boolean }) {
         {/*<div className="text-2xl">*/}
         {/*    {props.language.flag}*/}
         {/*</div>*/}
-        <LanguageFlagIcon height={24} countryCode={props.language?.country}/>
+        <LanguageFlagIcon highlighted={props.active} height={24} language={props.language}/>
         <div className="w-1"/>
         <div className="text-nowrap">
             {props.language.name.native}
@@ -116,26 +116,37 @@ function SocialItem(props: { socialLink: SocialLink }) {
 
 function LanguageFlagIcon(
     props: {
-        countryCode?: string,
+        language: LanguageInfo,
+        highlighted?: boolean
         height?: number,
     }
 ) {
-    const {countryCode, ...restProps} = props
-    const iconName = useMemo(
-        () => {
-            if (countryCode) {
-                return "flag:" + countryCode.toLowerCase() + "-4x3"
-            } else {
-                return "mdi:language"
-            }
-        },
-        [countryCode]
-    )
-    return <Icon
-        icon={iconName}
-        className="rounded"
+    const {language, ...restProps} = props
+    // const countryCode = language?.country
+    // const iconName = useMemo(
+    //     () => {
+    //         if (countryCode) {
+    //             return "flag:" + countryCode.toLowerCase() + "-4x3"
+    //         } else {
+    //             return "mdi:language"
+    //         }
+    //     },
+    //     [countryCode]
+    // )
+    return <div
+        className={classNames(
+            "text-xs px-1",
+            "rounded border",
+            props.highlighted ?
+                "text-base-content border-base-content"
+                : "border-base-content/50 text-base-content/50",
+        )}
         {...restProps}
-    />
+    >
+        <span className="font-bold">
+            {language.language.toUpperCase()}
+        </span>
+    </div>
 }
 
 function LanguageDropDown() {
@@ -147,9 +158,7 @@ function LanguageDropDown() {
         !currentLanguageInfo.isRTL && "dropdown-end",
     )}>
         <div tabIndex={0} className="btn btn-ghost">
-            {/*<Icon height={24} width={24} icon="mdi:language"/>*/}
-            {/*{currentLanguageInfo?.flag}*/}
-            <LanguageFlagIcon height={24} countryCode={currentLanguageInfo?.country}/>
+            <Icon height={24} width={24} icon="mdi:language"/>
             <div className="w-1"></div>
             <div>
                 {currentLanguageInfo?.name?.native}
@@ -164,8 +173,8 @@ function LanguageDropDown() {
         )}>
             <ul tabIndex={0} className="menu">
                 {Object.values(languages).map(lang => (
-                    <li className="" onClick={() => changeLang(lang.code)} key={lang.code}>
-                        <LanguageItem language={lang} active={currentLanguageInfo?.code == lang.code}/>
+                    <li className="" onClick={() => changeLang(lang.locale)} key={lang.locale}>
+                        <LanguageItem language={lang} active={currentLanguageInfo?.locale == lang.locale}/>
                     </li>
                 ))}
             </ul>
@@ -179,14 +188,14 @@ function LanguageForMobile() {
     const changeLang = useChangeLanguage()
     return <details dir={useCurrentDirection()}>
         <summary>
-            <LanguageFlagIcon height={24} countryCode={activeLocale?.country}/>
+            <Icon height={24} width={24} icon="mdi:language"/>
             {/* <div className="w-1"/> */}
             {activeLocale?.name?.native}
         </summary>
         <ul>
             {Object.values(languages).map(lang => (
-                <li onClick={() => changeLang(lang.code)} key={lang.code}>
-                    <LanguageItem language={lang} active={activeLocale?.code == lang.code}/>
+                <li onClick={() => changeLang(lang.locale)} key={lang.locale}>
+                    <LanguageItem language={lang} active={activeLocale?.locale == lang.locale}/>
                 </li>
             ))}
         </ul>

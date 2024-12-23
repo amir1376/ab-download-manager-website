@@ -10,7 +10,7 @@ import {useMemo} from "react";
 export function useCurrentLocaleString(): LocaleString {
     const saved = useTranslationContext().currentLocale
     const l = useMemo(
-        () => getBestLanguageForThisLocale(saved)?.code,
+        () => getBestLanguageForThisLocale(saved)?.locale,
         [saved],
     ) ?? getDefaultLocale()
     return l
@@ -73,7 +73,7 @@ export function getBestLanguageForThisLocale(locale: LocaleString): LanguageInfo
 }
 
 export function getLanguageInfo(localeString: LocaleString) {
-    return getLanguagesInfo().find(l => l.code == localeString)
+    return getLanguagesInfo().find(l => l.locale == localeString)
 }
 
 let languageInfo: LanguageInfo[] | undefined = undefined
@@ -83,9 +83,10 @@ export function getLanguagesInfo(): LanguageInfo[] {
         languageInfo = getAvailableLocaleStrings().map(localeString => {
             const locale = toMyLocale(localeString)
             return {
-                code: localeString,
+                locale: localeString,
                 name: getLocaleName(locale) ?? {english: localeString, native: localeString},
                 isRTL: isRtl(locale),
+                language:locale.language,
                 country:locale?.country
                 // it seems that country flags not rendered in chrome!
                 // flag:locale?.country && countryCodeToFlag(locale.country)

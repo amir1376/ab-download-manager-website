@@ -1,9 +1,10 @@
 import {MyLocale} from "~/i18n/MyLocale.ts";
 
 export type LanguageInfo = {
-    code: string,
+    locale: string,
     name: LanguageName,
     isRTL: boolean,
+    language:string
     country?:string
 }
 

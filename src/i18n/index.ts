@@ -10,6 +10,7 @@ import pt_BR from "./locales/pt-BR.json";
 import tr_TR from "./locales/tr-TR.json";
 import uk_UA from "./locales/uk-UA.json";
 import ru_RU from "./locales/ru-RU.json";
+import vi_VN from "./locales/vi-VN.json";
 import es_ES from "./locales/es-ES.json";
 import zh_CN from "./locales/zh-CN.json";
 import zh_TW from "./locales/zh-TW.json";
@@ -30,6 +31,7 @@ export function setUpIntl() {
     "uk-UA":uk_UA,
     "ru-RU":ru_RU,
     "tr-TR":tr_TR,
+    "vi-VN":vi_VN,
     "zh-CN":zh_CN,
     "zh-TW":zh_TW,
   });

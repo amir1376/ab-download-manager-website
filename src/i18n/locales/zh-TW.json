@@ -1,7 +1,7 @@
 {
     "seo_title": "AB 下載管理員",
     "seo_description": "有了此應用程式，讓你無論在何處都能輕鬆下載檔案，搭配瀏覽器擴充套件來達到無縫銜接的高速下載體驗。",
-    "seo_keywords": "下載管理員，下載，瀏覽器擴充套件，chrome，firefox，ab下載管理員，開源，免費",
+    "seo_keywords": "下載管理員,下載,瀏覽器擴充套件,chrome,firefox,ab下載管理員,開源,免費",
     "not_found": "找不到",
     "app_short_name": "AB 下載管理員",
     "app_long_name": "AB 下載管理員",
@@ -12,14 +12,14 @@
     "footer_project": "專案",
     "footer_developed_with_love": "用❤️為您開發 by",
     "footer_my_personal_website": "我的個人網站",
-    "footer_my_github": "Github 主頁",
+    "footer_my_github": "Github 首頁",
     "footer_contact_me": "與我聯絡",
     "footer_released_under": "基於",
     "home": "首頁",
     "home_hero_get_app": "下載應用程式",
     "home_hero_title": "簡化您的下載",
     "home_hero_description": "有了此應用程式，讓你無論在何處都能輕鬆下載檔案，搭配瀏覽器擴充套件來達到無縫銜接的高速下載體驗。",
-    "home_hero_see_guides": "用戶指南",
+    "home_hero_see_guides": "使用者指南",
     "home_features": "特色功能",
     "home_feature_multi_threaded_title": "更快的下載速度",
     "home_feature_multi_threaded_description": "使用多執行緒下載檔案，下載速度最快提升 500%",
@@ -55,6 +55,6 @@
     "source_code": "原始碼",
     "coming_soon": "敬請期待",
     "attention": "友情提醒",
-    "experimental_platform_warning": "{platform} 版本目前還在實驗階段，部分功能可能無法正常執行！",
+    "experimental_platform_warning": "{platform} 版本目前還在實驗階段，部分功能可能無法正常運作！",
     "file_checksum": "檔案校驗碼"
 }

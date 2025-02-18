@@ -8,6 +8,7 @@ import it_IT from "./locales/it-IT.json";
 import id_ID from "./locales/id-ID.json";
 import pt_BR from "./locales/pt-BR.json";
 import tr_TR from "./locales/tr-TR.json";
+import uk_UA from "./locales/uk-UA.json";
 import ru_RU from "./locales/ru-RU.json";
 import es_ES from "./locales/es-ES.json";
 import zh_CN from "./locales/zh-CN.json";
@@ -26,6 +27,7 @@ export function setUpIntl() {
     "id-ID":id_ID,
     "it-IT":it_IT,
     "pt-BR":pt_BR,
+    "uk-UA":uk_UA,
     "ru-RU":ru_RU,
     "tr-TR":tr_TR,
     "zh-CN":zh_CN,

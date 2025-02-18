@@ -11,6 +11,7 @@ import ru_RU from "./locales/ru-RU.json";
 import es_ES from "./locales/es-ES.json";
 import zh_CN from "./locales/zh-CN.json";
 import zh_TW from "./locales/zh-TW.json";
+import id_ID from "./locales/id-ID.json";
 import { addLocales, setDefaultLocale } from "./TranslationRegistry.ts";
 
 export function setUpIntl() {
@@ -22,6 +23,7 @@ export function setUpIntl() {
     "es-ES":es_ES,
     "fa-IR":fa_IR,
     "fr-FR":fr_FR,
+    "id-ID":id_ID,
     "it-IT":it_IT,
     "pt-BR":pt_BR,
     "ru-RU":ru_RU,

@@ -5,6 +5,7 @@ import en_US from "./locales/en-US.json";
 import fa_IR from "./locales/fa-IR.json";
 import fr_FR from "./locales/fr-FR.json";
 import it_IT from "./locales/it-IT.json";
+import id_ID from "./locales/id-ID.json";
 import pt_BR from "./locales/pt-BR.json";
 import tr_TR from "./locales/tr-TR.json";
 import ru_RU from "./locales/ru-RU.json";
@@ -22,6 +23,7 @@ export function setUpIntl() {
     "es-ES":es_ES,
     "fa-IR":fa_IR,
     "fr-FR":fr_FR,
+    "id-ID":id_ID,
     "it-IT":it_IT,
     "pt-BR":pt_BR,
     "ru-RU":ru_RU,

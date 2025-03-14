@@ -1,7 +1,7 @@
 {
     "seo_title": "AB Download Manager",
     "seo_description": "Avec cette application, vous pouvez facilement télécharger des fichiers depuis n'importe où. Profitez de téléchargements rapides et gratuits grâce à la prise en charge transparente des extensions de navigateur.",
-    "seo_keywords": "gestionnaire de téléchargement,téléchargement,extension de navigateur,Chrome,Firefox,ab Download Manager,open source,gratuit",
+    "seo_keywords": "gestionnaire de téléchargement,téléchargement,extension de navigateur,Chrome,Firefox,ab download manager,open source,gratuit",
     "not_found": "Non trouvé",
     "app_short_name": "AB DM",
     "app_long_name": "AB Download Manager",
@@ -26,7 +26,7 @@
     "home_feature_multiplatform_title": "Multi-plateforme",
     "home_feature_multiplatform_description": "Ce logiciel est actuellement disponible pour Windows et Linux, avec d'autres plateformes en route !",
     "home_feature_open_source_title": "Libre et Open Source",
-    "home_feature_open_source_description": "Il s'agit d'un logiciel entièrement gratuit et open source",
+    "home_feature_open_source_description": "Ceci est un logiciel entièrement gratuit et open source",
     "home_feature_queue_title": "File d'attente de téléchargement",
     "home_feature_queue_description": "Créez et gérez vos téléchargements dans des files d'attente, ce qui permet à tous vos fichiers d'être téléchargés de manière séquentielle",
     "home_feature_scheduler_title": "Planificateur de téléchargement",

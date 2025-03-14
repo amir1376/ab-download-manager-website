@@ -49,12 +49,12 @@
     "social_email": "Correo electrónico",
     "social_instagram": "Instagram",
     "social_telegram_channel": "Canal de Telegram",
-    "social_telegram_group": "Grupo de Telegram",
+    "social_telegram_group": "Telegram Group",
     "social_x": "X",
     "theme": "Tema",
     "source_code": "Código fuente",
     "coming_soon": "Próximamente",
     "attention": "Atención",
     "experimental_platform_warning": "La aplicación en {platform} está en fase experimental, ¡algunas partes de la aplicación pueden no funcionar correctamente!",
-    "file_checksum": "Comprobación de archivo"
+    "file_checksum": "File checksum"
 }

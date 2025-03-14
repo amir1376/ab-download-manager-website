@@ -54,6 +54,10 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Indonesian",
         native: "Bahasa Indonesia"
     },
+    "jp": {
+        english: "Japanese",
+        native: "日本語",
+    },
     "it": {
         english: "Italian",
         native: "Italiano",

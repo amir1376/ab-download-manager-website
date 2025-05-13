@@ -15,6 +15,14 @@ export const possiblePlatformNames: PossiblePlatformsType[] =
         "mac",
     ]
 
+export type PossibleArchitectureType =
+    | "x64"
+    | "arm64"
+export const possibleArchitectureNames: PossibleArchitectureType[] =
+    [
+        "x64",
+        "arm64",
+    ]
 
 export type PossibleLinkType =
     | "direct"
@@ -24,9 +32,10 @@ export interface LinkType<Type extends PossibleLinkType = PossibleLinkType> {
     type: Type
     link: string
     ext?: string
+    arch?: string
 }
 
-export interface ChecksumHash{
+export interface ChecksumHash {
     value: string
     type: string // "md5" | "sha" etc.
 }
@@ -87,7 +96,7 @@ export interface AppVersionData {
     version: string
     changeLog: string
     links: LinkType[],
-    experimental:boolean,
+    experimental: boolean,
 }
 
 export type PossibleBrowserType =
@@ -149,40 +158,41 @@ const defaultVersionData: {
     // }
 ]
 
-const experimentalPlatforms:PossiblePlatformsType[] = [
+const experimentalPlatforms: PossiblePlatformsType[] = [
     "linux", "mac"
 ]
 
-function isPlatformExperimental(platform:PossiblePlatformsType){
+function isPlatformExperimental(platform: PossiblePlatformsType) {
     return experimentalPlatforms.includes(platform)
 }
 
-function mergeWithPredefined(appVersionData: AppVersionData[]){
-    const out=appVersionData
-    const defaultGrouped=_
-        .groupBy(defaultVersionData,i=>i.platform)
-    for (const [k,v] of Object.entries(defaultGrouped)) {
-        let found=out.find(i=>i.platform==k)
-        if (!found){
-            found={
-                platform:k as PossiblePlatformsType,
-                links:[],
-                changeLog:"",
-                version:"",
-                experimental:false,
+function mergeWithPredefined(appVersionData: AppVersionData[]) {
+    const out = appVersionData
+    const defaultGrouped = _
+        .groupBy(defaultVersionData, i => i.platform)
+    for (const [k, v] of Object.entries(defaultGrouped)) {
+        let found = out.find(i => i.platform == k)
+        if (!found) {
+            found = {
+                platform: k as PossiblePlatformsType,
+                links: [],
+                changeLog: "",
+                version: "",
+                experimental: false,
             }
             out.push(found)
         }
-        found.links.push(...v.map(l=>l.link))
+        found.links.push(...v.map(l => l.link))
     }
-    for (const appVersionData of out){
+    for (const appVersionData of out) {
         appVersionData.experimental = appVersionData.experimental || isPlatformExperimental(appVersionData.platform)
     }
     return _.sortBy(out, l => l.experimental)
 }
+
 export async function getLatestVersionData(): Promise<VersionData> {
     return {
-        app:mergeWithPredefined(
+        app: mergeWithPredefined(
             await getLatestReleaseFromGithubRelease(
                 Constants.github.user,
                 Constants.github.repo,

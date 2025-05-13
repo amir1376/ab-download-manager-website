@@ -1,12 +1,13 @@
-import {PossiblePlatformsType} from "~/data/LatestAppVersionData.ts";
+import {PossibleArchitectureType, PossiblePlatformsType} from "~/data/LatestAppVersionData.ts";
 
 export type SemanticVersion = `${number}.${number}.${number}` | `${number}.${number}.${number}-${string}`
 export type ArtifactInfo = {
     version: SemanticVersion,
-    platform: PossiblePlatformsType
+    platform: PossiblePlatformsType,
+    arch: PossibleArchitectureType,
 }
 const versionPattern = /(\d+\.\d+\.\d+)/
-const versionAndPlatformRegex = /_(\d+\.\d+\.\d+)_([a-zA-Z]+)/
+const versionAndPlatformAndArchRegex = /_(\d+\.\d+\.\d+)_([a-zA-Z]+)_([a-zA-Z0-9]+)/
 
 export function extractVersion(name: string):SemanticVersion|null {
     const x = versionPattern.exec(name)
@@ -18,10 +19,11 @@ export function extractVersion(name: string):SemanticVersion|null {
 }
 
 export function extractPlatformAndVersion(name: string):ArtifactInfo|null {
-    const result=versionAndPlatformRegex.exec(name)
+    const result=versionAndPlatformAndArchRegex.exec(name)
     if (!result)return null
     return {
         version:result[1] as SemanticVersion,
         platform:result[2] as PossiblePlatformsType,
+        arch:result[3] as PossibleArchitectureType,
     }
 }

@@ -1,6 +1,12 @@
 import {extractPlatformAndVersion} from "~/data/ArtiffactUtil.ts";
-import {AppVersionData, ChecksumHash, DirectLink} from "~/data/LatestAppVersionData.ts";
-import _, {has} from "lodash";
+import {
+    AppVersionData,
+    ChecksumHash,
+    DirectLink,
+    PossibleArchitectureType,
+    PossiblePlatformsType
+} from "~/data/LatestAppVersionData.ts";
+import _ from "lodash";
 import {run} from "~/utils/functionalUtils.ts";
 
 export type GithubRelease = {
@@ -35,6 +41,32 @@ async function downloadAsText(link: string): Promise<string> {
     }
 }
 
+function getUserAwareNameForArchitecture(
+    platform: PossiblePlatformsType,
+    arch: PossibleArchitectureType,
+): string | undefined {
+    const archMap: Record<PossiblePlatformsType, Partial<Record<PossibleArchitectureType, string>>> = {
+        android: {
+            x64: "64-bit",
+            arm64: "ARM-64",
+        },
+        windows: {
+            x64: "64-bit",
+            arm64: "ARM-64",
+        },
+        linux: {
+            x64: "64-bit",
+            arm64: "ARM-64",
+        },
+        mac: {
+            x64: "Intel",
+            arm64: "Apple Silicon",
+        },
+    };
+
+    return archMap[platform]?.[arch];
+}
+
 export async function getLatestReleaseFromGithubRelease(
     owner: string,
     repo: string
@@ -46,7 +78,7 @@ export async function getLatestReleaseFromGithubRelease(
         return /^.+\.(exe|msi|deb|rpm|dmg|apk|zip|gz)$/.test(f.name)
     })
     // don't forget to update regex if change this
-    const hashExtensions = ["md5","sha"]
+    const hashExtensions = ["md5", "sha"]
     const appHashAssets = release.assets.filter(f => {
         return /^.+\.(md5|sha)$/.test(f.name)
     })
@@ -64,19 +96,19 @@ export async function getLatestReleaseFromGithubRelease(
     )
     const linkAndHashes = await Promise.all(
         appReleaseAsset.map(async (appDownloadFileAsset) => {
-            const possibleNameWithHashExtension = hashExtensions.map((hashExtension)=>{
-                return appDownloadFileAsset.name+"."+hashExtension
+            const possibleNameWithHashExtension = hashExtensions.map((hashExtension) => {
+                return appDownloadFileAsset.name + "." + hashExtension
             })
             const hashAssets = appHashAssets.filter(
                 ha => possibleNameWithHashExtension.includes(ha.name)
             )
-            const checksums =await Promise.all(
-                hashAssets.map(async hashAsset=>{
+            const checksums = await Promise.all(
+                hashAssets.map(async hashAsset => {
                     const hashLink = hashAsset.browser_download_url
-                    const hashType= hashAsset.name.split(".").pop()!
+                    const hashType = hashAsset.name.split(".").pop()!
                     let hash: ChecksumHash = {
-                        value:await downloadAsText(hashLink),
-                        type:hashType,
+                        value: await downloadAsText(hashLink),
+                        type: hashType,
                     }
                     return hash
                 })
@@ -99,6 +131,14 @@ export async function getLatestReleaseFromGithubRelease(
                     return {
                         link: l.link,
                         type: "direct",
+                        arch: run(() => {
+                            if (l.platform && l.arch) {
+                                return getUserAwareNameForArchitecture(
+                                    l.platform,
+                                    l.arch,
+                                )
+                            }
+                        }),
                         ext: run(() => {
                             const p = l.name.split(".")
                             return p[p.length - 1]

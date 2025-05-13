@@ -13,7 +13,6 @@ import {
     browserInfo,
     VersionData,
     isDirectLink,
-    DirectLink,
     ChecksumHash
 } from "~/data/LatestAppVersionData.ts";
 import {MyLink} from "~/abstraction/navigation";
@@ -134,6 +133,7 @@ function RenderDownloadLinkBase(
         link: string,
         icon: string,
         title: string,
+        badge?: string,
     }
 ) {
     const haveLink = !!props.link
@@ -156,15 +156,24 @@ function RenderDownloadLinkBase(
                 <div>{props.title}</div>
             </div>
         </MyLink>
+        {props.badge && <Badge>{props.badge}</Badge> }
         {!haveLink && <ComingSoonBadge/>}
+    </div>
+}
+
+function Badge(
+    props: PropsWithChildren
+) {
+    return <div className="badge badge-primary absolute top-0 end-0 transform -translate-y-1/2">
+        {props.children}
     </div>
 }
 
 function ComingSoonBadge() {
     const t = useTranslate()
-    return <div className="badge badge-primary absolute top-0 end-0 transform -translate-y-1/2">
+    return <Badge>
         {t("coming_soon")}
-    </div>
+    </Badge>
 }
 
 function RenderAppDownloadLink(
@@ -199,6 +208,7 @@ function RenderAppDownloadLink(
             link={link.link}
             icon={icon}
             title={title}
+            badge={link.arch}
         />
         {isDirectLink(link) && (
             <Checksums

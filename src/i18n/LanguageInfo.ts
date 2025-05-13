@@ -46,6 +46,10 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Persian",
         native: "فارسی",
     },
+    "fi": {
+        english: "Finnish",
+        native: "Suomi",
+    },
     "fr": {
         english: "French",
         native: "Français",
@@ -58,9 +62,17 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Japanese",
         native: "日本語",
     },
+    "hu": {
+        english: "Hungarian",
+        native: "Magyar",
+    },
     "it": {
         english: "Italian",
         native: "Italiano",
+    },
+    "pl": {
+        english: "Polish",
+        native: "Polski",
     },
     "pt-BR": {
         english: "Brazilian Portuguese",

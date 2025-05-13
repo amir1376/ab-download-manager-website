@@ -150,7 +150,7 @@ const defaultVersionData: {
 ]
 
 const experimentalPlatforms:PossiblePlatformsType[] = [
-    "linux"
+    "linux", "mac"
 ]
 
 function isPlatformExperimental(platform:PossiblePlatformsType){

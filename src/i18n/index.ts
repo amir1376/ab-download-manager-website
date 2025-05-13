@@ -10,6 +10,7 @@ import hu_HU from "./locales/hu-HU.json";
 import id_ID from "./locales/id-ID.json";
 import jp_JP from "./locales/ja-JP.json";
 import it_IT from "./locales/it-IT.json";
+import pl_PL from "./locales/pl-PL.json";
 import pt_BR from "./locales/pt-BR.json";
 import ru_RU from "./locales/ru-RU.json";
 import tr_TR from "./locales/tr-TR.json";
@@ -33,6 +34,7 @@ export function setUpIntl() {
     "id-ID":id_ID,
     "it-IT":it_IT,
     "jp-JP":jp_JP,
+    "pl-PL":pl_PL,
     "pt-BR":pt_BR,
     "ru-RU":ru_RU,
     "tr-TR":tr_TR,

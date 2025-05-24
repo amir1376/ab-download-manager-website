@@ -70,6 +70,10 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Italian",
         native: "Italiano",
     },
+    "ko": {
+        english: "Korean",
+        native: "한국어",
+    },
     "pl": {
         english: "Polish",
         native: "Polski",
@@ -81,6 +85,10 @@ const languageNames: Record<LocaleString, LanguageName> = {
     "ru": {
         english: "Russian",
         native: "Русский",
+    },
+    "th": {
+        english: "Thai",
+        native: "ไทย",
     },
     "uk": {
         english: "Ukrainian",

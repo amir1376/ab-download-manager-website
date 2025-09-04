@@ -52,9 +52,9 @@
     "social_telegram_group": "گروه تلگرام",
     "social_x": "ایکس",
     "theme": "پوسته",
-    "source_code": "کد منبع",
-    "coming_soon": "به زودی",
+    "source_code": "کد برنامه",
+    "coming_soon": "به‌زودی",
     "attention": "توجه",
-    "experimental_platform_warning": "برنامه در {platform} در مرحله آزمایشی است، ممکن است برخی از قسمت های برنامه به درستی کار نکند!",
+    "experimental_platform_warning": "برنامه در {platform} در مرحله آزمایشی است، ممکن است برخی از قسمت های برنامه به درستی کار نکنند!",
     "file_checksum": "چک سام فایل"
 }

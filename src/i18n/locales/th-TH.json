@@ -21,7 +21,7 @@
     "home_hero_description": "ด้วยแอปนี้ คุณสามารถดาวน์โหลดไฟล์จากทุกที่ได้อย่างง่ายดาย เพลิดเพลินไปกับการดาวน์โหลดที่รวดเร็วและฟรีด้วยการรองรับส่วนขยายบนเบราว์เซอร์",
     "home_hero_see_guides": "ด้วยแอปนี้ คุณสามารถดาวน์โหลดไฟล์จากทุกที่ได้อย่างง่ายดาย เพลิดเพลินไปกับการดาวน์โหลดที่รวดเร็วและฟรีด้วยการรองรับส่วนขยายบนเบราว์เซอร์ ",
     "home_features": "คุณสมบัติ",
-    "home_feature_multi_threaded_title": "ความเร็วในการดาวน์โหลดที่เร็วขึ้น",
+    "home_feature_multi_threaded_title": "ดาวน์โหลดเร็วขึ้น",
     "home_feature_multi_threaded_description": "ดาวน์โหลดไฟล์โดยใช้การเชื่อมต่อหลาย ๆ แบบเพื่อเพิ่มความเร็วในการดาวน์โหลดของคุณได้ถึง 500%",
     "home_feature_multiplatform_title": "หลากหลายแพลตฟอร์ม",
     "home_feature_multiplatform_description": "ซอฟต์แวร์นี้ใช้บน Windows และ Linux และจะมีแพลตฟอร์มอื่น ๆ ตามมาอีก!",
@@ -31,7 +31,7 @@
     "home_feature_queue_description": "สร้างและจัดการการดาวน์โหลดของคุณในคิว ซึ่งจะทำให้ดาวน์โหลดไฟล์ทั้งหมดของคุณตามลำดับได้",
     "home_feature_scheduler_title": "กำหนดเวลาดาวน์โหลด",
     "home_feature_scheduler_description": "คุณสามารถกำหนดเวลาให้คิวของคุณเริ่มและหยุดโดยอัตโนมัติ",
-    "home_feature_simple_ui_title": "UI ที่เรียบง่ายและทันสมัย",
+    "home_feature_simple_ui_title": "UI เรียบง่ายและทันสมัย",
     "home_feature_simple_ui_description": "UI ที่เรียบง่ายและโหมดมืดตามค่าเริ่มต้น",
     "home_feature_speed_limiter_title": "จำกัดความเร็ว",
     "home_feature_speed_limiter_description": "คุณสามารถตั้งขีดจำกัดความเร็วในการดาวน์โหลดเพื่อป้องกันไม่ให้ผู้อื่นประสบปัญหาการเชื่อมต่อที่ไม่ดี :)",
@@ -54,7 +54,7 @@
     "theme": "รูปแบบ ",
     "source_code": "\"Source\", \"Code\"",
     "coming_soon": "เร็วๆนี้",
-    "attention": "แจ้งเตือน ",
+    "attention": "ให้ความสนใจ",
     "experimental_platform_warning": "แอปบน {platform} อยู่ในขั้นทดลอง โปรแกรมอาจไม่ทำงานอย่างถูกต้อง",
     "file_checksum": "ตรวจแฮชไฟล์"
 }

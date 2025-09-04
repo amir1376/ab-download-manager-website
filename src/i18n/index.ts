@@ -1,6 +1,9 @@
 import ar_SA from "./locales/ar-SA.json";
 import bn_BD from "./locales/bn-BD.json";
+import bqi_IR from "./locales/bqi-IR.json";
+import ckb_IR from "./locales/ckb-IR.json";
 import de_DE from "./locales/de-DE.json";
+import el_GR from "./locales/el-GR.json";
 import en_US from "./locales/en-US.json";
 import es_ES from "./locales/es-ES.json";
 import fa_IR from "./locales/fa-IR.json";
@@ -11,8 +14,10 @@ import id_ID from "./locales/id-ID.json";
 import jp_JP from "./locales/ja-JP.json";
 import it_IT from "./locales/it-IT.json";
 import ko_KR from "./locales/ko-KR.json";
+import lt_LT from "./locales/lt-LT.json";
 import pl_PL from "./locales/pl-PL.json";
 import pt_BR from "./locales/pt-BR.json";
+import nl_NL from "./locales/nl-NL.json";
 import ru_RU from "./locales/ru-RU.json";
 import tr_TR from "./locales/tr-TR.json";
 import th_TH from "./locales/th-TH.json";
@@ -26,7 +31,10 @@ export function setUpIntl() {
   addLocales({
     "ar-SA":ar_SA,
     "bn-BD":bn_BD,
+    "bqi-IR":bqi_IR,
+    "ckb-IR":ckb_IR,
     "de-DE":de_DE,
+    "el-GR":el_GR,
     "en-US":en_US,
     "es-ES":es_ES,
     "fa-IR":fa_IR,
@@ -36,7 +44,9 @@ export function setUpIntl() {
     "id-ID":id_ID,
     "it-IT":it_IT,
     "ko-KR":ko_KR,
+    "lt-LT":lt_LT,
     "jp-JP":jp_JP,
+    "nl-NL":nl_NL,
     "pl-PL":pl_PL,
     "pt-BR":pt_BR,
     "ru-RU":ru_RU,

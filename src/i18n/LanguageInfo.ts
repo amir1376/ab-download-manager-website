@@ -18,6 +18,8 @@ export type LocaleString =
 
 const rtlLanguages: LocaleString[] = [
     "ar",
+    "ckb",
+    "bqi",
     "fa",
 ]
 
@@ -30,9 +32,21 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Bengali",
         native: "বাংলা",
     },
+    "bqi": {
+        english: "Bakhtiari",
+        native: "بختياري",
+    },
+    "ckb": {
+        english: "Kurdish (Sorani)",
+        native: "کوردیی سورانی",
+    },
     "de": {
         english: "German",
         native: "Deutsch",
+    },
+    "el":{
+        english: "Greek",
+        native: "Ελληνικά",
     },
     "en": {
         english: "English",
@@ -74,9 +88,17 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Korean",
         native: "한국어",
     },
+    "nl":{
+        english: "Dutch",
+        native: "Nederlands",
+    },
     "pl": {
         english: "Polish",
         native: "Polski",
+    },
+    "lt": {
+        english: "Lithuanian",
+        native: "Lietuvių",
     },
     "pt-BR": {
         english: "Brazilian Portuguese",

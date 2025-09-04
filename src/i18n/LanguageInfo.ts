@@ -33,8 +33,8 @@ const languageNames: Record<LocaleString, LanguageName> = {
         native: "বাংলা",
     },
     "bqi": {
-        english: "Bakhtiari",
-        native: "بختياري",
+        english: "Luri Bakhtiari",
+        native: "لۊری بختیاری",
     },
     "ckb": {
         english: "Kurdish (Sorani)",

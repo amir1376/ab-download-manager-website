@@ -6,7 +6,7 @@ import {MyLink} from "~/abstraction/navigation";
 import {useCurrentDirection, useTranslate} from "~/abstraction/i18n";
 import {useLocation, useNavigate} from "react-router-dom";
 import DownloadModal from "~/sections/download/DownloadModal.tsx";
-import {ProvideDownloadData} from "~/sections/download/DownloadDataContext.tsx";
+import {ProvideDownloadData, useDownloadData} from "~/sections/download/DownloadDataContext.tsx";
 import {useTheme} from "~/abstraction/theme/useTheme.tsx";
 import {VersionData} from "~/data/LatestAppVersionData.ts";
 import Constants from "~/data/Constants.ts";
@@ -14,6 +14,9 @@ import Constants from "~/data/Constants.ts";
 function Hero(props: { icon: ImageProp, title: string, description: string }) {
     const t = useTranslate()
     const iconSource = props.icon.src
+    const downloadData = useDownloadData()
+    const version = downloadData?.remoteData?.value?.app[0].version
+
     return <div className="container flex flex-col md:flex-row justify-center items-center">
         <div className="mx-auto relative p-8 flex items-center justify-center flex-shrink-0">
             <div
@@ -36,27 +39,32 @@ function Hero(props: { icon: ImageProp, title: string, description: string }) {
                 "text-xl sm:text-2xl lg:text-3xl font-medium leading-normal text-center md:text-start"
             )}>{props.description}</h5>
             <div className="flex flex-row flex-wrap gap-4 justify-center md:justify-start">
-                <MyLink href={`/#download`}>
+                <div className="relative">
+                    <MyLink href={`/#download`}>
+                        <div className={classNames(
+                            "btn btn-primary btn-lg rounded-full border-2",
+                            "min-w-48",
+                            "font-bold",
+                            "shadow-btn-blur shadow-primary/50"
+                        )}>
+                            <Icon height={32} width={32} icon="material-symbols:download"/>
+                            <span>{t("home_hero_get_app")}</span>
+                        </div>
+                    </MyLink>
+                    {version && <div className="badge badge-success absolute top-0 end-0 transform -translate-y-1/2">
+                        {version}
+                    </div>}
+                </div>
+                <MyLink href={Constants.openSource.sourceCodeUrl} target="_blank">
                     <div className={classNames(
-                        "btn btn-primary btn-lg rounded-full border-2",
+                        "btn btn-ghost btn-outline btn-lg rounded-full border-2",
                         "min-w-48",
                         "font-bold",
-                        "shadow-btn-blur shadow-primary/50"
                     )}>
-                        <Icon height={32} width={32} icon="material-symbols:download"/>
-                        <span>{t("home_hero_get_app")}</span>
+                        <Icon height={32} width={32} icon="mdi:github"/>
+                        <span>{t("source_code")}</span>
                     </div>
                 </MyLink>
-                {/*<MyLink href={Constants.openSource.sourceCodeUrl} target="_blank">*/}
-                {/*    <div className={classNames(*/}
-                {/*        "btn btn-primary btn-outline btn-lg rounded-full border-2",*/}
-                {/*        "min-w-48",*/}
-                {/*        "font-bold",*/}
-                {/*    )}>*/}
-                {/*        <Icon height={32} width={32} icon="mdi:github"/>*/}
-                {/*        <span>{t("source_code")}</span>*/}
-                {/*    </div>*/}
-                {/*</MyLink>*/}
                 {/*
                 <div className={classNames(
                     "btn btn-outline btn-primary btn-lg rounded-full border-2",
@@ -170,7 +178,7 @@ export default function Home(
     return (
         <ProvideDownloadData
             requestData={async () => {
-                const latestVersionData:VersionData = await (
+                const latestVersionData: VersionData = await (
                     await fetch("/generated/latest_version_data.json")
                 ).json()
                 return latestVersionData

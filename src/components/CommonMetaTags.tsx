@@ -15,12 +15,29 @@ export default function CommonMetaTags() {
         <title>{title}</title>
         <meta name="description" content={description}/>
         <meta name="keywords" content={t("seo_keywords")}/>
+        <meta name="author" content="AmirHossein Abdolmotallebi"/>
+        <meta name="robots" content="index, follow"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
         <meta property="og:title" content={title}/>
         <meta property="og:description" content={description}/>
         <meta property="og:type" content="website"/>
         <meta property="og:site_name" content={title}/>
         <meta property="og:locale" content={locale}/>
         <meta property="og:image" content={bannerFullLink}/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://abdownloadmanager.com'}/>
+
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:title" content={title}/>
+        <meta name="twitter:description" content={description}/>
+        <meta name="twitter:image" content={bannerFullLink}/>
+
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : 'https://abdownloadmanager.com'}/>
+
+        <link rel="icon" type="image/svg+xml" href="/src/assets/icons/app_icon_simple.svg"/>
+
         {allLocales.map((locale) => <link
                 key={locale}
                 rel="alternate"

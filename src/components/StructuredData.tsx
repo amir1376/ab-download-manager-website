@@ -33,8 +33,7 @@ export default function StructuredData({ currentUrl }: StructuredDataProps) {
             "name": Constants.developer.name,
             "url": Constants.developer.website,
             "sameAs": [
-                Constants.developer.github,
-                "https://github.com/amir1376"
+                Constants.developer.github
             ]
         },
         "publisher": {
@@ -84,14 +83,14 @@ export default function StructuredData({ currentUrl }: StructuredDataProps) {
             }
         ],
         "featureList": [
-            "Multi-threaded downloads for faster speeds",
-            "Download queue management",
-            "Download scheduler",
-            "Speed limiter",
-            "Browser integration with extensions",
-            "Multi-platform support",
-            "Open source and free",
-            "Simple and modern UI"
+            t("home_feature_multi_threaded_title"),
+            t("home_feature_queue_title"),
+            t("home_feature_scheduler_title"),
+            t("home_feature_speed_limiter_title"),
+            t("home_feature_browser_integration_title"),
+            t("home_feature_multiplatform_title"),
+            t("home_feature_open_source_title"),
+            t("home_feature_simple_ui_title")
         ],
         "aggregateRating": {
             "@type": "AggregateRating",

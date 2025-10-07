@@ -7,9 +7,8 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "initScript": "bun scripts/InitialScript.ts",
-    "dev": "npm run initScript && vite",
-    "build": "npm run initScript && tsc && vite build",
+    "dev": "vite",
+    "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -38,7 +37,6 @@
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "autoprefixer": "^10.4.19",
-    "bun": "^1.1.21",
     "daisyui": "^4.12.10",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",

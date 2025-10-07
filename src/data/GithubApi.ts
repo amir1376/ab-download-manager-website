@@ -33,11 +33,18 @@ async function hitRemote(
 
 async function downloadAsText(link: string): Promise<string> {
     try {
-        const response = await fetch(link)
+        // Use codetabs.com CORS proxy to fetch hash files
+        const proxyUrl = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(link)}`
+        const response = await fetch(proxyUrl)
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        
         return await response.text()
     } catch (e) {
-        console.error("Fail to download link as a text")
-        throw e;
+        console.warn(`Failed to download hash file from ${link}:`, e)
+        return ""
     }
 }
 
@@ -94,6 +101,7 @@ export async function getLatestReleaseFromGithubRelease(
             }),
         i => i.platform
     )
+    // Fetch hash files using a CORS proxy to avoid browser CORS restrictions
     const linkAndHashes = await Promise.all(
         appReleaseAsset.map(async (appDownloadFileAsset) => {
             const possibleNameWithHashExtension = hashExtensions.map((hashExtension) => {
@@ -106,16 +114,22 @@ export async function getLatestReleaseFromGithubRelease(
                 hashAssets.map(async hashAsset => {
                     const hashLink = hashAsset.browser_download_url
                     const hashType = hashAsset.name.split(".").pop()!
-                    let hash: ChecksumHash = {
-                        value: await downloadAsText(hashLink),
-                        type: hashType,
+                    const hashValue = await downloadAsText(hashLink)
+                    // Only include hash if we successfully downloaded it
+                    if (hashValue.trim()) {
+                        return {
+                            value: hashValue.trim(),
+                            type: hashType,
+                        } as ChecksumHash
                     }
-                    return hash
+                    return null
                 })
             )
+            // Filter out null values (failed downloads)
+            const validChecksums = checksums.filter((hash): hash is ChecksumHash => hash !== null)
             return [
                 appDownloadFileAsset.browser_download_url,
-                checksums,
+                validChecksums,
             ]
         })
     )

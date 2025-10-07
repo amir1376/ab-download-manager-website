@@ -8,7 +8,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import DownloadModal from "~/sections/download/DownloadModal.tsx";
 import {ProvideDownloadData, useDownloadData} from "~/sections/download/DownloadDataContext.tsx";
 import {useTheme} from "~/abstraction/theme/useTheme.tsx";
-import {VersionData} from "~/data/LatestAppVersionData.ts";
+import {getLatestVersionData} from "~/data/LatestAppVersionData.ts";
 import Constants from "~/data/Constants.ts";
 
 function Hero(props: { icon: ImageProp, title: string, description: string }) {
@@ -178,10 +178,7 @@ export default function Home(
     return (
         <ProvideDownloadData
             requestData={async () => {
-                const latestVersionData: VersionData = await (
-                    await fetch("/generated/latest_version_data.json")
-                ).json()
-                return latestVersionData
+                return await getLatestVersionData()
             }}
         >
             {showDownloadDialog && <DownloadModal onClose={() => close()}/>}

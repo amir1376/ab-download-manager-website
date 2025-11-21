@@ -37,8 +37,8 @@ const languageNames: Record<LocaleString, LanguageName> = {
         native: "لۊری بختیاری",
     },
     "ckb": {
-        english: "Kurdish (Sorani)",
-        native: "کوردیی سورانی",
+        english: "Central Kurdish",
+        native: "کوردیی ناوەندی",
     },
     "de": {
         english: "German",

@@ -38,19 +38,21 @@ function OSOption(
     return <div onClick={props.onSelect} className={classNames(
         "relative",
         "cursor-pointer select-none",
+        "flex-1 min-w-[calc(50%-0.5rem)] sm:min-w-0 sm:flex-none",
     )}>
         <div className={classNames(
             "flex flex-col items-center space-y-2 justify-center",
             "transition-all",
             "border-2 rounded",
-            "py-2 px-4",
+            "py-2 px-3 sm:px-4",
             props.isSelected
                 ? ["bg-base-content/20", "border-primary"]
                 : ["border-base-content/20"],
             !props.isSelected && "hover:bg-base-content/20",
         )}>
-            <Icon height={32} width={32} icon={props.icon}/>
+            <Icon height={32} width={32} icon={props.icon} className="flex-shrink-0"/>
             <div className={classNames(
+                "text-sm sm:text-base text-center",
                 props.isSelected ? "text-opacity-100" : "text-opacity-75"
             )}>{props.name}</div>
         </div>
@@ -96,7 +98,7 @@ function OsSection(
         }, [props.availablePlatforms]
     )
 
-    return <div className="flex flex-row flex-wrap gap-4">
+    return <div className="flex flex-row flex-wrap gap-2 sm:gap-4">
         {
             osesToRender.map(os => {
                 return <OSOption
@@ -117,7 +119,7 @@ function TopOfSection(props: {
     step: number
 } & PropsWithChildren) {
     return <div className="">
-        <div className="flex flex-row items-center select-none mb-4 mt-2 text-lg font-bold">
+        <div className="flex flex-row items-center select-none mb-4 mt-2 text-base sm:text-lg font-bold">
         <span
             className="text-primary me-1">
             {props.step}.
@@ -137,8 +139,8 @@ function RenderDownloadLinkBase(
     }
 ) {
     const haveLink = !!props.link
-    return <div className="flex flex-row relative">
-        <MyLink enabled={haveLink} aria-disabled={!haveLink} href={props.link} target="_blank">
+    return <div className="flex flex-row relative w-full">
+        <MyLink enabled={haveLink} aria-disabled={!haveLink} href={props.link} target="_blank" className="relative">
             <div className={classNames(
                 "flex flex-row items-center gap-4",
                 "transition-all",
@@ -148,23 +150,24 @@ function RenderDownloadLinkBase(
                 "border-opacity-0",
                 "bg-base-content/10",
                 "hover:bg-base-content/20",
-                "w-72 justify-start",
+                "w-full md:w-72 justify-start",
+                "relative",
                 haveLink ? "cursor-pointer" : "cursor-not-allowed"
                 // "btn btn-ghost btn-outline w-72 justify-start"
             )}>
-                <Icon className="h-6 w-6" icon={props.icon}/>
-                <div>{props.title}</div>
+                <Icon className="h-6 w-6 flex-shrink-0" icon={props.icon}/>
+                <div className="flex-1 break-words">{props.title}</div>
+                {props.badge && <Badge>{props.badge}</Badge> }
+                {!haveLink && <ComingSoonBadge/>}
             </div>
         </MyLink>
-        {props.badge && <Badge>{props.badge}</Badge> }
-        {!haveLink && <ComingSoonBadge/>}
     </div>
 }
 
 function Badge(
     props: PropsWithChildren
 ) {
-    return <div className="badge badge-primary absolute top-0 end-0 transform -translate-y-1/2">
+    return <div className="badge badge-primary badge-sm absolute -top-2 -end-2 z-10 shadow-lg">
         {props.children}
     </div>
 }
@@ -232,24 +235,24 @@ function Checksums(props: {
     return <div className={props.className}>
         <div className="flex flex-col dropdown dropdown-bottom">
             <div tabIndex={0} className={classNames(
-                "self-start hover:underline cursor-pointer text-sm",
+                "self-start hover:underline cursor-pointer text-xs sm:text-sm",
                 props.btnExtraClassName,
             )}>
                 {t("file_checksum")}
             </div>
-            <div tabIndex={0} className="z-50 shadow-xl dropdown-content rounded-full bg-base-300">
+            <div tabIndex={0} className="z-50 shadow-xl dropdown-content rounded-full bg-base-300 max-w-[calc(100vw-2rem)] sm:max-w-none">
                 {props.checksums.map((checksum,) => {
                     return <div
                         dir="ltr"
                         key={checksum.type}
                         className="p-1 flex flex-row items-center space-x-1"
                     >
-                        <div className="px-1">{checksum.type.toUpperCase()}</div>
-                        <div className="text-sm ps-2 bg-base-200 rounded-full items-center flex flex-row">
-                            <code>{checksum.value}</code>
-                            <div className="btn btn-sm btn-circle btn-ghost"
+                        <div className="px-1 text-xs sm:text-sm">{checksum.type.toUpperCase()}</div>
+                        <div className="text-xs sm:text-sm ps-2 bg-base-200 rounded-full items-center flex flex-row max-w-[200px] sm:max-w-none overflow-hidden">
+                            <code className="truncate">{checksum.value}</code>
+                            <div className="btn btn-xs sm:btn-sm btn-circle btn-ghost flex-shrink-0"
                                  onClick={() => copyToClipboard(checksum.value)}>
-                                <Icon height={16} width={16} icon="ic:round-content-copy"/>
+                                <Icon height={14} width={14} className="sm:h-4 sm:w-4" icon="ic:round-content-copy"/>
                             </div>
                         </div>
                     </div>
@@ -280,9 +283,9 @@ function DownloadSection(
                 </div>
             ))}
         </div>
-        <div className="mt-4 flex flex-row items-center select-none">
+        <div className="mt-4 flex flex-row items-center select-none text-sm sm:text-base">
             <span className="opacity-50">{t("download_version")}:</span>
-            <span className="opacity-75">{props.versionInfo.version}</span>
+            <span className="opacity-75 ms-1">{props.versionInfo.version}</span>
         </div>
     </div>
 }
@@ -355,9 +358,9 @@ function ExperimentalPlatformWarning(
 ) {
     const t = useTranslate()
     const os = osInfo[props.platform]
-    return <div className="w-72">
-        <div className="text-lg font-bold text-warning">{t("attention")}:</div>
-        <div className="text-base">{t("experimental_platform_warning", {
+    return <div className="w-full md:w-72">
+        <div className="text-base sm:text-lg font-bold text-warning">{t("attention")}:</div>
+        <div className="text-sm sm:text-base">{t("experimental_platform_warning", {
             platform: os.name
         })}</div>
     </div>
@@ -383,8 +386,8 @@ function LoadedDownloadModal(
         , [selectedPlatform, appForPlatforms])
     const dir = useCurrentDirection()
     const t = useTranslate()
-    return <div dir={dir} className="flex flex-col md:flex-row gap-8">
-        <div className="flex flex-col space-y-8">
+    return <div dir={dir} className="flex flex-col md:flex-row gap-6 md:gap-8">
+        <div className="flex flex-col space-y-6 md:space-y-8">
             <TopOfSection step={1} title={t("download_select_platform")}>
                 <div className="flex flex-col space-y-4">
                     <OsSection
@@ -401,7 +404,7 @@ function LoadedDownloadModal(
                 <DownloadSection versionInfo={currentOsData!}/>
             </TopOfSection>
         </div>
-        <div className="flex flex-col space-x-8">
+        <div className="flex flex-col space-y-6 md:space-y-8">
             {
                 browser_extension.length > 0 && <TopOfSection step={3} title={t("download_extension_for_browser")}>
                     <DownloadExtensionSection extensionLinks={browser_extension!}/>
@@ -412,9 +415,9 @@ function LoadedDownloadModal(
 }
 
 function LoadingContent() {
-    return <div className="flex flex-col justify-center items-center p-16">
+    return <div className="flex flex-col justify-center items-center p-8 sm:p-16">
         <div className="loading"></div>
-        <div>Please Wait...</div>
+        <div className="text-sm sm:text-base">Please Wait...</div>
     </div>
 }
 
@@ -422,9 +425,9 @@ function ErrorContent(props: {
     error: string,
     refresh: () => void
 }) {
-    return <div className="flex flex-col justify-center items-center p-16">
-        <div>Error!</div>
-        <div className="opacity-75">{props.error}</div>
-        <button onClick={props.refresh}>Refresh</button>
+    return <div className="flex flex-col justify-center items-center p-8 sm:p-16">
+        <div className="text-base sm:text-lg">Error!</div>
+        <div className="opacity-75 text-sm sm:text-base text-center px-4">{props.error}</div>
+        <button className="btn btn-primary mt-4" onClick={props.refresh}>Refresh</button>
     </div>
 }

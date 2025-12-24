@@ -1,4 +1,4 @@
-import {useMemo} from "react";
+import {useMemo, useState, useRef, useEffect} from "react";
 import appIcon from "~/assets/icons/app_icon_simple.svg"
 import {Icon} from "@iconify/react";
 import {useWindowScroll} from "react-use";
@@ -86,16 +86,17 @@ function LanguageItem(props: { language: LanguageInfo, active: boolean }) {
         {/*<div className="text-2xl">*/}
         {/*    {props.language.flag}*/}
         {/*</div>*/}
-        <LanguageFlagIcon highlighted={props.active} height={24} language={props.language}/>
-        <div className="w-1"/>
-        <div className="text-nowrap">
-            {props.language.name.native}
+        <div className="flex-shrink-0">
+            <LanguageFlagIcon highlighted={props.active} height={24} language={props.language}/>
         </div>
-        <div className="w-2"/>
-        <div className="flex-1"/>
+        <div className="flex-1 min-w-0 max-w-full overflow-hidden">
+            <div className="truncate">
+                {props.language.name.native}
+            </div>
+        </div>
         <Icon
             className={classNames(
-                "transform transition",
+                "transform transition flex-shrink-0",
                 !props.active && "scale-0 opacity-0",
             )}
             icon="mdi:done"
@@ -171,7 +172,7 @@ function LanguageDropDown() {
             "overscroll-contain",
             "rounded-box border border-base-content/25"
         )}>
-            <ul tabIndex={0} className="menu">
+            <ul tabIndex={0} className="menu space-y-1">
                 {Object.values(languages).map(lang => (
                     <li className="" onClick={() => changeLang(lang.locale)} key={lang.locale}>
                         <LanguageItem language={lang} active={currentLanguageInfo?.locale == lang.locale}/>
@@ -189,12 +190,11 @@ function LanguageForMobile() {
     return <details dir={useCurrentDirection()}>
         <summary>
             <Icon height={24} width={24} icon="mdi:language"/>
-            {/* <div className="w-1"/> */}
             {activeLocale?.name?.native}
         </summary>
-        <ul>
+        <ul className="max-h-[calc(100vh-12rem)] overflow-y-auto overscroll-contain space-y-1 pr-4 py-1 pl-4">
             {Object.values(languages).map(lang => (
-                <li onClick={() => changeLang(lang.locale)} key={lang.locale}>
+                <li key={lang.locale} className="block w-full" onClick={() => changeLang(lang.locale)}>
                     <LanguageItem language={lang} active={activeLocale?.locale == lang.locale}/>
                 </li>
             ))}
@@ -247,13 +247,113 @@ function CommunityDesktop() {
 }
 
 function OptionMobile() {
-    return <div className="dropdown dropdown-bottom dropdown-end md:hidden">
-        <div tabIndex={0} role="button" className="btn btn-ghost">
-            <Icon height={24} width={24} icon="ic:round-menu"/>
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLDivElement>(null);
+    
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+                setIsOpen(false);
+                buttonRef.current?.blur();
+            }
+        };
+        
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+        
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpen]);
+    
+    // Close dropdown when pressing Escape
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isOpen) {
+                setIsOpen(false);
+                buttonRef.current?.blur();
+            }
+        };
+        
+        document.addEventListener('keydown', handleEscape);
+        return () => {
+            document.removeEventListener('keydown', handleEscape);
+        };
+    }, [isOpen]);
+    
+    const handleButtonClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        
+        if (isOpen) {
+            // If open, close it and prevent focus
+            setIsOpen(false);
+            // Use setTimeout to ensure the state update happens before any focus events
+            setTimeout(() => {
+                buttonRef.current?.blur();
+                // Remove tabIndex temporarily to prevent immediate refocus
+                if (buttonRef.current) {
+                    buttonRef.current.tabIndex = -1;
+                    setTimeout(() => {
+                        if (buttonRef.current) {
+                            buttonRef.current.tabIndex = 0;
+                        }
+                    }, 100);
+                }
+            }, 0);
+        } else {
+            // If closed, open it
+            setIsOpen(true);
+        }
+    };
+    
+    return <div 
+        ref={dropdownRef}
+        className={classNames(
+            "dropdown dropdown-bottom dropdown-end md:hidden",
+            isOpen && "dropdown-open"
+        )}
+    >
+        <div 
+            ref={buttonRef}
+            tabIndex={0} 
+            role="button" 
+            className={classNames(
+                "btn btn-ghost relative transition-all duration-200",
+                isOpen && "btn-active"
+            )}
+            onClick={handleButtonClick}
+        >
+            <div className="relative w-6 h-6 flex items-center justify-center">
+                <Icon 
+                    height={24} 
+                    width={24} 
+                    icon="ic:round-menu"
+                    className={classNames(
+                        "absolute transition-all duration-200 ease-in-out",
+                        isOpen ? "opacity-0 rotate-90 scale-0" : "opacity-100 rotate-0 scale-100"
+                    )}
+                />
+                <Icon 
+                    height={24} 
+                    width={24} 
+                    icon="mdi:close"
+                    className={classNames(
+                        "absolute transition-all duration-200 ease-in-out",
+                        isOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"
+                    )}
+                />
+            </div>
         </div>
-        <div tabIndex={0} className="dropdown-content shadow-lg w-56 rounded-box bg-base-200">
-            <ul className="menu">
-                <li><LanguageForMobile/></li>
+        <div 
+            tabIndex={0} 
+            className="dropdown-content shadow-lg w-[calc(100vw-1rem)] max-w-[calc(100vw-1rem)] translate-x-2 rounded-box bg-base-200 overflow-x-hidden z-50"
+        >
+            <ul className="menu w-full min-w-0 max-w-full box-border">
+                <li className="w-full min-w-0 max-w-full box-border"><LanguageForMobile/></li>
             </ul>
             <ul className="menu">
                 <li><CommunityForMobile/></li>

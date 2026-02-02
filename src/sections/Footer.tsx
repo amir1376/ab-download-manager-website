@@ -77,7 +77,7 @@ export default function Footer() {
                 </div>
                 <div className="divider md:divider-horizontal"/>
                 <div dir="ltr">
-                    © {data.copyright.since}-present {data.copyright.for}
+                    &copy; {data.copyright.since}-present {data.copyright.for}
                 </div>
             </div>
         </div>

@@ -18,10 +18,12 @@ export const possiblePlatformNames: PossiblePlatformsType[] =
 export type PossibleArchitectureType =
     | "x64"
     | "arm64"
+    | "universal"
 export const possibleArchitectureNames: PossibleArchitectureType[] =
     [
         "x64",
         "arm64",
+        "universal",
     ]
 
 export type PossibleLinkType =
@@ -32,7 +34,7 @@ export interface LinkType<Type extends PossibleLinkType = PossibleLinkType> {
     type: Type
     link: string
     ext?: string
-    arch?: string
+    arch?: PossibleArchitectureType
 }
 
 export interface ChecksumHash {

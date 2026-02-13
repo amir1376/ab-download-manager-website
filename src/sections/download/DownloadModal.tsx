@@ -1,7 +1,7 @@
 import {Modal, ModalContent, ModalHeader} from "~/components/Modal";
 import classNames from "classnames";
 import {Icon} from "@iconify/react";
-import {PropsWithChildren, ReactElement, ReactNode, useMemo, useState} from "react";
+import {PropsWithChildren, ReactNode, useMemo, useState} from "react";
 import {
     providerInfo,
     isThirdPartyLink,
@@ -21,6 +21,8 @@ import {detectOS} from "~/utils/OsDetector.ts";
 import {useDownloadData} from "~/sections/download/DownloadDataContext";
 import {run} from "~/utils/functionalUtils.ts";
 import {useCopyToClipboard} from "usehooks-ts";
+import {archNameMapper, archPriorityPerPlatform} from "~/utils/ArchUtil.ts";
+import _ from "lodash";
 
 export type DownloadModalProps = {
     onClose: () => void
@@ -157,7 +159,7 @@ function RenderDownloadLinkBase(
             )}>
                 <Icon className="h-6 w-6 flex-shrink-0" icon={props.icon}/>
                 <div className="flex-1 break-words">{props.title}</div>
-                {props.badge && <Badge>{props.badge}</Badge> }
+                {props.badge && <Badge>{props.badge}</Badge>}
                 {!haveLink && <ComingSoonBadge/>}
             </div>
         </MyLink>
@@ -189,6 +191,10 @@ function RenderAppDownloadLink(
     const link = props.downloadLink;
     let icon: string
     let title: string
+    let badge: string|undefined = undefined
+    if (link.arch) {
+        badge = archNameMapper[props.platform][link.arch];
+    }
     if (isThirdPartyLink(link)) {
         const info = providerInfo[link.provider];
         icon = info.icon
@@ -211,7 +217,7 @@ function RenderAppDownloadLink(
             link={link.link}
             icon={icon}
             title={title}
-            badge={link.arch}
+            badge={badge}
         />
         {isDirectLink(link) && (
             <Checksums
@@ -240,7 +246,8 @@ function Checksums(props: {
             )}>
                 {t("file_checksum")}
             </div>
-            <div tabIndex={0} className="z-50 shadow-xl dropdown-content rounded-full bg-base-300 max-w-[calc(100vw-2rem)] sm:max-w-none">
+            <div tabIndex={0}
+                 className="z-50 shadow-xl dropdown-content rounded-full bg-base-300 max-w-[calc(100vw-2rem)] sm:max-w-none">
                 {props.checksums.map((checksum,) => {
                     return <div
                         dir="ltr"
@@ -248,7 +255,8 @@ function Checksums(props: {
                         className="p-1 flex flex-row items-center space-x-1"
                     >
                         <div className="px-1 text-xs sm:text-sm">{checksum.type.toUpperCase()}</div>
-                        <div className="text-xs sm:text-sm ps-2 bg-base-200 rounded-full items-center flex flex-row max-w-[200px] sm:max-w-none overflow-hidden">
+                        <div
+                            className="text-xs sm:text-sm ps-2 bg-base-200 rounded-full items-center flex flex-row max-w-[200px] sm:max-w-none overflow-hidden">
                             <code className="truncate">{checksum.value}</code>
                             <div className="btn btn-xs sm:btn-sm btn-circle btn-ghost flex-shrink-0"
                                  onClick={() => copyToClipboard(checksum.value)}>
@@ -268,12 +276,26 @@ function DownloadSection(
     }
 ) {
     const t = useTranslate()
+    const sortedLinks = _.sortBy(
+        props.versionInfo.links,
+        (link: LinkType) => {
+            const arch = link.arch;
+            if (!arch){
+                return 999
+            }
+            const index = archPriorityPerPlatform[props.versionInfo.platform].indexOf(arch);
+            if (index > -1) {
+                return index
+            }
+            return 999 // minimum priority
+        }
+    )
     const orDivider = <div className="divider my-2 select-none">
         <span className="opacity-50">{t("or")}</span>
     </div>
     return <div>
         <div className="flex flex-col py-2">
-            {props.versionInfo.links.map((dlLink, index) => (
+            {sortedLinks.map((dlLink, index) => (
                 <div key={index}>
                     {index != 0 && orDivider}
                     <RenderAppDownloadLink

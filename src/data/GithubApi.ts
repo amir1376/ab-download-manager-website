@@ -47,15 +47,15 @@ function getUserAwareNameForArchitecture(
 ): string | undefined {
     const archMap: Record<PossiblePlatformsType, Partial<Record<PossibleArchitectureType, string>>> = {
         android: {
-            x64: "64-bit",
+            x64: "X64",
             arm64: "ARM-64",
         },
         windows: {
-            x64: "64-bit",
+            x64: "X64 (Intel/AMD)",
             arm64: "ARM-64",
         },
         linux: {
-            x64: "64-bit",
+            x64: "X64 (Intel/AMD)",
             arm64: "ARM-64",
         },
         mac: {
@@ -131,14 +131,7 @@ export async function getLatestReleaseFromGithubRelease(
                     return {
                         link: l.link,
                         type: "direct",
-                        arch: run(() => {
-                            if (l.platform && l.arch) {
-                                return getUserAwareNameForArchitecture(
-                                    l.platform,
-                                    l.arch,
-                                )
-                            }
-                        }),
+                        arch: l.arch,
                         ext: run(() => {
                             const p = l.name.split(".")
                             return p[p.length - 1]

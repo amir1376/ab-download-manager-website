@@ -87,7 +87,11 @@ function LanguageItem(props: { language: LanguageInfo, active: boolean }) {
         {/*    {props.language.flag}*/}
         {/*</div>*/}
         <div className="flex-shrink-0">
-            <LanguageFlagIcon highlighted={props.active} height={24} language={props.language}/>
+            <LanguageFlagIcon
+                highlighted={true}
+                height={24}
+                language={props.language}
+            />
         </div>
         <div className="flex-1 min-w-0 max-w-full overflow-hidden">
             <div className="truncate">
@@ -118,11 +122,11 @@ function SocialItem(props: { socialLink: SocialLink }) {
 function LanguageFlagIcon(
     props: {
         language: LanguageInfo,
-        highlighted?: boolean
+        highlighted?: boolean,
         height?: number,
     }
 ) {
-    const {language, ...restProps} = props
+    const {language, highlighted, ...restProps} = props
     // const countryCode = language?.country
     // const iconName = useMemo(
     //     () => {
@@ -250,7 +254,7 @@ function OptionMobile() {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
-    
+
     // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -259,16 +263,16 @@ function OptionMobile() {
                 buttonRef.current?.blur();
             }
         };
-        
+
         if (isOpen) {
             document.addEventListener('mousedown', handleClickOutside);
         }
-        
+
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [isOpen]);
-    
+
     // Close dropdown when pressing Escape
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
@@ -277,17 +281,17 @@ function OptionMobile() {
                 buttonRef.current?.blur();
             }
         };
-        
+
         document.addEventListener('keydown', handleEscape);
         return () => {
             document.removeEventListener('keydown', handleEscape);
         };
     }, [isOpen]);
-    
+
     const handleButtonClick = (e: React.MouseEvent) => {
         e.stopPropagation();
         e.preventDefault();
-        
+
         if (isOpen) {
             // If open, close it and prevent focus
             setIsOpen(false);
@@ -309,18 +313,18 @@ function OptionMobile() {
             setIsOpen(true);
         }
     };
-    
-    return <div 
+
+    return <div
         ref={dropdownRef}
         className={classNames(
             "dropdown dropdown-bottom dropdown-end md:hidden",
             isOpen && "dropdown-open"
         )}
     >
-        <div 
+        <div
             ref={buttonRef}
-            tabIndex={0} 
-            role="button" 
+            tabIndex={0}
+            role="button"
             className={classNames(
                 "btn btn-ghost relative transition-all duration-200",
                 isOpen && "btn-active"
@@ -328,18 +332,18 @@ function OptionMobile() {
             onClick={handleButtonClick}
         >
             <div className="relative w-6 h-6 flex items-center justify-center">
-                <Icon 
-                    height={24} 
-                    width={24} 
+                <Icon
+                    height={24}
+                    width={24}
                     icon="ic:round-menu"
                     className={classNames(
                         "absolute transition-all duration-200 ease-in-out",
                         isOpen ? "opacity-0 rotate-90 scale-0" : "opacity-100 rotate-0 scale-100"
                     )}
                 />
-                <Icon 
-                    height={24} 
-                    width={24} 
+                <Icon
+                    height={24}
+                    width={24}
                     icon="mdi:close"
                     className={classNames(
                         "absolute transition-all duration-200 ease-in-out",
@@ -348,8 +352,8 @@ function OptionMobile() {
                 />
             </div>
         </div>
-        <div 
-            tabIndex={0} 
+        <div
+            tabIndex={0}
             className="dropdown-content shadow-lg w-[calc(100vw-1rem)] max-w-[calc(100vw-1rem)] translate-x-2 rounded-box bg-base-200 overflow-x-hidden z-50"
         >
             <ul className="menu w-full min-w-0 max-w-full box-border">

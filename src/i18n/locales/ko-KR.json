@@ -32,7 +32,7 @@
     "home_feature_scheduler_title": "다운로드 스케줄러",
     "home_feature_scheduler_description": "대기열을 자동으로 시작 및 중지하기 위해 스케줄러를 설정할 수 있습니다",
     "home_feature_simple_ui_title": "간단하고 현대적인 UI",
-    "home_feature_simple_ui_description": "간단한 UI와 기본으로 어두운 모드 제공",
+    "home_feature_simple_ui_description": "간단한 UI 및 기본으로 어두운 모드 제공",
     "home_feature_speed_limiter_title": "속도 제한",
     "home_feature_speed_limiter_description": "다른 사람들이 연결 상태가 좋지 않아 불편함을 겪는 것을 방지하기 위해 다운로드 속도에 제한을 설정할 수 있습니다 :)",
     "home_feature_browser_integration_title": "브라우저 통합",
@@ -53,8 +53,8 @@
     "social_x": "X",
     "theme": "테마",
     "source_code": "소스 코드",
-    "coming_soon": "곧 출시",
+    "coming_soon": "출시 예정",
     "attention": "주의",
-    "experimental_platform_warning": "{platform}의 앱은 실험 단계에 있으며, 일부 기능이 제대로 작동하지 않을 수 있습니다!",
+    "experimental_platform_warning": "{platform}의 앱은 실험 단계에 있으며, 일부 앱이 제대로 작동하지 않을 수 있습니다!",
     "file_checksum": "파일 체크섬"
 }

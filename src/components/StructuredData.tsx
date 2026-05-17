@@ -176,6 +176,46 @@ export default function StructuredData({ currentUrl }: StructuredDataProps) {
         }
     };
 
+    // FAQ Schema
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": t("faq_q1"),
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": `${t("faq_a1_1")} ${t("faq_a1_2")}`
+                }
+            },
+            {
+                "@type": "Question",
+                "name": t("faq_q2"),
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": t("faq_a2")
+                }
+            },
+            {
+                "@type": "Question",
+                "name": t("faq_q3"),
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": `${t("faq_a3", { link: `<a href="https://github.com/amir1376/ab-download-manager/wiki/Change-the-renderApi">${t("here")}</a>` })}<br/><strong>SKIKO_RENDER_API=SOFTWARE</strong>`
+                }
+            },
+            {
+                "@type": "Question",
+                "name": t("faq_q4"),
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": `${t("faq_a4_1")} ${t("faq_a4_2", { link: `<a href="http://localhost:15151">http://localhost:15151</a>` })}`
+                }
+            }
+        ]
+    };
+
     return (
         <Helmet>
             <script type="application/ld+json">
@@ -189,6 +229,9 @@ export default function StructuredData({ currentUrl }: StructuredDataProps) {
             </script>
             <script type="application/ld+json">
                 {JSON.stringify(productSchema)}
+            </script>
+            <script type="application/ld+json">
+                {JSON.stringify(faqSchema)}
             </script>
         </Helmet>
     );

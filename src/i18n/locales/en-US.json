@@ -56,5 +56,17 @@
     "coming_soon": "Coming Soon",
     "attention": "Attention",
     "experimental_platform_warning": "App on {platform} is in experimental stage, some parts of the app may not work properly!",
-    "file_checksum": "File checksum"
+    "file_checksum": "File checksum",
+    "faq": "FAQ",
+    "faq_q1": "Does this app support downloading media from websites?",
+    "faq_a1_1": "Yes. It can capture video, audio, and non-encrypted HLS streams from websites.",
+    "faq_a1_2": "Make sure you have the browser extension installed for this feature to work.",
+    "faq_q2": "Does this app support downloading from YouTube?",
+    "faq_a2": "No. Due to legal reasons, the app doesn't support encrypted streams — including YouTube.",
+    "faq_q3": "My screen is black or flickering — what should I do?",
+    "faq_a3": "You may need to change the render API. Follow the tutorial {link}",
+    "here": "here",
+    "faq_q4": "The extension can't connect to the app — what should I do?",
+    "faq_a4_1": "Make sure the app is running, and check that your VPN or proxy isn't blocking access to the local TCP port 15151.",
+    "faq_a4_2": "You should be able to open {link} in your browser."
 }

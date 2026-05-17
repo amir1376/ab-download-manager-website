@@ -27,8 +27,8 @@ function Hero(props: { icon: ImageProp, title: string, description: string }) {
                 )}
             />
             <img className="h-52 sm:h-64 w-52 sm:w-64 z-[1]"
-                 src={iconSource}
-                 alt={props.icon.alt}
+                src={iconSource}
+                alt={props.icon.alt}
             />
         </div>
         <div className="flex flex-col space-y-10 p-4 md:max-w-[55%]">
@@ -107,7 +107,7 @@ function Screenshots(props: { images: MainAppScreenshot }) {
     const downloadScreenshot = props.images.download[variant]
     return <div className="bg-base-200/25 py-8">
         <div dir="ltr"
-             className="z-10 container justify-center space-y-4 lg:space-y-0 lg:space-x-2 lg:flex-wrap flex flex-col lg:flex-row">
+            className="z-10 container justify-center space-y-4 lg:space-y-0 lg:space-x-2 lg:flex-wrap flex flex-col lg:flex-row">
             <img className="object-cover lg:h-[26rem]" src={homeScreenshot.src} alt={homeScreenshot.alt}/>
             <img className="object-cover lg:h-[26rem]" src={downloadScreenshot.src} alt={downloadScreenshot.alt}/>
         </div>
@@ -159,6 +159,92 @@ function Features(props: { features: FeatureProp[] }) {
     </SectionWithTitle>
 }
 
+function FaqItem({ question, children }: { question: string, children: React.ReactNode }) {
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    return <div className={classNames(
+        "bg-base-200 text-base-content",
+        "border border-base-content/10 rounded-lg",
+        "shadow hover:shadow-lg",
+        "gradient-border overflow-hidden"
+    )}>
+        <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className="w-full flex items-center justify-between text-left text-xl font-bold py-6 px-8"
+        >
+            <span className="pe-4">{question}</span>
+            <Icon
+                icon="mdi:chevron-down"
+                className={classNames(
+                    "flex-shrink-0 transition-transform duration-300",
+                    isOpen && "rotate-180"
+                )}
+                width={28}
+            />
+        </button>
+        <div
+            className="grid transition-all duration-300 ease-in-out"
+            style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+        >
+            <div className="overflow-hidden">
+                <div className="px-8 pb-6 text-base opacity-90 space-y-2">
+                    {children}
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+function CopyableCodeBlock({ code }: { code: string }) {
+    const [copied, setCopied] = React.useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(code);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    return (
+        <div className="bg-base-300 rounded-lg p-3 mt-4 font-mono text-sm border border-base-content/10 flex items-center justify-between">
+            <code className="text-base-content overflow-x-auto whitespace-nowrap">{code}</code>
+            <button 
+                onClick={handleCopy}
+                className="btn btn-outline btn-sm btn-square flex-shrink-0 border-base-content/20 text-base-content/70 hover:bg-base-content/10 hover:border-base-content/30 hover:text-base-content transition-colors ml-4"
+                aria-label="Copy to clipboard"
+            >
+                <Icon icon={copied ? "mdi:check" : "mdi:content-copy"} className={classNames("w-4 h-4", copied ? "text-success" : "")} />
+            </button>
+        </div>
+    );
+}
+
+function FaqSection() {
+    const t = useTranslate()
+    return <SectionWithTitle
+        className="container"
+        title={t("faq") || "FAQ"}
+        id="faq">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-8 items-start">
+            <FaqItem question={t("faq_q1")}>
+                <p>{t("faq_a1_1")}</p>
+                <p>{t("faq_a1_2")}</p>
+            </FaqItem>
+            <FaqItem question={t("faq_q2")}>
+                <p>{t("faq_a2")}</p>
+            </FaqItem>
+            <FaqItem question={t("faq_q3")}>
+                <p>{t("faq_a3", { link: <a href="https://github.com/amir1376/ab-download-manager/wiki/Change-the-renderApi" className="link link-primary" target="_blank">{t("here")}</a> })}</p>
+                <CopyableCodeBlock code="SKIKO_RENDER_API=SOFTWARE" />
+            </FaqItem>
+            <FaqItem question={t("faq_q4")}>
+                <p>{t("faq_a4_1")}</p>
+                <p>{t("faq_a4_2", { link: <a href="http://localhost:15151" className="link link-primary" target="_blank">http://localhost:15151</a> })}</p>
+            </FaqItem>
+        </div>
+    </SectionWithTitle>
+}
+
 interface HomeProps {
     data: HomeData
 }
@@ -195,6 +281,8 @@ export default function Home(
                 <Screenshots images={data.screenshots}/>
                 <div className="mt-12"/>
                 <Features features={data.features}/>
+                <div className="mt-12"/>
+                <FaqSection/>
             </div>
         </ProvideDownloadData>
     )

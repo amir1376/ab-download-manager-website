@@ -78,5 +78,18 @@ export type ILanguageData = {
     attention:string
     experimental_platform_warning:string
 
-    file_checksum:string
+    file_checksum: string
+
+    faq: string
+    faq_q1: string
+    faq_a1_1: string
+    faq_a1_2: string
+    faq_q2: string
+    faq_a2: string
+    faq_q3: string
+    faq_a3: string
+    here: string
+    faq_q4: string
+    faq_a4_1: string
+    faq_a4_2: string
 }

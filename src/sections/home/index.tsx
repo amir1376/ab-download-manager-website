@@ -27,8 +27,8 @@ function Hero(props: { icon: ImageProp, title: string, description: string }) {
                 )}
             />
             <img className="h-52 sm:h-64 w-52 sm:w-64 z-[1]"
-                 src={iconSource}
-                 alt={props.icon.alt}
+                src={iconSource}
+                alt={props.icon.alt}
             />
         </div>
         <div className="flex flex-col space-y-10 p-4 md:max-w-[55%]">
@@ -107,7 +107,7 @@ function Screenshots(props: { images: MainAppScreenshot }) {
     const downloadScreenshot = props.images.download[variant]
     return <div className="bg-base-200/25 py-8">
         <div dir="ltr"
-             className="z-10 container justify-center space-y-4 lg:space-y-0 lg:space-x-2 lg:flex-wrap flex flex-col lg:flex-row">
+            className="z-10 container justify-center space-y-4 lg:space-y-0 lg:space-x-2 lg:flex-wrap flex flex-col lg:flex-row">
             <img className="object-cover lg:h-[26rem]" src={homeScreenshot.src} alt={homeScreenshot.alt}/>
             <img className="object-cover lg:h-[26rem]" src={downloadScreenshot.src} alt={downloadScreenshot.alt}/>
         </div>
@@ -159,6 +159,28 @@ function Features(props: { features: FeatureProp[] }) {
     </SectionWithTitle>
 }
 
+function DocsCtaSection() {
+    const t = useTranslate()
+    const navigate = useNavigate()
+    return (
+        <section className="container max-w-4xl mx-auto text-center py-16 px-6 bg-base-200/50 border border-base-content/10 rounded-3xl mt-24 shadow-inner relative overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+            <Icon icon="mdi:help-circle-outline" className="w-12 h-12 mx-auto text-primary mb-4" />
+            <h3 className="text-2xl sm:text-3xl font-bold mb-3">{t("docs_faq")}</h3>
+            <p className="text-base-content/70 max-w-md mx-auto mb-6 text-sm sm:text-base">
+                {t("docs_cta_description")}
+            </p>
+            <button
+                onClick={() => navigate("/docs")}
+                className="btn btn-primary px-8 shadow-lg shadow-primary/20 flex items-center gap-2 mx-auto"
+            >
+                <span>{t("docs_cta_button")}</span>
+                <Icon icon="mdi:arrow-right" className="w-5 h-5" />
+            </button>
+        </section>
+    )
+}
+
 interface HomeProps {
     data: HomeData
 }
@@ -195,6 +217,8 @@ export default function Home(
                 <Screenshots images={data.screenshots}/>
                 <div className="mt-12"/>
                 <Features features={data.features}/>
+                <div className="mt-12"/>
+                <DocsCtaSection/>
             </div>
         </ProvideDownloadData>
     )

@@ -78,9 +78,27 @@ export type ILanguageData = {
     attention:string
     experimental_platform_warning:string
 
-    file_checksum:string
+    file_checksum: string
 
+    docs: string
+    docs_getting_started: string
+    docs_usage: string
+    docs_resources: string
+    docs_introduction: string
+    docs_integration: string
+    docs_faq: string
+    docs_no_documentation: string
+    docs_no_documentation_desc: string
+    docs_not_found_title: string
+    docs_not_found_desc: string
     please_wait: string
     error: string
     refresh: string
+    docs_cta_description: string
+    docs_cta_button: string
+    docs_loading: string
+    docs_translation_missing: string
+    docs_fallback_warning: string
+    docs_help_translate: string
+    docs_menu: string
 }

@@ -12,3 +12,44 @@
 .my-primary-gradient-colors {
     @apply from-[var(--primary-gradient-start)] to-[var(--primary-gradient-end)]
 }
+
+/* Beautiful responsive markdown styles for documentation */
+.prose-docs h1 {
+    @apply text-3xl sm:text-4xl font-bold mb-6 text-gradient bg-gradient-to-r my-primary-gradient-colors pb-2 border-b border-base-content/10;
+}
+.prose-docs h2 {
+    @apply text-xl sm:text-2xl font-semibold mt-8 mb-4 border-b border-base-content/5 pb-2;
+}
+.prose-docs h3 {
+    @apply text-lg sm:text-xl font-medium mt-6 mb-3 text-primary;
+}
+.prose-docs p {
+    @apply text-base opacity-90 leading-relaxed mb-4;
+}
+.prose-docs ul {
+    @apply list-disc list-inside pl-4 mb-6 space-y-2 opacity-90;
+}
+.prose-docs ol {
+    @apply list-decimal list-inside pl-4 mb-6 space-y-2 opacity-90;
+}
+.prose-docs li {
+    @apply leading-relaxed;
+}
+.prose-docs pre {
+    @apply bg-base-300 rounded-lg p-4 my-6 font-mono text-sm border border-base-content/10 overflow-x-auto;
+}
+.prose-docs code {
+    @apply bg-base-300/50 text-secondary font-mono text-xs sm:text-sm px-1.5 py-0.5 rounded border border-base-content/5;
+}
+.prose-docs pre code {
+    @apply bg-transparent text-base-content p-0 border-none;
+}
+.prose-docs blockquote {
+    @apply border-l-4 border-primary pl-4 py-2 my-4 italic opacity-85 bg-base-200/50 rounded-r;
+}
+.prose-docs a {
+    @apply link link-primary font-semibold;
+}
+.prose-docs hr {
+    @apply border-base-content/10 my-8;
+}

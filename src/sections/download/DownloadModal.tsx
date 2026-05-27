@@ -437,9 +437,10 @@ function LoadedDownloadModal(
 }
 
 function LoadingContent() {
+    const t = useTranslate()
     return <div className="flex flex-col justify-center items-center p-8 sm:p-16">
         <div className="loading"></div>
-        <div className="text-sm sm:text-base">Please Wait...</div>
+        <div className="text-sm sm:text-base">{t("please_wait")}</div>
     </div>
 }
 
@@ -447,9 +448,10 @@ function ErrorContent(props: {
     error: string,
     refresh: () => void
 }) {
+    const t = useTranslate()
     return <div className="flex flex-col justify-center items-center p-8 sm:p-16">
-        <div className="text-base sm:text-lg">Error!</div>
+        <div className="text-base sm:text-lg">{t("error")}</div>
         <div className="opacity-75 text-sm sm:text-base text-center px-4">{props.error}</div>
-        <button className="btn btn-primary mt-4" onClick={props.refresh}>Refresh</button>
+        <button className="btn btn-primary mt-4" onClick={props.refresh}>{t("refresh")}</button>
     </div>
 }

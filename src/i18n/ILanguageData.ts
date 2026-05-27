@@ -79,4 +79,8 @@ export type ILanguageData = {
     experimental_platform_warning:string
 
     file_checksum:string
+
+    please_wait: string
+    error: string
+    refresh: string
 }

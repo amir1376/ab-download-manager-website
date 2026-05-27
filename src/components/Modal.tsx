@@ -8,15 +8,13 @@ export function ModalHeader(
         onClose: () => void
     }
 ) {
-    return <div className="flex flex-col select-none">
-        <div className="flex flex-row items-center ps-3 sm:ps-4 pt-2 pe-2 pb-3 sm:pb-4">
-            <div className="font-bold text-base sm:text-lg flex-1 text-center">{props.title}</div>
-            <div
-                className="btn btn-circle btn-ghost btn-sm sm:btn-md"
-                onClick={props.onClose}
-            >
-                <Icon height={20} width={20} className="sm:h-6 sm:w-6" icon="mdi:close"/>
-            </div>
+    return <div className="relative flex flex-row items-center justify-center select-none py-3 sm:py-4 px-12 border-b border-base-content/10">
+        <div className="font-bold text-base sm:text-lg text-center">{props.title}</div>
+        <div
+            className="absolute end-2 sm:end-4 btn btn-circle btn-ghost btn-sm sm:btn-md"
+            onClick={props.onClose}
+        >
+            <Icon height={20} width={20} className="sm:h-6 sm:w-6" icon="mdi:close" />
         </div>
     </div>
 }
@@ -24,7 +22,7 @@ export function ModalHeader(
 export function ModalContent(
     props: PropsWithChildren
 ) {
-    return <div className="px-4 sm:px-6 md:px-8 pb-6 md:pb-8">
+    return <div className="px-4 sm:px-6 md:px-8 pb-6 md:pb-8 flex-1 md:overflow-y-auto">
         {props.children}
     </div>
 }
@@ -34,15 +32,14 @@ export function Modal(
         onClickOutside?: () => void
     }
 ) {
-    return <div className="modal modal-bottom md:modal-top sm:pt-16 modal-open" role="dialog">
+    return <div className="modal modal-open" role="dialog">
         <div className={classNames(
             "modal-box bg-base-200 text-base-content",
             "rounded-3xl sm:w-auto max-w-full container",
-            "p-0",//we want to use padding for each section
+            "border border-base-content/10",
+            "p-0 md:h-[80%] flex flex-col",//we want to use padding for each section
         )}>
-            <div className="">
-                {props.children}
-            </div>
+            {props.children}
         </div>
         <div
             onClick={props.onClickOutside}

@@ -56,5 +56,8 @@
     "coming_soon": "Coming Soon",
     "attention": "Attention",
     "experimental_platform_warning": "App on {platform} is in experimental stage, some parts of the app may not work properly!",
-    "file_checksum": "File checksum"
+    "file_checksum": "File checksum",
+    "please_wait": "Please Wait...",
+    "error": "Error!",
+    "refresh": "Refresh"
 }

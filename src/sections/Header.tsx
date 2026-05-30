@@ -196,13 +196,15 @@ function LanguageForMobile() {
             <Icon height={24} width={24} icon="mdi:language"/>
             {activeLocale?.name?.native}
         </summary>
-        <ul className="max-h-[calc(100vh-12rem)] overflow-y-auto overscroll-contain space-y-1 pr-4 py-1 pl-4">
-            {Object.values(languages).map(lang => (
-                <li key={lang.locale} className="block w-full" onClick={() => changeLang(lang.locale)}>
-                    <LanguageItem language={lang} active={activeLocale?.locale == lang.locale}/>
-                </li>
-            ))}
-        </ul>
+        <div className="max-h-[calc(100vh-12rem)] overflow-y-auto overscroll-contain">
+            <ul className="space-y-1 pr-4 py-1 pl-4">
+                {Object.values(languages).map(lang => (
+                    <li key={lang.locale} className="block w-full" onClick={() => changeLang(lang.locale)}>
+                        <LanguageItem language={lang} active={activeLocale?.locale == lang.locale}/>
+                    </li>
+                ))}
+            </ul>
+        </div>
     </details>
 }
 

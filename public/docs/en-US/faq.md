@@ -22,7 +22,7 @@ You may need to change the render API to software rendering. Follow the steps be
    ```
 2. Restart the application.
 
-For more details, you can also view the [official rendering API tutorial on [GitHub](https://github.com/amir1376/ab-download-manager/wiki/Change-the-renderApi).
+For more details, you can also view the [official rendering API tutorial on GitHub](https://github.com/amir1376/ab-download-manager/wiki/Change-the-renderApi).
 
 ---
 

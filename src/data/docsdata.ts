@@ -17,8 +17,8 @@ export function getDocsData(): SidebarCategoryData[] {
             category: "docs_category_getting_started",
             items: [
                 { id: "introduction", title: "docs_title_introduction", icon: "mdi:play-circle-outline" },
-                { id: "installation", title: "docs_title_installation", icon: "" },
-                { id: "portable", title: "docs_title_portable", icon: "" },
+                { id: "installation", title: "docs_title_installation", icon: "mdi:download-circle-outline" },
+                { id: "portable", title: "docs_title_portable", icon: "mdi:usb-flash-drive-outline" },
             ]
         },
         {
@@ -31,7 +31,7 @@ export function getDocsData(): SidebarCategoryData[] {
             category: "docs_category_resources",
             items: [
                 { id: "faq", title: "docs_title_faq", icon: "mdi:help-circle-outline" },
-                { id: "uninstallation", title: "docs_title_uninstallation", icon: "" },
+                { id: "uninstallation", title: "docs_title_uninstallation", icon: "mdi:trash-can-outline" },
             ]
         }
     ];

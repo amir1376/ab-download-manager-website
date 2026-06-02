@@ -4,11 +4,11 @@ You can install the AB Download Manager using the following ways
 
 ### Direct Download
 
-- Official Website: https://abdownloadmanager/#download  
+- Official Website: https://abdownloadmanager.com/#download  
   Download the latest stable version directly. This is the simplest option for most users.
 
 - GitHub Releases: https://github.com/amir1376/ab-download-manager/releases/latest  
-  Contains installers, portable builds, and full release history.
+  Contains installers and full release history.
 
 ### Installation script
 

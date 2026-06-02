@@ -252,10 +252,21 @@ function CommunityDesktop() {
     </div>
 }
 
+function DocsLink() {
+    const t = useTranslate()
+    return <MyLink title={t("docs")}
+                   className="btn btn-ghost flex items-center gap-2"
+                   href="/docs">
+        <Icon height={24} width={24} icon="mdi:book-open-page-variant-outline"/>
+        <span className="hidden lg:inline">{t("docs")}</span>
+    </MyLink>
+}
+
 function OptionMobile() {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
+    const t = useTranslate()
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -358,6 +369,14 @@ function OptionMobile() {
             tabIndex={0}
             className="dropdown-content shadow-lg w-[calc(100vw-1rem)] max-w-[calc(100vw-1rem)] translate-x-2 rounded-box bg-base-200 overflow-x-hidden z-50"
         >
+            <ul className="menu">
+                <li className="w-full min-w-0 max-w-full box-border">
+                    <MyLink href="/docs">
+                        <Icon icon="mdi:book-open-page-variant-outline" height={24} width={24} />
+                        {t("docs")}
+                    </MyLink>
+                </li>
+            </ul>
             <ul className="menu w-full min-w-0 max-w-full box-border">
                 <li className="w-full min-w-0 max-w-full box-border"><LanguageForMobile/></li>
             </ul>
@@ -376,6 +395,7 @@ function OptionMobile() {
 function OptionDesktop() {
     return <div className="hidden md:flex flex-row  lg:space-x-4">
         <SourceCode/>
+        <DocsLink/>
         <CommunityDesktop/>
         <LanguageDropDown/>
         <Theme/>

@@ -80,6 +80,10 @@ export type ILanguageData = {
 
     file_checksum: string
 
+    please_wait: string
+    error: string
+    refresh: string
+
     docs: string
     docs_getting_started: string
     docs_usage: string
@@ -91,9 +95,6 @@ export type ILanguageData = {
     docs_no_documentation_desc: string
     docs_not_found_title: string
     docs_not_found_desc: string
-    please_wait: string
-    error: string
-    refresh: string
     docs_cta_description: string
     docs_cta_button: string
     docs_loading: string

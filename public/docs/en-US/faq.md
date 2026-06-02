@@ -16,7 +16,7 @@ No. Due to legal and licensing terms, the app does not support downloading encry
 
 ### My screen is black or flickering — what should I do?
 You may need to change the render API to software rendering. Follow the steps below:
-1. Open the `.env` file of the application.
+1. add this line to your environment variables
 2. Add the following line:
    ```env
    SKIKO_RENDER_API=SOFTWARE

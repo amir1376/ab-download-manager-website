@@ -166,7 +166,7 @@ function DocsCtaSection() {
         <section className="container max-w-4xl mx-auto text-center py-16 px-6 bg-base-200/50 border border-base-content/10 rounded-3xl mt-24 shadow-inner relative overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
             <Icon icon="mdi:help-circle-outline" className="w-12 h-12 mx-auto text-primary mb-4" />
-            <h3 className="text-2xl sm:text-3xl font-bold mb-3">{t("docs_faq")}</h3>
+            <h3 className="text-2xl sm:text-3xl font-bold mb-3">{t("docs_title_faq")}</h3>
             <p className="text-base-content/70 max-w-md mx-auto mb-6 text-sm sm:text-base">
                 {t("docs_cta_description")}
             </p>

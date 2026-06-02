@@ -14,21 +14,24 @@ export type SidebarCategoryData = {
 export function getDocsData(): SidebarCategoryData[] {
     return [
         {
-            category: "docs_getting_started",
+            category: "docs_category_getting_started",
             items: [
-                { id: "introduction", title: "docs_introduction", icon: "mdi:play-circle-outline" }
+                { id: "introduction", title: "docs_title_introduction", icon: "mdi:play-circle-outline" },
+                { id: "installation", title: "docs_title_installation", icon: "" },
+                { id: "portable", title: "docs_title_portable", icon: "" },
             ]
         },
         {
-            category: "docs_usage",
+            category: "docs_category_usage",
             items: [
-                { id: "integration", title: "docs_integration", icon: "mdi:web" }
+                { id: "integration", title: "docs_title_integration", icon: "mdi:web" }
             ]
         },
         {
-            category: "docs_resources",
+            category: "docs_category_resources",
             items: [
-                { id: "faq", title: "docs_faq", icon: "mdi:help-circle-outline" }
+                { id: "faq", title: "docs_title_faq", icon: "mdi:help-circle-outline" },
+                { id: "uninstallation", title: "docs_title_uninstallation", icon: "" },
             ]
         }
     ];

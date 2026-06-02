@@ -85,12 +85,6 @@ export type ILanguageData = {
     refresh: string
 
     docs: string
-    docs_getting_started: string
-    docs_usage: string
-    docs_resources: string
-    docs_introduction: string
-    docs_integration: string
-    docs_faq: string
     docs_no_documentation: string
     docs_no_documentation_desc: string
     docs_not_found_title: string
@@ -102,4 +96,14 @@ export type ILanguageData = {
     docs_fallback_warning: string
     docs_help_translate: string
     docs_menu: string
+
+    docs_category_getting_started: string
+    docs_category_usage: string
+    docs_category_resources: string
+    docs_title_introduction: string
+    docs_title_integration: string
+    docs_title_faq: string
+    docs_title_installation: string
+    docs_title_uninstallation: string
+    docs_title_portable: string
 }

@@ -374,7 +374,7 @@ function OptionMobile() {
         >
             <ul className="menu">
                 <li className="w-full min-w-0 max-w-full box-border">
-                    <MyLink href="/docs">
+                    <MyLink dir={useCurrentDirection()} href="/docs">
                         <Icon icon="mdi:book-open-page-variant-outline" height={24} width={24}/>
                         {t("docs")}
                     </MyLink>

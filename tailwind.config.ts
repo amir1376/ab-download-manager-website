@@ -1,5 +1,6 @@
 import type {Config} from 'tailwindcss'
 import daisyui, {Config as DaysiUiConfig} from "daisyui";
+import typography from "@tailwindcss/typography";
 import defaultThemes from "daisyui/src/theming/themes";
 
 import tinycolor from "tinycolor2";
@@ -64,6 +65,7 @@ const config: Config = {
     },
     plugins: [
         daisyui,
+        typography,
     ],
     daisyui: daisyuiConfigs
 }

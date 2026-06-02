@@ -224,8 +224,8 @@ export default function Docs({ data }: DocsProps) {
                                     </a>
                                 </div>
                             )}
-                            <article 
-                                className="prose-docs prose-invert max-w-none"
+                            <article
+                                className="prose max-w-none"
                                 dangerouslySetInnerHTML={{ __html: parsedHtml }}
                             />
                         </>

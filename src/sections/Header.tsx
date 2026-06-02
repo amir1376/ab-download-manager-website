@@ -1,4 +1,4 @@
-import {useMemo, useState, useRef, useEffect} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import appIcon from "~/assets/icons/app_icon_simple.svg"
 import {Icon} from "@iconify/react";
 import {useWindowScroll} from "react-use";
@@ -254,9 +254,12 @@ function CommunityDesktop() {
 
 function DocsLink() {
     const t = useTranslate()
-    return <MyLink title={t("docs")}
-                   className="btn btn-ghost flex items-center gap-2"
-                   href="/docs">
+    return <MyLink
+        dir={useCurrentDirection()}
+        title={t("docs")}
+        className="btn btn-ghost"
+        href="/docs"
+    >
         <Icon height={24} width={24} icon="mdi:book-open-page-variant-outline"/>
         <span className="hidden lg:inline">{t("docs")}</span>
     </MyLink>
@@ -372,7 +375,7 @@ function OptionMobile() {
             <ul className="menu">
                 <li className="w-full min-w-0 max-w-full box-border">
                     <MyLink href="/docs">
-                        <Icon icon="mdi:book-open-page-variant-outline" height={24} width={24} />
+                        <Icon icon="mdi:book-open-page-variant-outline" height={24} width={24}/>
                         {t("docs")}
                     </MyLink>
                 </li>

@@ -58,12 +58,6 @@
     "experimental_platform_warning": "برنامه در {platform} در مرحله آزمایشی است، ممکن است برخی از قسمت های برنامه به درستی کار نکنند!",
     "file_checksum": "چک سام فایل",
     "docs": "مستندات",
-    "docs_getting_started": "آغاز کار",
-    "docs_usage": "استفاده",
-    "docs_resources": "منابع",
-    "docs_introduction": "مقدمه",
-    "docs_integration": "یکپارچه‌سازی با مرورگر",
-    "docs_faq": "راهنمایی و پرسش های متداول",
     "please_wait": "لطفا صبر کنید...",
     "error": "خطا!",
     "refresh": "تازه‌سازی",
@@ -77,5 +71,14 @@
     "docs_no_documentation": "سندی در دسترس نیست",
     "docs_no_documentation_desc": "در حال حاضر هیچ سندی در دسترس نیست.",
     "docs_not_found_title": "سند یاف نشد",
-    "docs_not_found_desc": "صفحه درخواستی پیدا نشد. لطفاً یک موضوع دیگر را از نوار کناری انتخاب کنید."
+    "docs_not_found_desc": "صفحه درخواستی پیدا نشد. لطفاً یک موضوع دیگر را از نوار کناری انتخاب کنید.",
+    "docs_category_getting_started": "آغاز کار",
+    "docs_category_usage": "استفاده",
+    "docs_category_resources": "منابع",
+    "docs_title_introduction": "مقدمه",
+    "docs_title_integration": "یکپارچه‌سازی با مرورگر",
+    "docs_title_faq": "راهنمایی و پرسش های متداول",
+    "docs_title_installation": "نصب برنامه",
+    "docs_title_uninstallation": "حذف برنامه",
+    "docs_title_portable": "حالت قابل حمل"
 }

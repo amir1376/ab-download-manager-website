@@ -58,12 +58,6 @@
     "experimental_platform_warning": "Die App auf {platform} befindet sich in der experimentellen Phase. Einige Teile der App funktionieren möglicherweise nicht richtig!",
     "file_checksum": "Datei-Checksumme",
     "docs": "Docs",
-    "docs_getting_started": "Getting Started",
-    "docs_usage": "Usage",
-    "docs_resources": "Resources",
-    "docs_introduction": "Introduction",
-    "docs_integration": "Browser Integration",
-    "docs_faq": "FAQ & Help",
     "please_wait": "Please Wait...",
     "error": "Error!",
     "refresh": "Refresh",
@@ -77,5 +71,14 @@
     "docs_no_documentation": "No Documentation Available",
     "docs_no_documentation_desc": "Currently, there is no documentation available.",
     "docs_not_found_title": "Document Not Found",
-    "docs_not_found_desc": "The requested page could not be found. Please choose another topic from the sidebar."
+    "docs_not_found_desc": "The requested page could not be found. Please choose another topic from the sidebar.",
+    "docs_category_getting_started": "Getting Started",
+    "docs_category_usage": "Usage",
+    "docs_category_resources": "Resources",
+    "docs_title_introduction": "Introduction",
+    "docs_title_integration": "Browser Integration",
+    "docs_title_faq": "FAQ & Help",
+    "docs_title_installation": "Installation",
+    "docs_title_uninstallation": "Uninstallation",
+    "docs_title_portable": "Portable Mode"
 }

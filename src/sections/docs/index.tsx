@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { marked } from "marked";
 import { useCurrentDirection, useCurrentLanguageInfo, useTranslate } from "~/abstraction/i18n";
@@ -18,6 +18,7 @@ export default function Docs({ data }: DocsProps) {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isFallback, setIsFallback] = useState<boolean>(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+    const articleRef = useRef<HTMLElement>(null);
     
     const currentLanguageInfo = useCurrentLanguageInfo();
     const dir = useCurrentDirection();
@@ -105,6 +106,35 @@ export default function Docs({ data }: DocsProps) {
             return markdown;
         }
     }, [markdown]);
+
+    // Add copy button to code blocks dynamically
+    useEffect(() => {
+        if (isLoading || !articleRef.current) return;
+
+        const preElements = articleRef.current.querySelectorAll("pre");
+        preElements.forEach((pre) => {
+            if (pre.querySelector(".copy-code-btn")) return;
+
+            pre.style.position = "relative";
+
+            const code = pre.querySelector("code")?.innerText || pre.innerText;
+
+            const btn = document.createElement("button");
+            btn.className = "copy-code-btn absolute top-1/2 -translate-y-1/2 end-4 text-base-content/40 hover:text-base-content/85 transition-colors cursor-pointer flex items-center justify-center p-1.5 rounded-md hover:bg-base-content/5";
+            btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+
+            btn.addEventListener("click", () => {
+                navigator.clipboard.writeText(code.trim()).then(() => {
+                    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-success"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                    setTimeout(() => {
+                        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+                    }, 2000);
+                });
+            });
+
+            pre.appendChild(btn);
+        });
+    }, [parsedHtml, isLoading]);
 
     const handleSelectDoc = (id: string) => {
         navigate(`/docs/${id}`);
@@ -225,6 +255,7 @@ export default function Docs({ data }: DocsProps) {
                                 </div>
                             )}
                             <article
+                                ref={articleRef}
                                 className="prose max-w-none"
                                 dangerouslySetInnerHTML={{ __html: parsedHtml }}
                             />

@@ -1,25 +1,25 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { marked } from "marked";
-import { useCurrentDirection, useCurrentLanguageInfo, useTranslate } from "~/abstraction/i18n";
-import { Icon } from "@iconify/react";
+import React, {useEffect, useState, useMemo, useRef} from "react";
+import {useParams, useNavigate} from "react-router-dom";
+import {useCurrentDirection, useCurrentLanguageInfo, useTranslate} from "~/abstraction/i18n";
+import {Icon} from "@iconify/react";
 import classNames from "classnames";
-import { SidebarCategoryData } from "~/data/docsdata";
+import {SidebarCategoryData} from "~/data/docsdata";
+import Markdown, {ExtraProps} from "react-markdown";
+import {run} from "~/utils/functionalUtils.ts";
 
 export interface DocsProps {
     data: SidebarCategoryData[];
 }
 
-export default function Docs({ data }: DocsProps) {
-    const { docId: paramDocId } = useParams<{ docId?: string }>();
+export default function Docs({data}: DocsProps) {
+    const {docId: paramDocId} = useParams<{ docId?: string }>();
     const navigate = useNavigate();
     const [markdown, setMarkdown] = useState<string>("");
     const [docError, setDocError] = useState<"no_doc" | "not_found" | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isFallback, setIsFallback] = useState<boolean>(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-    const articleRef = useRef<HTMLElement>(null);
-    
+
     const currentLanguageInfo = useCurrentLanguageInfo();
     const dir = useCurrentDirection();
     const t = useTranslate();
@@ -88,7 +88,7 @@ export default function Docs({ data }: DocsProps) {
                 setMarkdown(content);
                 setIsFallback(fallbackActive);
                 setIsLoading(false);
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                window.scrollTo({top: 0, behavior: "smooth"});
             }
         };
 
@@ -98,44 +98,6 @@ export default function Docs({ data }: DocsProps) {
         };
     }, [docId, currentLanguageInfo]);
 
-    // Parse HTML using marked safely
-    const parsedHtml = useMemo(() => {
-        try {
-            return marked.parse(markdown) as string;
-        } catch (e) {
-            return markdown;
-        }
-    }, [markdown]);
-
-    // Add copy button to code blocks dynamically
-    useEffect(() => {
-        if (isLoading || !articleRef.current) return;
-
-        const preElements = articleRef.current.querySelectorAll("pre");
-        preElements.forEach((pre) => {
-            if (pre.querySelector(".copy-code-btn")) return;
-
-            pre.style.position = "relative";
-
-            const code = pre.querySelector("code")?.innerText || pre.innerText;
-
-            const btn = document.createElement("button");
-            btn.className = "copy-code-btn absolute top-1/2 -translate-y-1/2 end-4 text-base-content/40 hover:text-base-content/85 transition-colors cursor-pointer flex items-center justify-center p-1.5 rounded-md hover:bg-base-content/5";
-            btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
-
-            btn.addEventListener("click", () => {
-                navigator.clipboard.writeText(code.trim()).then(() => {
-                    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-success"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-                    setTimeout(() => {
-                        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
-                    }, 2000);
-                });
-            });
-
-            pre.appendChild(btn);
-        });
-    }, [parsedHtml, isLoading]);
-
     const handleSelectDoc = (id: string) => {
         navigate(`/docs/${id}`);
         setMobileMenuOpen(false);
@@ -144,14 +106,15 @@ export default function Docs({ data }: DocsProps) {
     return (
         <div dir={dir} className="min-h-screen bg-base-100 text-base-content pt-20 px-4 md:px-6 lg:px-8">
             <div className="container mx-auto flex flex-col md:flex-row gap-8 py-6">
-                
+
                 {/* Mobile Navigation Bar */}
-                <div className="md:hidden flex items-center justify-between bg-base-200 border border-base-content/10 p-3 rounded-xl mb-4">
+                <div
+                    className="md:hidden flex items-center justify-between bg-base-200 border border-base-content/10 p-3 rounded-xl mb-4">
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         className="btn btn-ghost btn-sm flex items-center gap-2"
                     >
-                        <Icon icon="mdi:menu" className="w-5 h-5" />
+                        <Icon icon="mdi:menu" className="w-5 h-5"/>
                         <span className="font-semibold">{t("docs_menu")}</span>
                     </button>
                     <div className="text-sm font-bold text-primary capitalize">{docId.replace("-", " ")}</div>
@@ -168,23 +131,26 @@ export default function Docs({ data }: DocsProps) {
                 {/* Sidebar Navigation Panel */}
                 <aside className={classNames(
                     "fixed md:sticky top-0 md:top-24 bottom-0 start-0 z-50 md:z-auto w-64 max-w-[80vw] bg-base-200 md:bg-transparent border-e border-base-content/10 md:border-none p-0 md:p-0 transition-transform duration-300 md:translate-x-0 md:rtl:translate-x-0",
-                    mobileMenuOpen 
-                        ? "translate-x-0 rtl:translate-x-0" 
+                    mobileMenuOpen
+                        ? "translate-x-0 rtl:translate-x-0"
                         : "-translate-x-full md:translate-x-0 rtl:translate-x-full md:rtl:translate-x-0"
                 )}>
                     {/* Mobile Drawer Header */}
-                    <div className="md:hidden flex items-center justify-between border-b border-b-base-content/10 px-6 py-4 mb-4">
-                        <span className="font-bold text-base text-primary uppercase tracking-wider">{t("docs_menu")}</span>
+                    <div
+                        className="md:hidden flex items-center justify-between border-b border-b-base-content/10 px-6 py-4 mb-4">
+                        <span
+                            className="font-bold text-base text-primary uppercase tracking-wider">{t("docs_menu")}</span>
                         <button
                             onClick={() => setMobileMenuOpen(false)}
                             className="btn btn-ghost btn-circle btn-sm"
                             aria-label="Close menu"
                         >
-                            <Icon icon="mdi:close" className="w-5 h-5" />
+                            <Icon icon="mdi:close" className="w-5 h-5"/>
                         </button>
                     </div>
 
-                    <div className="flex flex-col space-y-8 max-h-[calc(100vh-5rem)] md:max-h-[80vh] overflow-y-auto p-6 md:p-0 pr-2">
+                    <div
+                        className="flex flex-col space-y-8 max-h-[calc(100vh-5rem)] md:max-h-[80vh] overflow-y-auto p-6 md:p-0 pr-2">
                         {sidebarItems.map((cat, idx) => cat.items.length > 0 && (
                             <div key={idx} className="flex flex-col space-y-2">
                                 <h4 className="text-xs font-bold uppercase tracking-wider text-base-content/40 px-3">
@@ -199,12 +165,12 @@ export default function Docs({ data }: DocsProps) {
                                                     onClick={() => handleSelectDoc(item.id)}
                                                     className={classNames(
                                                         "w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-all text-start",
-                                                        isActive 
+                                                        isActive
                                                             ? "bg-primary text-primary-content shadow-lg shadow-primary/20 font-bold"
                                                             : "hover:bg-base-content/10 text-base-content/75 hover:text-base-content"
                                                     )}
                                                 >
-                                                    <Icon icon={item.icon} className="w-5 h-5 flex-shrink-0" />
+                                                    <Icon icon={item.icon} className="w-5 h-5 flex-shrink-0"/>
                                                     <span className="truncate">{item.title}</span>
                                                 </button>
                                             </li>
@@ -216,7 +182,8 @@ export default function Docs({ data }: DocsProps) {
                     </div>
                 </aside>
 
-                <main className="flex-1 min-w-0 bg-base-200/30 border border-base-content/5 rounded-3xl p-6 sm:p-8 lg:p-12 shadow-sm">
+                <main
+                    className="flex-1 min-w-0 bg-base-200/30 border border-base-content/5 rounded-3xl p-6 sm:p-8 lg:p-12 shadow-sm">
                     {isLoading ? (
                         <div className="flex flex-col items-center justify-center py-20 space-y-4">
                             <div className="loading loading-spinner loading-lg text-primary"></div>
@@ -224,7 +191,7 @@ export default function Docs({ data }: DocsProps) {
                         </div>
                     ) : docError ? (
                         <div className="flex flex-col items-center justify-center py-20 space-y-4 text-center">
-                            <Icon icon="mdi:file-document-remove-outline" className="w-16 h-16 text-base-content/20" />
+                            <Icon icon="mdi:file-document-remove-outline" className="w-16 h-16 text-base-content/20"/>
                             <h2 className="text-2xl font-bold">
                                 {docError === "no_doc" ? t("docs_no_documentation") : t("docs_not_found_title")}
                             </h2>
@@ -236,12 +203,13 @@ export default function Docs({ data }: DocsProps) {
                         <>
                             {/* Falling back to English with translation CTA warning */}
                             {isFallback && currentLanguageInfo?.locale !== "en-US" && (
-                                <div className="flex flex-col sm:flex-row items-center gap-4 bg-warning/15 border border-warning/30 text-base-content px-5 py-4 rounded-2xl mb-8 text-sm relative overflow-hidden shadow-inner animate-fade-in">
-                                    <div className="absolute top-0 start-0 w-1 h-full bg-warning" />
-                                    <Icon icon="mdi:translate-off" className="w-6 h-6 flex-shrink-0 text-warning" />
+                                <div
+                                    className="flex flex-col sm:flex-row items-center gap-4 bg-warning/15 border border-warning/30 text-base-content px-5 py-4 rounded-2xl mb-8 text-sm relative overflow-hidden shadow-inner animate-fade-in">
+                                    <div className="absolute top-0 start-0 w-1 h-full bg-warning"/>
+                                    <Icon icon="mdi:translate-off" className="w-6 h-6 flex-shrink-0 text-warning"/>
                                     <div className="flex-1 text-center sm:text-start">
                                         <span className="font-bold">{t("docs_translation_missing")}</span>{" "}
-                                        {t("docs_fallback_warning", { language: currentLanguageInfo?.name?.native || currentLanguageInfo?.locale })}
+                                        {t("docs_fallback_warning", {language: currentLanguageInfo?.name?.native || currentLanguageInfo?.locale})}
                                     </div>
                                     <a
                                         href="https://github.com/amir1376/ab-download-manager-website"
@@ -249,20 +217,63 @@ export default function Docs({ data }: DocsProps) {
                                         rel="noopener noreferrer"
                                         className="btn btn-warning btn-sm flex items-center gap-1.5 font-bold shadow-sm"
                                     >
-                                        <Icon icon="mdi:github" className="w-4 h-4" />
+                                        <Icon icon="mdi:github" className="w-4 h-4"/>
                                         <span>{t("docs_help_translate")}</span>
                                     </a>
                                 </div>
                             )}
-                            <article
-                                ref={articleRef}
-                                className="prose max-w-none"
-                                dangerouslySetInnerHTML={{ __html: parsedHtml }}
-                            />
+                            <div className="prose max-w-none">
+                                <Markdown
+                                    children={markdown}
+                                    components={{
+                                        pre(props) {
+                                            return <PreCopyCodeSupport {...props} />
+                                        },
+                                    }}
+                                />
+                            </div>
                         </>
                     )}
                 </main>
             </div>
         </div>
     );
+}
+
+function PreCopyCodeSupport(props: ExtraProps) {
+    const ref = useRef<HTMLPreElement>(null);
+    const [isDone, setIsDone] = useState(false)
+    const [lastHandle, setLastHandle] = useState<any>(undefined)
+    const {node, ...restProps} = props
+    const onButtonClick = () => {
+        run(async () => {
+            try {
+                const pre = ref.current;
+                if (!pre) return
+                const code = pre.querySelector("code")?.innerText || pre.innerText;
+                if (!code) return
+                await navigator.clipboard.writeText(code.trim());
+                setIsDone(true);
+            } catch (e) {
+                console.error(e);
+            }
+            clearTimeout(lastHandle);
+            setLastHandle(
+                setTimeout(() => setIsDone(false), 2000)
+            );
+        })
+    };
+    return <div className="relative">
+        <pre ref={ref} {...restProps}/>
+        <Icon
+            height={24} width={24}
+            onClick={onButtonClick}
+            icon={isDone ? "ic:round-done" : "mdi:content-copy"}
+            className={classNames(
+                "absolute top-1/2 -translate-y-1/2 end-4",
+                "hover:opacity-85 transition-colors cursor-pointer flex items-center justify-center p-1.5 rounded-md hover:bg-base-content/5 select-none",
+                isDone ? "text-success opacity-85" : "opacity-40 text-inherit",
+            )}
+        />
+    </div>
 }

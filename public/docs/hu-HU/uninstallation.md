@@ -1,30 +1,30 @@
-## Uninstall
+## Eltávolítás
 
 ### Windows
 
-- Simply go to the installation folder and run the `uninstall.exe`
-- You can also use uninstall the app in the Windows settings (`Add or remove programs`)
+- Egyszerűen lépjen a telepítési mappába, és futtassa az `uninstall.exe` fájlt.
+- Az alkalmazás eltávolítását a Windows beállításainál is használhatja (`Programok hozzáadása vagy eltávolítása`)
 
 ### Linux
 
-if you used the installation script for Linux you can perform the below command to uninstall it
+Ha a Linux telepítőszkriptjét használta, végrehajthatja az alábbi parancsot az eltávolításhoz:
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/uninstall.sh)
 ```
 
-### Homebrew (macOS & Linux)
+### Homebrew (macOS és Linux)
 
-if you installed app using Homebrew you can perform below command to uninstall it
+Ha az alkalmazást a Homebrew segítségével telepítette, az alábbi parancs végrehajtásával távolítsa el:
 
 ```bash
 brew uninstall --cask --zap ab-download-manager && brew untap amir1376/tap
 ```
 
-### Manual uninstall
+### Kézi eltávolítás
 
-if you installed the app manually (the `.zip` or `tar.gz` file) after you deleted the app folder, delete the following file(s)/folder(s) too.
+ha manuálisan telepítette az alkalmazást (a ".zip" vagy "tar.gz" fájlt) az alkalmazásmappa törlése után, törölje a következő fájl(oka)t/mappákat is:
 
-- `~/.abdm` (app's config/cache directory)
-- `~/.config/autostart/com.abdownloadmanager.desktop` (start on boot file)
-- `~/.local/share/applications/com.abdownloadmanager.desktop` (desktop entry file)
+- `~/.abdm` (az alkalmazás config/cache könyvtára)
+- `~/.config/autostart/com.abdownloadmanager.desktop` (indítsa el a rendszerindító fájlt)
+- `~/.local/share/applications/com.abdownloadmanager.desktop` (asztali bejegyzés fájl)

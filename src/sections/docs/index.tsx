@@ -113,14 +113,48 @@ export default function Docs({ data }: DocsProps) {
 
         const preElements = articleRef.current.querySelectorAll("pre");
         preElements.forEach((pre) => {
-            if (pre.querySelector(".copy-code-btn")) return;
+            const parent = pre.parentElement;
+            if (parent && parent.classList.contains("code-block-wrapper")) return;
 
-            pre.style.position = "relative";
+            // Get pre styles to copy them to the wrapper
+            const computedStyle = window.getComputedStyle(pre);
+            const bgColor = computedStyle.backgroundColor;
+            const padding = computedStyle.padding;
+            const borderRadius = computedStyle.borderRadius;
+            const border = computedStyle.border;
+            const marginTop = computedStyle.marginTop;
+            const marginBottom = computedStyle.marginBottom;
+
+            // Create wrapper flex container
+            const wrapper = document.createElement("div");
+            wrapper.className = "code-block-wrapper flex items-center justify-between w-full gap-4";
+            wrapper.style.backgroundColor = bgColor;
+            wrapper.style.padding = padding;
+            wrapper.style.borderRadius = borderRadius;
+            wrapper.style.border = border;
+            wrapper.style.marginTop = marginTop;
+            wrapper.style.marginBottom = marginBottom;
+
+            // Create scrollable content container
+            const codeContainer = document.createElement("div");
+            codeContainer.className = "flex-1 overflow-x-auto pr-2";
+
+            // Strip style from pre
+            pre.style.backgroundColor = "transparent";
+            pre.style.margin = "0";
+            pre.style.padding = "0";
+            pre.style.overflow = "visible";
+            pre.style.borderRadius = "0";
+            pre.style.border = "none";
+
+            pre.parentNode?.insertBefore(wrapper, pre);
+            codeContainer.appendChild(pre);
+            wrapper.appendChild(codeContainer);
 
             const code = pre.querySelector("code")?.innerText || pre.innerText;
 
             const btn = document.createElement("button");
-            btn.className = "copy-code-btn absolute top-1/2 -translate-y-1/2 end-4 text-base-content/40 hover:text-base-content/85 transition-colors cursor-pointer flex items-center justify-center p-1.5 rounded-md hover:bg-base-content/5";
+            btn.className = "copy-code-btn flex-shrink-0 text-base-content/40 hover:text-base-content/85 transition-colors cursor-pointer flex items-center justify-center p-1.5 rounded-md hover:bg-base-content/5";
             btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
 
             btn.addEventListener("click", () => {
@@ -132,7 +166,7 @@ export default function Docs({ data }: DocsProps) {
                 });
             });
 
-            pre.appendChild(btn);
+            wrapper.appendChild(btn);
         });
     }, [parsedHtml, isLoading]);
 

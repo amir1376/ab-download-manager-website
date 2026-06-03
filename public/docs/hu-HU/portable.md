@@ -1,21 +1,21 @@
-## How to Make the App Portable (Customize Config Directory)
+## Az alkalmazás hordozhatóvá tétele (a konfigurációs könyvtár testreszabása)
 
-By default, the app stores its configuration files in:
+Alapértelmezés szerint az alkalmazás a konfigurációs fájljait a következő helyen tárolja:
 
 `~/.abdm`
 
-You have two ways to change this:
+Kétféleképpen módosíthatja ezt:
 
-### Option 1: Use a Local `.abdm` Folder
+### 1. lehetőség: Használjon helyi `.abdm` mappát
 
-Create a folder named `.abdm` inside the app’s installation directory.
+Hozzon létre egy `.abdm` nevű mappát az alkalmazás telepítési könyvtárában.
 
-When this folder exists, the app will automatically use it as the config directory instead of the default location.
+Ha ez a mappa létezik, az alkalmazás automatikusan konfigurációs könyvtárként fogja használni az alapértelmezett hely helyett.
 
-### Option 2: Use a `.portable` File
+### 2. lehetőség: Használjon `.portable` fájlt
 
-Create a file named `.portable` inside the installation directory.
+Hozzon létre egy `.portable` nevű fájlt a telepítési könyvtárban.
 
-Inside this file, write the full path to the folder you want to use as the config directory.
+Ebben a fájlban írja be a konfigurációs könyvtárként használni kívánt mappa teljes elérési útját.
 
-The app will read this file and use the specified path for storing configuration data.
+Az alkalmazás beolvassa ezt a fájlt, és a megadott elérési utat használja a konfigurációs adatok tárolására.

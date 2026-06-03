@@ -1,20 +1,20 @@
-## Installation
+## Telepítés
 
-You can install the AB Download Manager using the following ways
+Az AB Download Manager telepíthető a következő módokon
 
-### Direct Download
+### Közvetlen letöltés
 
-- [Official Website](https://abdownloadmanager.com/#download): Download the latest stable version directly. This is the simplest option for most users.
-- [GitHub Releases](https://github.com/amir1376/ab-download-manager/releases/latest): Contains installers and full release history.
+- [Hivatalos weboldal](https://abdownloadmanager.com/#download): Töltse le közvetlenül a legújabb stabil verziót. Ez a legegyszerűbb lehetőség a legtöbb felhasználó számára.
+- [GitHub kiadások](https://github.com/amir1376/ab-download-manager/releases/latest): Tartalmazza a telepítőket és a teljes kiadási történetet.
 
-### Installation script
+### Telepítő szkript
 
-#### Linux (Recommended)
+#### Linux (Ajánlott)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/install.sh | bash
 ```
 
-### Package Manager
+### Csomagkezelő
 
 #### Windows
 
@@ -30,7 +30,7 @@ winget install amir1376.ABDownloadManager
 scoop install extras/abdownloadmanager
 ```
 
-#### Homebrew (for macOS & Linux)
+#### Homebrew (macOS és Linux számára)
 
 ```bash
 brew tap amir1376/tap && brew install --cask ab-download-manager

@@ -1,10 +1,10 @@
-# Browser Integration
+# Böngésző integráció
 
-Integrating AB Download Manager with your browser enables automatic capture of download links, providing a smooth downloading experience.
+Az AB Download Manager integrálása böngészőjével lehetővé teszi a letöltési hivatkozások automatikus rögzítését, zökkenőmentes letöltést biztosítva.
 
-## Supported Browsers
+## Támogatott böngészők
 
-We support modern web browsers, including:
+Támogatjuk a modern webböngészőket, beleértve:
 - **Google Chrome**
 - **Mozilla Firefox**
 - **Microsoft Edge**
@@ -12,8 +12,8 @@ We support modern web browsers, including:
 - **Opera**
 - **Vivaldi**
 
-## Installation Steps
+## Telepítési lépések
 
-1. Install the browser extension matching your web browser from the official web store or the links in the download modal.
-2. Ensure the AB Download Manager desktop application is running in the background.
-3. Once active, links clicked in the browser will automatically be routed directly to AB Download Manager.
+1. Telepítse a böngészőjének megfelelő böngészőbővítményt a hivatalos webáruházból vagy a letöltési módban található hivatkozásokról.
+2. Győződjön meg arról, hogy az AB Download Manager asztali alkalmazás fut a háttérben.
+3. Az aktiválás után a böngészőben kattintott linkek automatikusan közvetlenül az AB Download Managerbe kerülnek.

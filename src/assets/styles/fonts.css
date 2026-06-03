@@ -4,9 +4,9 @@
     font-family: 'Inter', sans-serif;
 }
 
-:root[lang=fa],
-:root[lang=ar],
-:root[lang=ckb],
-:root[lang=bqi] {
+:root[lang=fa-IR],
+:root[lang=ar-Sa],
+:root[lang=ckb-IR],
+:root[lang=bqi-IR] {
     font-family: 'Vazirmatn', sans-serif;
 }

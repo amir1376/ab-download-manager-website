@@ -207,7 +207,7 @@ export default function Docs({ data }: DocsProps) {
                             {/* Falling back to English with translation CTA warning */}
                             {isFallback && currentLanguageInfo?.locale !== "en-US" && (
                                 <div className="flex flex-col sm:flex-row items-center gap-4 bg-warning/15 border border-warning/30 text-base-content px-5 py-4 rounded-2xl mb-8 text-sm relative overflow-hidden shadow-inner animate-fade-in">
-                                    <div className="absolute top-0 left-0 w-1 h-full bg-warning" />
+                                    <div className="absolute top-0 start-0 w-1 h-full bg-warning" />
                                     <Icon icon="mdi:translate-off" className="w-6 h-6 flex-shrink-0 text-warning" />
                                     <div className="flex-1 text-center sm:text-start">
                                         <span className="font-bold">{t("docs_translation_missing")}</span>{" "}

@@ -9,25 +9,25 @@ Igen! Az AB Download Manager képes videókat, hanganyagokat és nem titkosítot
 
 ---
 
-### Does this app support downloading from YouTube?
-No. Due to legal and licensing terms, the app does not support downloading encrypted streams, which includes YouTube videos.
+### Támogatja ez az alkalmazás a letöltést a YouTube-ról?
+Nem. A jogi és licencfeltételek miatt az alkalmazás nem támogatja a titkosított videófolyamok letöltését, ami magában foglalja a YouTube-videókat is.
 
 ---
 
-### My screen is black or flickering — what should I do?
-You may need to change the render API to software rendering. Follow the steps below:
-1. add this line to your environment variables
+### A képernyő fekete vagy villog – mit tegyek?
+Előfordulhat, hogy a renderelési API-t szoftveres renderelésre kell módosítania. Kövesse az alábbi lépéseket:
+1. adja hozzá ezt a sort a környezeti változóihoz
    ```env
    SKIKO_RENDER_API=SOFTWARE
    ```
-2. Restart the application.
+2. Indítsa újra az alkalmazást.
 
-For more details, you can also view the [official rendering API tutorial on GitHub](https://github.com/amir1376/ab-download-manager/wiki/Change-the-renderApi).
+További részletekért tekintse meg a [hivatalos renderelési API oktatóanyagot a GitHubon] (https://github.com/amir1376/ab-download-manager/wiki/Change-the-renderApi).
 
 ---
 
-### The extension can't connect to the app — what should I do?
-If the browser extension is unable to communicate with the desktop application:
-1. Make sure the AB Download Manager desktop application is running.
-2. Check that your VPN, firewall, or proxy is not blocking access to the local port `15151`.
-3. Try opening [http://localhost:15151](http://localhost:15151) directly in your browser. If it is working, you should see a connection response from the app.
+### A bővítmény nem tud csatlakozni az alkalmazáshoz — mit tegyek?
+Ha a böngészőbővítmény nem tud kommunikálni az asztali alkalmazással:
+1. Győződjön meg róla, hogy az AB Download Manager asztali alkalmazás fut.
+2. Ellenőrizze, hogy a VPN-je, tűzfala vagy proxyja nem blokkolja-e a hozzáférést a helyi porthoz `15151`.
+3. Próbálja meg közvetlenül megnyitni a [http://localhost:15151](http://localhost:15151) oldalt a böngészőben. Ha működik, látnia kell egy kapcsolati választ az alkalmazástól.

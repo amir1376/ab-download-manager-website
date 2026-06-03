@@ -1,13 +1,13 @@
-# Introduction
+# Bevezetés
 
-Welcome to the **AB Download Manager** documentation! 
+Üdvözöljük az **AB Download Manager** dokumentációjában! 
 
-AB Download Manager is a free, fast, and open-source download manager designed to make downloading files seamless, organized, and lightning fast. 
+Az AB Download Manager egy ingyenes, gyors és nyílt forráskódú letöltéskezelő, amely a fájlok zökkenőmentes, rendszerezett és villámgyors letöltését teszi lehetővé.
 
-## Key Features
+## Főbb jellemzők
 
-- **Fast Downloads**: Speeds up your downloads by up to 500% using multi-threaded connections.
-- **Queue Management**: Download multiple files sequentially by creating custom download queues.
-- **Sleek Interface**: Enjoy a beautiful, modern user interface with built-in dark mode support.
-- **Browser Integration**: Automatically captures links from popular browsers (Chrome, Firefox, Edge, Opera, etc.) using extensions.
-- **Speed Limiter**: Control how much bandwidth the app consumes to avoid slowing down your network.
+- **Gyors letöltések**: Akár 500%-kal felgyorsítja a letöltéseket a többszálú csatlakozások segítségével.
+- **Várólista Kezelése**: Töltsön le több fájlt egymás után egyéni letöltési sorok létrehozásával.
+- **Letisztult felület**: Élvezzen egy szép, modern felhasználói felületet beépített sötét mód támogatással.
+- **Böngésző integráció**: Automatikusan rögzíti a linkeket a népszerű böngészőkből (Chrome, Firefox, Edge, Opera stb.) kiegészítők segítségével.
+- **Sebességszabályozás**: Szabályozza, hogy mekkora sávszélességet fogyaszt az alkalmazás, hogy elkerülje a hálózat lelassulását.

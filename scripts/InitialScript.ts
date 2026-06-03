@@ -1,4 +1,5 @@
 import {generateLatestVersionData} from "./GenerateLatestVersionData";
+import {generateSitemap} from "./GenerateSitemap";
 import path from "path";
 import * as fs from "node:fs";
 
@@ -12,5 +13,6 @@ export async function main() {
         recursive:true,
     })
     await generateLatestVersionData(generatedPath)
+    await generateSitemap(path.resolve(__dirname, "..", "public"))
 }
 main()

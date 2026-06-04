@@ -2,11 +2,16 @@ import {Helmet} from "react-helmet";
 import {useCurrentLocaleString, useTranslate} from "~/abstraction/i18n";
 import {useTranslationContext} from "~/i18n/TranslationContext.tsx";
 import {addLocales, getAvailableLocaleStrings} from "~/i18n/TranslationRegistry.ts";
+import {usePageInfo, WithPageInfo} from "~/components/PageInfo.tsx";
 
 export default function CommonMetaTags() {
+    const pageInfo = usePageInfo()
     const t = useTranslate()
-    const title = t("seo_title")
-    const description = t("seo_description")
+    const defaultTitle = t("seo_title")
+    const defaultDescription = t("seo_description")
+
+    const title = pageInfo.title || defaultTitle
+    const description = pageInfo.description || defaultDescription
 
     const locale = useCurrentLocaleString()
     const allLocales = getAvailableLocaleStrings()

@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useMemo, useRef} from "react";
-import {useParams, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useCurrentDirection, useCurrentLanguageInfo, useTranslate} from "~/abstraction/i18n";
 import {Icon} from "@iconify/react";
 import classNames from "classnames";
@@ -9,10 +9,10 @@ import {run} from "~/utils/functionalUtils.ts";
 
 export interface DocsProps {
     data: SidebarCategoryData[];
+    docId: string;
 }
 
-export default function Docs({data}: DocsProps) {
-    const {docId: paramDocId} = useParams<{ docId?: string }>();
+export default function Docs({data, docId}: DocsProps) {
     const navigate = useNavigate();
     const [markdown, setMarkdown] = useState<string>("");
     const [docError, setDocError] = useState<"no_doc" | "not_found" | null>(null);
@@ -35,9 +35,6 @@ export default function Docs({data}: DocsProps) {
             }))
         }));
     }, [data, t]);
-
-    const defaultDocId = sidebarItems.length > 0 && sidebarItems[0].items.length > 0 ? sidebarItems[0].items[0].id : "";
-    const docId = paramDocId || defaultDocId;
 
     useEffect(() => {
         let isMounted = true;

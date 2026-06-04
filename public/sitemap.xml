@@ -3,14 +3,16 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://abdownloadmanager.com/</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en-us" href="https://abdownloadmanager.com/?lang=en-US"/>
     <xhtml:link rel="alternate" hreflang="ar-sa" href="https://abdownloadmanager.com/?lang=ar-SA"/>
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://abdownloadmanager.com/?lang=bn-BD"/>
+    <xhtml:link rel="alternate" hreflang="bqi-ir" href="https://abdownloadmanager.com/?lang=bqi-IR"/>
+    <xhtml:link rel="alternate" hreflang="ckb-ir" href="https://abdownloadmanager.com/?lang=ckb-IR"/>
     <xhtml:link rel="alternate" hreflang="de-de" href="https://abdownloadmanager.com/?lang=de-DE"/>
     <xhtml:link rel="alternate" hreflang="el-gr" href="https://abdownloadmanager.com/?lang=el-GR"/>
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://abdownloadmanager.com/?lang=en-US"/>
     <xhtml:link rel="alternate" hreflang="es-es" href="https://abdownloadmanager.com/?lang=es-ES"/>
     <xhtml:link rel="alternate" hreflang="fa-ir" href="https://abdownloadmanager.com/?lang=fa-IR"/>
     <xhtml:link rel="alternate" hreflang="fi-fi" href="https://abdownloadmanager.com/?lang=fi-FI"/>
@@ -31,5 +33,41 @@
     <xhtml:link rel="alternate" hreflang="vi-vn" href="https://abdownloadmanager.com/?lang=vi-VN"/>
     <xhtml:link rel="alternate" hreflang="zh-cn" href="https://abdownloadmanager.com/?lang=zh-CN"/>
     <xhtml:link rel="alternate" hreflang="zh-tw" href="https://abdownloadmanager.com/?lang=zh-TW"/>
+  </url>
+  <url>
+    <loc>https://abdownloadmanager.com/docs/introduction</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abdownloadmanager.com/docs/installation</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abdownloadmanager.com/docs/portable</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abdownloadmanager.com/docs/integration</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abdownloadmanager.com/docs/faq</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abdownloadmanager.com/docs/uninstallation</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

@@ -192,12 +192,15 @@ function mergeWithPredefined(appVersionData: AppVersionData[]) {
     return _.sortBy(out, l => l.experimental)
 }
 
-export async function getLatestVersionData(): Promise<VersionData> {
+export async function getLatestVersionData(
+    githubToken?: string
+): Promise<VersionData> {
     return {
         app: mergeWithPredefined(
             await getLatestReleaseFromGithubRelease(
                 Constants.github.user,
                 Constants.github.repo,
+                githubToken,
             )
         ),
         browser_extension: [

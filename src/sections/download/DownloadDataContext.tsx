@@ -1,5 +1,5 @@
 import {useAsync} from "react-use";
-import {VersionData, getLatestVersionData} from "~/data/LatestAppVersionData.ts";
+import {VersionData} from "~/data/LatestAppVersionData.ts";
 import React, {PropsWithChildren, useContext, useEffect, useState} from "react";
 import {AsyncState} from "react-use/lib/useAsyncFn";
 

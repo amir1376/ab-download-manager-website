@@ -21,10 +21,17 @@ export type GithubArtifactAsset = {
 
 async function hitRemote(
     owner: string,
-    repo: string
+    repo: string,
+    token?: string,
 ): Promise<GithubRelease> {
-    const input = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
-    const response = await fetch(input);
+    const url = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
+    const headers = new Headers()
+    if (token) {
+        headers.set("Authorization", "Bearer " + token)
+    }
+    const response = await fetch(url, {
+        headers: headers
+    });
     if (!_.inRange(response.status, 200, 299)) {
         throw Error(`fail to get latest version data code:${response.status} ${response.statusText}`);
     }
@@ -69,9 +76,10 @@ function getUserAwareNameForArchitecture(
 
 export async function getLatestReleaseFromGithubRelease(
     owner: string,
-    repo: string
+    repo: string,
+    token?: string,
 ): Promise<AppVersionData[]> {
-    const release = (await hitRemote(owner, repo))
+    const release = (await hitRemote(owner, repo, token))
 
     const appReleaseAsset = release.assets.filter(f => {
         //make sure to add new file extensions here if we have new target

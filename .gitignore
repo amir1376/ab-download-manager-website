@@ -13,6 +13,9 @@ dist-ssr
 *.local
 public/generated
 
+# we are auto generating it
+public/sitemap.xml
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

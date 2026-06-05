@@ -11,7 +11,7 @@ import fi_FI from "./locales/fi-FI.json";
 import fr_FR from "./locales/fr-FR.json";
 import hu_HU from "./locales/hu-HU.json";
 import id_ID from "./locales/id-ID.json";
-import jp_JP from "./locales/ja-JP.json";
+import ja_JP from "./locales/ja-JP.json";
 import it_IT from "./locales/it-IT.json";
 import ko_KR from "./locales/ko-KR.json";
 import lt_LT from "./locales/lt-LT.json";
@@ -45,7 +45,7 @@ export function setUpIntl() {
     "it-IT":it_IT,
     "ko-KR":ko_KR,
     "lt-LT":lt_LT,
-    "jp-JP":jp_JP,
+    "ja-JP":ja_JP,
     "nl-NL":nl_NL,
     "pl-PL":pl_PL,
     "pt-BR":pt_BR,

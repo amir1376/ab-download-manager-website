@@ -15,6 +15,7 @@ export interface FooterData {
     sourceCodeUrl: string
     discussionLink: string
     issuesLink: string
+    docs: string
     developerSite: string
     developerGithub: string
     developerName: string
@@ -35,6 +36,7 @@ export function getFooterData(): FooterData {
         discussionLink: openSource.discussionsUrl,
         issuesLink: openSource.issuesUrl,
         sourceCodeUrl: openSource.sourceCodeUrl,
+        docs: Constants.docs,
         socials: socials,
         licence: {
             name: "Apache-2.0 license",

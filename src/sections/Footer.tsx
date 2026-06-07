@@ -58,6 +58,7 @@ export default function Footer() {
                     <FooterItem name={t("footer_source_code")} link={data.sourceCodeUrl}/>
                     <FooterItem name={t("footer_issues")} link={data.issuesLink}/>
                     <FooterItem name={t("footer_discussion")} link={data.discussionLink}/>
+                    <FooterItem name={t("docs")} link={data.docs}/>
                 </FooterSection>
                 <FooterSection title={t("footer_developer")}>
                     <FooterItem name={t("footer_my_personal_website")} link={data.developerSite}/>

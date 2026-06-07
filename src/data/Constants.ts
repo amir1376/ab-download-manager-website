@@ -31,4 +31,5 @@ export default {
         issuesUrl: issuesUrl,
         discussionsUrl: discussionsUrl,
     },
+    docs: "/docs",
 }

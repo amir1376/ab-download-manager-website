@@ -258,7 +258,7 @@ function DocsLink() {
         dir={useCurrentDirection()}
         title={t("docs")}
         className="btn btn-ghost"
-        href="/docs"
+        href={Constants.docs}
     >
         <Icon height={24} width={24} icon="mdi:book-open-page-variant-outline"/>
         <span className="hidden lg:inline">{t("docs")}</span>
@@ -374,7 +374,7 @@ function OptionMobile() {
         >
             <ul className="menu">
                 <li className="w-full min-w-0 max-w-full box-border">
-                    <MyLink dir={useCurrentDirection()} href="/docs">
+                    <MyLink dir={useCurrentDirection()} href={Constants.docs}>
                         <Icon icon="mdi:book-open-page-variant-outline" height={24} width={24}/>
                         {t("docs")}
                     </MyLink>

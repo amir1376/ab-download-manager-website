@@ -118,7 +118,7 @@ export function WithPageInfo(
                 id,
             });
         };
-    }, [host, id]);
+    }, [host.dispatch, id]);
 
     useEffect(() => {
         host.dispatch({
@@ -129,7 +129,7 @@ export function WithPageInfo(
                 description: props.description,
             },
         });
-    }, [host, id, props.title, props.description]);
+    }, [host.dispatch, id, props.title, props.description]);
 
     return <>{props.children}</>;
 }

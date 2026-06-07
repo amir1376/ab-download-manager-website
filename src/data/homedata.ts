@@ -16,99 +16,110 @@ export interface ImageProp {
 export interface FeatureProp {
     title: Translatable
     description: Translatable
+    icon: string
 }
 
 export interface BrowserProp {
     icon: string
     title: string
-    link:string
-}
-export interface MainAppScreenshot{
-    home:Screenshot
-    download:Screenshot
-}
-export type Screenshot =Record<"dark"|"light", ImageProp>
-
-export interface HomeData{
-    shortName:Translatable
-    longName:Translatable
-    title:Translatable
-    description:Translatable
-    headerIcon:ImageProp
-    borderedIcon:ImageProp
-    features:FeatureProp[]
-    screenshots:MainAppScreenshot
+    link: string
 }
 
-export function getHomeData():HomeData {
+export interface MainAppScreenshot {
+    home: Screenshot
+    download: Screenshot
+}
+
+export type Screenshot = Record<"dark" | "light", ImageProp>
+
+export interface HomeData {
+    shortName: Translatable
+    longName: Translatable
+    title: Translatable
+    description: Translatable
+    headerIcon: ImageProp
+    borderedIcon: ImageProp
+    features: FeatureProp[]
+    screenshots: MainAppScreenshot
+}
+
+export function getHomeData(): HomeData {
     return {
-        headerIcon:{
-            src:appIcon,
-            alt:"App Icon",
+        headerIcon: {
+            src: appIcon,
+            alt: "App Icon",
         },
-        borderedIcon:{
-            src:appIconWithBackground,
-            alt:"App Icon",
+        borderedIcon: {
+            src: appIconWithBackground,
+            alt: "App Icon",
         },
 
-        shortName:"app_short_name",
-        screenshots:{
-            home:{
-                dark:{
-                    alt:"home-screenshot-dark",
-                    src:appHomeDarkScreenshot
+        shortName: "app_short_name",
+        screenshots: {
+            home: {
+                dark: {
+                    alt: "home-screenshot-dark",
+                    src: appHomeDarkScreenshot
                 },
-                light:{
-                    alt:"home-screenshot-light",
-                    src:appHomeLightScreenshot
+                light: {
+                    alt: "home-screenshot-light",
+                    src: appHomeLightScreenshot
                 },
             },
-            download:{
-                dark:{
-                    alt:"download-screenshot-dark",
-                    src:appDownloadDarkScreenshot
+            download: {
+                dark: {
+                    alt: "download-screenshot-dark",
+                    src: appDownloadDarkScreenshot
                 },
-                light:{
-                    alt:"download-screenshot-light",
-                    src:appDownloadLightScreenshot
+                light: {
+                    alt: "download-screenshot-light",
+                    src: appDownloadLightScreenshot
                 },
             }
         },
-        longName:"app_long_name",
-        title:"home_hero_title",
-        description:"home_hero_description",
-        features:[
+        longName: "app_long_name",
+        title: "home_hero_title",
+        description: "home_hero_description",
+        features: [
             {
-                title:"home_feature_simple_ui_title",
-                description:`home_feature_simple_ui_description`,
+                title: "home_feature_simple_ui_title",
+                description: "home_feature_simple_ui_description",
+                icon: "mdi:palette-outline",
             },
             {
-                title:"home_feature_multi_threaded_title",
-                description:`home_feature_multi_threaded_description`
+                title: "home_feature_multi_threaded_title",
+                description: "home_feature_multi_threaded_description",
+                icon: "mdi:speedometer",
             },
             {
-                title:"home_feature_queue_title",
-                description:`home_feature_queue_description`
+                title: "home_feature_queue_title",
+                description: "home_feature_queue_description",
+                icon: "mdi:playlist-check",
             },
             {
-                title:"home_feature_scheduler_title",
-                description:`home_feature_scheduler_description`
+                title: "home_feature_scheduler_title",
+                description: "home_feature_scheduler_description",
+                icon: "mdi:calendar-clock",
             },
             {
-                title:"home_feature_speed_limiter_title",
-                description:`home_feature_speed_limiter_description`
+                title: "home_feature_speed_limiter_title",
+                description: "home_feature_speed_limiter_description",
+                icon: "mdi:car-speed-limiter",
             },
             {
-                title:"home_feature_browser_integration_title",
-                description:`home_feature_browser_integration_description`
+                title: "home_feature_browser_integration_title",
+                description: "home_feature_browser_integration_description",
+                icon: "mdi:web-sync",
             },
             {
-                title:"home_feature_multiplatform_title",
-                description:`home_feature_multiplatform_description`
+                title: "home_feature_multiplatform_title",
+                description: "home_feature_multiplatform_description",
+                icon: "mdi:monitor-cellphone",
             },
             {
-                title:"home_feature_open_source_title",
-                description:`home_feature_open_source_description`
+                title: "home_feature_open_source_title",
+                description: "home_feature_open_source_description",
+                icon: "mdi:code-tags",
             },
         ],
     }

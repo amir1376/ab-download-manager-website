@@ -119,20 +119,32 @@ function Feature({feature}: {
     feature: FeatureProp,
 }) {
     const t = useTranslate()
-    return <div className={classNames(
-        "flex flex-col transition-all hover:scale-105",
-        "py-8 px-8 rounded-lg cursor-default",
-        "bg-base-200 text-base-content",
-        "border border-base-content/10",
-        "shadow hover:shadow-lg",
-        "gradient-border"
-    )}>
-        <div className="text-xl sm:text-2xl font-bold">
-            {t(feature.title)}
-        </div>
-        <div className="mt-2"/>
-        <div className="text-sm sm:text-base opacity-75">
-            {t(feature.description)}
+    return <div className = "relative group">
+        <div className={classNames(
+            "flex flex-col h-full",
+            "py-8 px-8 rounded-lg cursor-default group-hover:scale-105",
+            "transition-all",
+            "bg-base-200 text-base-content",
+            "border border-base-content/10",
+            "shadow group-hover:shadow-xl border-transparent group-hover:border-primary",
+        )}>
+            <div className={
+                classNames(
+                    "w-max p-4",
+                    "text-primary rounded-2xl border-2 border-transparent group-hover:border-primary/10",
+                    "bg-primary bg-opacity-5"
+                )
+            }>
+                <Icon icon={feature.icon} height={36} width={36}/>
+            </div>
+            <div className="mt-4"/>
+            <div className="text-xl sm:text-2xl font-bold transition-colors group-hover:text-primary">
+                {t(feature.title)}
+            </div>
+            <div className="mt-4"/>
+            <div className="text-sm sm:text-base opacity-75">
+                {t(feature.description)}
+            </div>
         </div>
     </div>
 }

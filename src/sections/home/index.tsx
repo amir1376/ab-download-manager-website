@@ -124,10 +124,12 @@ function Feature({feature}: {
             "flex flex-col h-full",
             "py-8 px-8 rounded-lg cursor-default group-hover:scale-105",
             "transition-all",
-            "bg-base-200 text-base-content",
-            "border border-base-content/10",
-            "shadow group-hover:shadow-xl border-transparent group-hover:border-primary",
+            "bg-base-200/50 text-base-content",
+            "border border-base-content/10 group-hover:border-primary",
+            "shadow group-hover:shadow-xl",
         )}>
+            <div className="transition-opacity hidden opacity-0 group-hover:opacity-10 group-hover:block absolute top-0 start-0 w-full h-12 bg-gradient-to-b from-primary to-transparent  pointer-events-none" />
+
             <div className={
                 classNames(
                     "w-max p-4",

@@ -40,6 +40,10 @@ const languageNames: Record<LocaleString, LanguageName> = {
         english: "Kurdish (Sorani)",
         native: "کوردیی سورانی",
     },
+    "cs": {
+        english: "Czech",
+        native: "Čeština",
+    },
     "de": {
         english: "German",
         native: "Deutsch",

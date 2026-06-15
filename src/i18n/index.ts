@@ -2,6 +2,7 @@ import ar_SA from "./locales/ar-SA.json";
 import bn_BD from "./locales/bn-BD.json";
 import bqi_IR from "./locales/bqi-IR.json";
 import ckb_IR from "./locales/ckb-IR.json";
+import cs_CZ from "./locales/cs-CZ.json";
 import de_DE from "./locales/de-DE.json";
 import el_GR from "./locales/el-GR.json";
 import en_US from "./locales/en-US.json";
@@ -33,6 +34,7 @@ export function setUpIntl() {
     "bn-BD":bn_BD,
     "bqi-IR":bqi_IR,
     "ckb-IR":ckb_IR,
+    "cs-CZ":cs_CZ,
     "de-DE":de_DE,
     "el-GR":el_GR,
     "en-US":en_US,

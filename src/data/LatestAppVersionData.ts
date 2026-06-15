@@ -213,14 +213,14 @@ export async function getLatestVersionData(
                 browserType: "chrome",
                 link: "https://chromewebstore.google.com/detail/ab-download-manager-brows/bbobopahenonfdgjgaleledndnnfhooj?authuser=0&hl=en"
             },
-            // {
-            //     browserType:"opera",
-            //     link:""
-            // },
-            // {
-            //     browserType:"edge",
-            //     link:""
-            // },
+            {
+                browserType:"edge",
+                link:"https://chromewebstore.google.com/detail/ab-download-manager-brows/bbobopahenonfdgjgaleledndnnfhooj?authuser=0&hl=en"
+            },
+            {
+                browserType:"opera",
+                link:"https://chromewebstore.google.com/detail/ab-download-manager-brows/bbobopahenonfdgjgaleledndnnfhooj?authuser=0&hl=en"
+            },
         ]
     }
 }

@@ -22,7 +22,7 @@ export function ModalHeader(
 export function ModalContent(
     props: PropsWithChildren
 ) {
-    return <div className="px-4 sm:px-6 md:px-8 pb-6 md:pb-8 flex-1 md:overflow-y-auto">
+    return <div className="px-4 sm:px-6 md:px-8 pb-6 md:pb-8 flex-1 overflow-y-auto">
         {props.children}
     </div>
 }
@@ -37,7 +37,7 @@ export function Modal(
             "modal-box bg-base-200 text-base-content",
             "rounded-3xl sm:w-auto max-w-full container",
             "border border-base-content/10",
-            "p-0 md:h-[80%] flex flex-col",//we want to use padding for each section
+            "p-0 max-h-dvh h-[80%] flex flex-col",//we want to use padding for each section
         )}>
             {props.children}
         </div>

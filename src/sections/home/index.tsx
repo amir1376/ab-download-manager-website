@@ -57,7 +57,7 @@ function Hero(props: { icon: ImageProp, title: string, description: string }) {
                 </div>
                 <MyLink href={Constants.openSource.sourceCodeUrl} target="_blank">
                     <div className={classNames(
-                        "btn btn-ghost btn-outline btn-lg rounded-full border-2",
+                        "btn btn-lg rounded-full",
                         "min-w-48",
                         "font-bold",
                     )}>
@@ -89,7 +89,7 @@ function SectionWithTitle(
 ) {
     return <div id={props.id} className={classNames(
         props.className,
-        "space-y-8"
+        "flex flex-col gap-8"
     )}>
         <MyLink href={`#${props.id}`}>
             <div className="inline-block font-bold text-3xl sm:text-4xl">
@@ -134,7 +134,7 @@ function Feature({feature}: {
                 classNames(
                     "w-max p-4",
                     "text-primary rounded-2xl border-2 border-transparent group-hover:border-primary/10",
-                    "bg-primary bg-opacity-5"
+                    "bg-primary/5"
                 )
             }>
                 <Icon icon={feature.icon} height={36} width={36}/>

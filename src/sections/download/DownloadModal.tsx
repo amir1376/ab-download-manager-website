@@ -55,7 +55,7 @@ function OSOption(
             <Icon height={32} width={32} icon={props.icon} className="flex-shrink-0"/>
             <div className={classNames(
                 "text-sm sm:text-base text-center",
-                props.isSelected ? "text-opacity-100" : "text-opacity-75"
+                props.isSelected ? "opacity-100" : "opacity-75"
             )}>{props.name}</div>
         </div>
         {props.isExperimental && (
@@ -149,7 +149,7 @@ function RenderDownloadLinkBase(
                 "border-2 border-primary rounded-full",
                 "select-none",
                 "py-3 px-4",
-                "border-opacity-0",
+                "border-primary/0",
                 "bg-base-content/10",
                 "hover:bg-base-content/20",
                 "w-full md:w-72 justify-start",

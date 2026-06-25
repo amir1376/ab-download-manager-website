@@ -1,4 +1,37 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+  themes: light, dark;
+}
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --shadow-btn-blur: 0px 0px 50px 10px rgba(0, 0, 0, 0.3);
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  color-scheme: light;
+  --color-primary: #2563eb;
+  --color-secondary: #C631FF;
+  --color-base-100: #eeeeee;
+  --color-base-200: #e0e0e0;
+  --color-base-300: #e0e0e0;
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  color-scheme: dark;
+  --color-primary: #2563eb;
+  --color-secondary: #C631FF;
+  --color-base-100: #0f172a;
+  --color-base-200: #1c2539;
+  --color-base-300: #1c2539;
+  --color-base-content: #B5B5C4;
+}
+
+@utility container {
+  margin-inline: auto;
+}

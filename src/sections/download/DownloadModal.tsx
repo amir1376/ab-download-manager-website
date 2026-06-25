@@ -40,17 +40,18 @@ function OSOption(
     return <div onClick={props.onSelect} className={classNames(
         "relative",
         "cursor-pointer select-none",
-        "flex-1 min-w-[calc(50%-0.5rem)] sm:min-w-0 sm:flex-none",
+        "h-full",
     )}>
         <div className={classNames(
             "flex flex-col items-center space-y-2 justify-center",
             "transition-all",
-            "border-2 rounded",
-            "py-2 px-3 sm:px-4",
+            "border-2 rounded-2xl",
+            "py-3 px-3 sm:px-4",
+            "h-full w-full",
             props.isSelected
                 ? ["bg-base-content/20", "border-primary"]
-                : ["border-base-content/20"],
-            !props.isSelected && "hover:bg-base-content/20",
+                : ["border-base-content/10 bg-base-content/5"],
+            !props.isSelected && "hover:bg-base-content/10",
         )}>
             <Icon height={32} width={32} icon={props.icon} className="flex-shrink-0"/>
             <div className={classNames(
@@ -100,7 +101,7 @@ function OsSection(
         }, [props.availablePlatforms]
     )
 
-    return <div className="flex flex-row flex-wrap gap-2 sm:gap-4">
+    return <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
         {
             osesToRender.map(os => {
                 return <OSOption

@@ -36,6 +36,16 @@ export default function Docs({data, docId}: DocsProps) {
         }));
     }, [data, t]);
 
+    const activeDocTitle = useMemo(() => {
+        for (const cat of sidebarItems) {
+            const found = cat.items.find(item => item.id === docId);
+            if (found) {
+                return found.title;
+            }
+        }
+        return docId ? docId.replace("-", " ") : "";
+    }, [sidebarItems, docId]);
+
     useEffect(() => {
         let isMounted = true;
 
@@ -114,7 +124,7 @@ export default function Docs({data, docId}: DocsProps) {
                         <Icon icon="mdi:menu" className="w-5 h-5"/>
                         <span className="font-semibold">{t("docs_menu")}</span>
                     </button>
-                    <div className="text-sm font-bold text-primary capitalize">{docId.replace("-", " ")}</div>
+                    <div className="text-sm font-bold text-primary">{activeDocTitle}</div>
                 </div>
 
                 {/* Mobile Menu Dropdown Backdrop */}
@@ -161,7 +171,7 @@ export default function Docs({data, docId}: DocsProps) {
                                                 <button
                                                     onClick={() => handleSelectDoc(item.id)}
                                                     className={classNames(
-                                                        "w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-all text-start",
+                                                        "w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-all text-start cursor-pointer",
                                                         isActive
                                                             ? "bg-primary text-primary-content shadow-lg shadow-primary/20 font-bold"
                                                             : "hover:bg-base-content/10 text-base-content/75 hover:text-base-content"

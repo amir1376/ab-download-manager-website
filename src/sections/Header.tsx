@@ -372,18 +372,14 @@ function OptionMobile() {
             tabIndex={0}
             className="dropdown-content shadow-lg w-[calc(100vw-1rem)] max-w-[calc(100vw-1rem)] translate-x-2 rounded-box bg-base-200 overflow-x-hidden z-50"
         >
-            <ul className="menu">
-                <li className="w-full min-w-0 max-w-full box-border">
+            <ul className="menu w-full min-w-0 max-w-full box-border space-y-4">
+                <li>
                     <MyLink dir={useCurrentDirection()} href={Constants.docs}>
                         <Icon icon="mdi:book-open-page-variant-outline" height={24} width={24}/>
                         {t("docs")}
                     </MyLink>
                 </li>
-            </ul>
-            <ul className="menu w-full min-w-0 max-w-full box-border">
-                <li className="w-full min-w-0 max-w-full box-border"><LanguageForMobile/></li>
-            </ul>
-            <ul className="menu">
+                <li><LanguageForMobile/></li>
                 <li><CommunityForMobile/></li>
             </ul>
             <div className="divider my-0"/>

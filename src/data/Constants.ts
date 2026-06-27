@@ -14,6 +14,7 @@ const issuesUrl = `${sourceCodeUrl}/issues/`
 const discussionsUrl = `${sourceCodeUrl}/discussions/`
 
 export default {
+    website: "https://abdownloadmanager.com",
     github: githubInfo,
     developer: developerInfo,
     social:[

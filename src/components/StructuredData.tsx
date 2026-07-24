@@ -4,6 +4,7 @@ import Constants from "~/data/Constants.ts";
 import appIconWithBackground from "~/assets/icons/app_icon_with_background.svg";
 import appHomeLightScreenshot from "~/assets/screenshots/app-home_light.png";
 import appDownloadLightScreenshot from "~/assets/screenshots/app-download_light.png";
+import {usePageInfo} from "~/components/PageInfo.tsx";
 
 interface StructuredDataProps {
     currentUrl: string;
@@ -117,18 +118,6 @@ export default function StructuredData({ currentUrl }: StructuredDataProps) {
         }
     };
 
-    const breadcrumbSchema = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": currentUrl
-            }
-        ]
-    };
 
     // Product Schema (alternative view)
     const productSchema = {
@@ -176,6 +165,22 @@ export default function StructuredData({ currentUrl }: StructuredDataProps) {
         }
     };
 
+    const { breadcrumbs } = usePageInfo();
+
+    let breadcrumbSchema: any = null;
+    if (breadcrumbs && breadcrumbs.length > 0) {
+        breadcrumbSchema = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": breadcrumbs.map((breadcrumb, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "name": breadcrumb.name,
+                "item": breadcrumb.item
+            }))
+        };
+    }
+
     return (
         <Helmet>
             <script type="application/ld+json">
@@ -184,9 +189,11 @@ export default function StructuredData({ currentUrl }: StructuredDataProps) {
             <script type="application/ld+json">
                 {JSON.stringify(websiteSchema)}
             </script>
-            <script type="application/ld+json">
-                {JSON.stringify(breadcrumbSchema)}
-            </script>
+            {breadcrumbSchema && (
+                <script type="application/ld+json">
+                    {JSON.stringify(breadcrumbSchema)}
+                </script>
+            )}
             <script type="application/ld+json">
                 {JSON.stringify(productSchema)}
             </script>

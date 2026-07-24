@@ -10,6 +10,7 @@ import {
 export interface PageInfo {
     title?: string;
     description?: string;
+    breadcrumbs?: { name: string; item?: string }[];
 }
 
 interface Entry {
@@ -67,6 +68,7 @@ export function WithPageInfoHost(props: PropsWithChildren) {
             (result, entry) => ({
                 title: entry.pageInfo.title ?? result.title,
                 description: entry.pageInfo.description ?? result.description,
+                breadcrumbs: entry.pageInfo.breadcrumbs ?? result.breadcrumbs,
             }),
             {}
         );
@@ -108,6 +110,7 @@ export function WithPageInfo(
                 pageInfo: {
                     title: props.title,
                     description: props.description,
+                    breadcrumbs: props.breadcrumbs,
                 },
             },
         });
@@ -127,9 +130,10 @@ export function WithPageInfo(
             pageInfo: {
                 title: props.title,
                 description: props.description,
+                breadcrumbs: props.breadcrumbs,
             },
         });
-    }, [host.dispatch, id, props.title, props.description]);
+    }, [host.dispatch, id, props.title, props.description, props.breadcrumbs]);
 
     return <>{props.children}</>;
 }

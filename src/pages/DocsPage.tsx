@@ -4,6 +4,7 @@ import {useEffect, useMemo} from "react";
 import {useParams} from "react-router-dom";
 import {useTranslate} from "~/abstraction/i18n";
 import {WithPageInfo} from "~/components/PageInfo.tsx";
+import Constants from "~/data/Constants.ts";
 
 function useDocsTitle(
     data: SidebarCategoryData[],
@@ -25,7 +26,7 @@ function useDocsTitle(
     }else {
         result = t("docs_not_found_title")
     }
-    return result
+    return { fullTitle: result, itemTitle: title }
 }
 
 export default function DocsPage() {
@@ -33,8 +34,21 @@ export default function DocsPage() {
     const { docId: paramDocId } = useParams<{ docId?: string }>();
     const defaultDocId = data.length > 0 && data[0].items.length > 0 ? data[0].items[0].id : "";
     const docId = paramDocId || defaultDocId;
-    const title = useDocsTitle(data, docId)
-    return <WithPageInfo title={title}>
+    const { fullTitle, itemTitle } = useDocsTitle(data, docId)
+    const t = useTranslate()
+    
+    const breadcrumbs = [
+        { name: t("home"), item: Constants.website },
+        { name: t("docs"), item: `${Constants.website}/docs` }
+    ];
+    if (itemTitle) {
+        breadcrumbs.push({ name: itemTitle, item: `${Constants.website}/docs/${docId}` });
+    }
+    
+    return <WithPageInfo 
+        title={fullTitle}
+        breadcrumbs={breadcrumbs}
+    >
         <Docs data={data} docId={docId} />
     </WithPageInfo>;
 }

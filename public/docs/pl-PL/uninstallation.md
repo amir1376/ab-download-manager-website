@@ -23,7 +23,7 @@ brew uninstall --cask --zap ab-download-manager && brew untap amir1376/tap
 
 ### Ręczne odinstalowywanie
 
-Jeśli zainstalowano program ręcznie (z pliku `.zip` albo `tar.gz`) po usunięciu folderu aplikacji, także usuń następujące pliki i foldery.
+Jeśli zainstalowano program ręcznie (z pliku `.zip` albo `tar.gz`) po usunięciu folderu aplikacji, także usuń następujące plik(i)/folder(y).
 
 - `~/.abdm` (konfiguracja aplikacji/katalog pamięci podręcznej)
 - `~/.config/autostart/com.abdownloadmanager.desktop` (plik autostartu)

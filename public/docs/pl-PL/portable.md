@@ -1,4 +1,4 @@
-## Jak włączyć tryb przenośny (Zmiana katalogu konfiguracyjnego)
+## Jak uczynić aplikację przenośną (Zmiana katalogu konfiguracyjnego)
 
 Domyślnie, aplikacja przechowuje swoje pliki konfiguracyjne w:
 
@@ -16,6 +16,6 @@ Jeżeli ten folder istnieje, aplikacja automatycznie zacznie go używać jako ka
 
 Stwórz plik o nazwie `.portable` w folderze instalacyjnym aplikacji.
 
-W tym pliku zapisz pełną ścieżkę do folderu, który chcesz użyć jako katalog konfiguracyjny.
+W środku tego pliku, zapisz pełną ścieżkę do folderu, który chcesz użyć jako katalog konfiguracyjny.
 
 Aplikacja odczyta ten plik i użyje podanej ścieżki do przechowywania plików konfiguracyjnych.

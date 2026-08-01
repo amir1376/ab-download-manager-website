@@ -7,7 +7,7 @@
 
 ### Linux
 
-Jeśli został użyty skrypt instalacyjny dla Linuxa możesz uruchomić poniższą komendę żeby odinstalować program
+Jeśli został użyty skrypt instalacyjny dla Linuxa, możesz uruchomić poniższą komendę, żeby odinstalować program
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/uninstall.sh)
@@ -15,7 +15,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager
 
 ### Homebrew (macOS i Linux)
 
-Jeśli aplikacja została zainstalowana przy użyciu Homebrew możesz uruchomić poniższą komendę żeby odinstalować program
+Jeśli aplikacja została zainstalowana przy użyciu Homebrew, możesz uruchomić poniższą komendę, żeby odinstalować program
 
 ```bash
 brew uninstall --cask --zap ab-download-manager && brew untap amir1376/tap

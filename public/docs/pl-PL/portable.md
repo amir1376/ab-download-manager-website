@@ -4,7 +4,7 @@ Domyślnie, aplikacja przechowuje swoje pliki konfiguracyjne w:
 
 `~/.abdm`
 
-Są dwa sposoby żeby to zmienić:
+Są dwa sposoby, żeby to zmienić:
 
 ### Sposób 1: Użyj lokalnego folderu `.abdm`
 
@@ -16,6 +16,6 @@ Jeżeli ten folder istnieje, aplikacja automatycznie zacznie go używać jako ka
 
 Stwórz plik o nazwie `.portable` w folderze instalacyjnym aplikacji.
 
-W środku tego pliku, zapisz pełną ścieżke do folderu który chcesz użyć jako katalog konfiguracyjny.
+W środku tego pliku, zapisz pełną ścieżkę do folderu, który chcesz użyć jako katalog konfiguracyjny.
 
 Aplikacja odczyta ten plik i użyje podanej ścieżki do przechowywania plików konfiguracyjnych.

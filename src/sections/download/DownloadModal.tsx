@@ -1,4 +1,4 @@
-import {Modal, ModalContent, ModalHeader} from "~/components/Modal";
+import {Modal, ModalContent, ModalHeaderTitleAndClose} from "~/components/Modal";
 import classNames from "classnames";
 import {Icon} from "@iconify/react";
 import {PropsWithChildren, ReactNode, useMemo, useState} from "react";
@@ -365,7 +365,7 @@ export default function DownloadModal(props: DownloadModalProps) {
         }
     }
     return <Modal onClickOutside={props.onClose}>
-        <ModalHeader title={t("home_hero_get_app")} onClose={props.onClose}/>
+        <ModalHeaderTitleAndClose title={t("home_hero_get_app")} onClose={props.onClose}/>
         <ModalContent>
             <div className="">
                 {content}

@@ -3,7 +3,7 @@ import classNames from "classnames"
 import {useState} from "react"
 import {QRCodeSVG} from "qrcode.react"
 import {useAsync} from "react-use"
-import {useTranslate} from "~/abstraction/i18n"
+import {useCurrentDirection, useTranslate} from "~/abstraction/i18n"
 import {DonationMethod} from "~/data/DonationMethods.ts";
 
 export function DonatePageContent(
@@ -14,13 +14,13 @@ export function DonatePageContent(
     const t = useTranslate()
     const {value: methods, loading, error} = useAsync(props.getData, [])
     const [selectedCrypto, setSelectedCrypto] = useState<DonationMethod | null>(null)
-    return <>
+    return <div>
         <div className="container mx-auto px-4 py-16 min-h-[calc(100vh-200px)]">
             <div className="text-center mb-16">
-                <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-6">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-base-content mb-6">
                     {t("donate")}
                 </h1>
-                <p className="text-lg text-base-content/70 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-lg text-base-content max-w-2xl mx-auto leading-relaxed">
                     {t("donate_description")}
                 </p>
             </div>
@@ -76,7 +76,7 @@ export function DonatePageContent(
                 </button>
             </form>
         </dialog>
-    </>
+    </div>
 }
 
 function CryptoDonationCard({method, onClick}: { method: DonationMethod, onClick: () => void }) {

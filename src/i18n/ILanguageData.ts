@@ -75,6 +75,12 @@ export type ILanguageData = {
 
     coming_soon:string
 
+    donate: string;
+    donate_description: string;
+
+    copied: string;
+    copy_address: string;
+
     attention:string
     experimental_platform_warning:string
 

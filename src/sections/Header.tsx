@@ -265,6 +265,19 @@ function DocsLink() {
     </MyLink>
 }
 
+function DonateLink() {
+    const t = useTranslate()
+    return <MyLink
+        dir={useCurrentDirection()}
+        title={t("donate")}
+        className="btn btn-ghost"
+        href="/donate"
+    >
+        <Icon height={24} width={24} icon="mdi:heart-outline"/>
+        <span className="hidden lg:inline">{t("donate")}</span>
+    </MyLink>
+}
+
 function OptionMobile() {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -379,6 +392,12 @@ function OptionMobile() {
                         {t("docs")}
                     </MyLink>
                 </li>
+                <li>
+                    <MyLink dir={useCurrentDirection()} href="/donate">
+                        <Icon icon="mdi:heart-outline" height={24} width={24}/>
+                        {t("donate")}
+                    </MyLink>
+                </li>
                 <li><LanguageForMobile/></li>
                 <li><CommunityForMobile/></li>
             </ul>
@@ -394,6 +413,7 @@ function OptionMobile() {
 function OptionDesktop() {
     return <div className="hidden md:flex flex-row  lg:space-x-4">
         <SourceCode/>
+        <DonateLink/>
         <DocsLink/>
         <CommunityDesktop/>
         <LanguageDropDown/>

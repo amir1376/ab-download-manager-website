@@ -77,9 +77,11 @@ export type ILanguageData = {
 
     donate: string;
     donate_description: string;
+    donate_via: string;
 
     copied: string;
     copy_address: string;
+    click_to_show_address_and_qr_code: string;
 
     attention:string
     experimental_platform_warning:string

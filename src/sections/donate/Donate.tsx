@@ -80,6 +80,7 @@ export function DonatePageContent(
 }
 
 function CryptoDonationCard({method, onClick}: { method: DonationMethod, onClick: () => void }) {
+    const t = useTranslate()
     return (
         <button
             onClick={onClick}
@@ -89,7 +90,7 @@ function CryptoDonationCard({method, onClick}: { method: DonationMethod, onClick
                 <RenderPaymentIcon icon={method.icon} iconTint={method.iconTint} className="w-12 h-12"/>
                 <div>
                     <h3 className="card-title text-xl font-bold">{method.name}</h3>
-                    <p className="text-sm text-base-content/60">Click to view QR code & address</p>
+                    <p className="text-sm text-base-content/60">{t("click_to_show_address_and_qr_code")}</p>
                 </div>
             </div>
         </button>
@@ -110,7 +111,7 @@ function LinkDonationCard({method}: { method: DonationMethod }) {
                 <RenderPaymentIcon icon={method.icon} iconTint={method.iconTint} className="w-12 h-12"/>
                 <div>
                     <h3 className="card-title text-xl font-bold">{method.name}</h3>
-                    <p className="text-sm text-base-content/60">{t("donate")} via {method.name}</p>
+                    <p className="text-sm text-base-content/60">{t("donate_via", {name: method.name})}</p>
                 </div>
             </div>
         </a>

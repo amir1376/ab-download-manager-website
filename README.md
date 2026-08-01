@@ -6,7 +6,7 @@ Website for introducing The **AB Download Manager** app
 
 <<<< **www.abdownloadmanager.com** >>>>
 
-This Website is **hosted** by `GitHub Pages ❤️`
+This Website is **hosted** by `Cloudflare Pages ❤️`
 
 ## Repositories And Source Code
 

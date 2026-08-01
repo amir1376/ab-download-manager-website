@@ -2,7 +2,7 @@
 
 Witamy w dokumentacji programu **AB Download Manager**! 
 
-AB Download Manager to darmowy, szybki i otwarto-źródłowy menedżer pobierania zaprojektowany tak, aby pobieranie plików przebiegało płynnie, w uporządkowany sposób i błyskawicznie.
+AB Download Manager to darmowy, szybki i o otwartym kodzie źródłowym menedżer pobierania zaprojektowany tak, aby pobieranie plików przebiegało płynnie, w uporządkowany sposób i błyskawicznie.
 
 ## Kluczowe funkcje
 

@@ -1,50 +1,58 @@
 import {getLatestReleaseFromGithubRelease} from "~/data/GithubApi.ts";
-import _ from "lodash";
+import _, {lastIndexOf} from "lodash";
 import Constants from "~/data/Constants.ts";
+import * as z from "zod";
 
 export type PossiblePlatformsType =
     | "android"
     | "windows"
     | "linux"
     | "mac"
-export const possiblePlatformNames: PossiblePlatformsType[] =
-    [
-        "android",
-        "windows",
-        "linux",
-        "mac",
-    ]
 
-export type PossibleArchitectureType =
-    | "x64"
-    | "arm64"
-    | "universal"
-export const possibleArchitectureNames: PossibleArchitectureType[] =
-    [
-        "x64",
-        "arm64",
-        "universal",
-    ]
+export const PossibleArchitectureSchema = z.enum([
+    "x64",
+    "arm64",
+    "universal",
+]);
 
-export type PossibleLinkType =
-    | "direct"
-    | "third_party"
+export type PossibleArchitectureType = z.infer<typeof PossibleArchitectureSchema>
 
-export interface LinkType<Type extends PossibleLinkType = PossibleLinkType> {
-    type: Type
-    link: string
-    ext?: string
-    arch?: PossibleArchitectureType
-}
+const ChecksumHashSchema = z.object({
+    value: z.string(),
+    type: z.string(),
+});
+export type ChecksumHash =  z.infer<typeof ChecksumHashSchema>
 
-export interface ChecksumHash {
-    value: string
-    type: string // "md5" | "sha" etc.
-}
+const DirectLinkSchema = z.object({
+    type: z.literal("direct"),
+    link: z.url(),
+    ext: z.string(),
+    checksums: z.array(ChecksumHashSchema),
+    arch: PossibleArchitectureSchema.optional(),
+});
 
-export interface DirectLink extends LinkType<"direct"> {
-    checksums: ChecksumHash[]
-}
+const ThirdPartyLinkSchema = z.object({
+    type: z.literal("third_party"),
+    provider: z.string(),
+    link: z.url()
+});
+
+const ScriptLinkSchema = z.object({
+    type: z.literal("script"),
+    name: z.string(),
+    script: z.string(),
+});
+
+const LinkSchema = z.discriminatedUnion("type", [
+    DirectLinkSchema,
+    ThirdPartyLinkSchema,
+    ScriptLinkSchema,
+]);
+
+export type DirectLink = z.infer<typeof DirectLinkSchema>;
+export type ThirdPartyLink = z.infer<typeof ThirdPartyLinkSchema>;
+export type ScriptLink = z.infer<typeof ScriptLinkSchema>;
+export type LinkType = z.infer<typeof LinkSchema>;
 
 export const osInfo: Record<PossiblePlatformsType, { icon: string, name: string }> = {
     android: {
@@ -79,10 +87,6 @@ export const providerInfo: Record<string, {
     }
 }
 
-export interface ThirdPartyLink extends LinkType<"third_party"> {
-    provider: keyof typeof providerInfo & string
-}
-
 
 export function isDirectLink(link: LinkType): link is DirectLink {
     return link.type === "direct"
@@ -92,6 +96,19 @@ export function isThirdPartyLink(link: LinkType): link is ThirdPartyLink {
     return link.type === "third_party"
 }
 
+export function isInstallationScript(link: LinkType): link is ThirdPartyLink {
+    return link.type === "script"
+}
+
+export function installationContainsLink(link: LinkType): link is ThirdPartyLink |  DirectLink {
+    return isDirectLink(link) || isThirdPartyLink(link)
+}
+export function getInstallationArch(link: LinkType): PossibleArchitectureType | undefined {
+    if (isDirectLink(link)){
+        return link.arch
+    }
+    return undefined
+}
 
 export interface AppVersionData {
     platform: PossiblePlatformsType
@@ -149,6 +166,46 @@ const defaultVersionData: {
     link: LinkType,
     platform: PossiblePlatformsType
 }[] = [
+    {
+        link: {
+            type: "script",
+            name: "Installation Script",
+            script: "bash <(curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/install.sh)"
+        },
+        platform: "linux"
+    },
+    {
+        link: {
+            type: "script",
+            name: "Winget",
+            script: "winget install amir1376.ABDownloadManager"
+        },
+        platform: "windows"
+    },
+    {
+        link: {
+            type: "script",
+            name: "Scoop",
+            script: "scoop install extras/abdownloadmanager"
+        },
+        platform: "windows"
+    },
+    {
+        link: {
+            type: "script",
+            name: "Brew",
+            script: "brew tap amir1376/tap && brew install --cask ab-download-manager"
+        },
+        platform: "linux"
+    },
+    {
+        link: {
+            type: "script",
+            name: "Brew",
+            script: "brew tap amir1376/tap && brew install --cask ab-download-manager"
+        },
+        platform: "mac"
+    },
     // TODO add markets etc..
     // {
     //     link: {

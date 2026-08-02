@@ -14,8 +14,9 @@ import {
     BrowserExtensionVersionData,
     browserInfo,
     ChecksumHash,
+    getInstallationArch,
+    installationContainsLink,
     isDirectLink,
-    isThirdPartyLink,
     LinkType,
     osInfo,
     PossiblePlatformsType,
@@ -128,8 +129,9 @@ function OsSection(
 function TopOfSection(props: {
     title: string
     step: number
+    className?: string
 } & PropsWithChildren) {
-    return <div className="">
+    return <div className={props.className}>
         <div className="flex flex-row items-center select-none mb-4 mt-2 text-base sm:text-lg font-bold">
         <span
             className="text-primary me-1">
@@ -155,7 +157,7 @@ function RenderDownloadLinkBase(
             <div className={classNames(
                 "flex flex-row items-center gap-4",
                 "transition-all",
-                "border-2 border-primary rounded-full",
+                "border-2 border-primary rounded-xl",
                 "select-none",
                 "py-3 px-4",
                 "border-primary/0",
@@ -167,11 +169,58 @@ function RenderDownloadLinkBase(
                 // "btn btn-ghost btn-outline w-72 justify-start"
             )}>
                 <Icon className="h-6 w-6 flex-shrink-0" icon={props.icon}/>
-                <div className="flex-1 break-words">{props.title}</div>
+                <div className="flex-1 wrap-break-word">{props.title}</div>
                 {props.badge && <Badge>{props.badge}</Badge>}
                 {!haveLink && <ComingSoonBadge/>}
             </div>
         </MyLink>
+    </div>
+}
+
+function RenderInstallerScript(
+    props: {
+        script: string,
+        title: string,
+        className: string,
+    }
+) {
+    const [isDone, setIsDone] = useState(false)
+    const [lastHandle, setLastHandle] = useState<any>(undefined)
+    const [, copyToClipboard] = useCopyToClipboard()
+    const onButtonClick = () => {
+        run(async () => {
+            try {
+                await copyToClipboard(props.script);
+                setIsDone(true);
+            } catch (e) {
+                console.error(e);
+            }
+            clearTimeout(lastHandle);
+            setLastHandle(
+                setTimeout(() => setIsDone(false), 2000)
+            );
+        })
+    };
+    return <div className={props.className}>
+        <div className="flex flex-row items-center">
+            <h6 className="font-bold text-lg">{props.title}</h6>
+            <div className="w-2"/>
+            <Icon
+                height={16} width={16}
+                onClick={onButtonClick}
+                icon={isDone ? "ic:round-done" : "mdi:content-copy"}
+                className={classNames(
+                    "hover:opacity-85 transition-colors cursor-pointer flex items-center justify-center rounded-md hover:bg-base-content/5 select-none",
+                    isDone ? "text-success opacity-85" : "opacity-40 text-inherit",
+                )}
+            />
+        </div>
+        <div className="h-1"/>
+        <div className="bg-base-content/10 w-full rounded-xl">
+        <pre className="p-4 overflow-x-scroll">
+            <code>{props.script}</code>
+        </pre>
+        </div>
     </div>
 }
 
@@ -201,36 +250,56 @@ function RenderAppDownloadLink(
     let icon: string
     let title: string
     let badge: string | undefined = undefined
-    if (link.arch) {
-        badge = archNameMapper[props.platform][link.arch];
-    }
-    if (isThirdPartyLink(link)) {
-        const info = providerInfo[link.provider];
-        icon = info.icon
-        title = t("download_from_provider", {
-            name: info.fullName
-        })
-    } else {
-        icon = osInfo[props.platform].icon
-        // console.log(icon, props.platform)
-        title = run(() => {
-            let m = t("download_direct_download")
-            if (props.downloadLink.ext) {
-                m += ` (${props.downloadLink.ext})`
+
+    let downloadBox: ReactNode
+
+    switch (link.type) {
+        case "direct":
+            if (link.arch) {
+                badge = archNameMapper[props.platform][link.arch];
             }
-            return m
-        })
+            icon = osInfo[props.platform].icon
+            // console.log(icon, props.platform)
+            title = run(() => {
+                let m = t("download_direct_download")
+                if (link.ext) {
+                    m += ` (${link.ext})`
+                }
+                return m
+            })
+            downloadBox = <RenderDownloadLinkBase
+                link={link.link}
+                icon={icon}
+                title={title}
+                badge={badge}
+            />
+            break
+        case "third_party":
+            const info = providerInfo[link.provider];
+            icon = info.icon
+            title = t("download_from_provider", {
+                name: info.fullName
+            })
+            downloadBox = <RenderDownloadLinkBase
+                link={link.link}
+                icon={icon}
+                title={title}
+                badge={badge}
+            />
+            break
+        case "script":
+            title = link.name
+            downloadBox = <RenderInstallerScript
+                title={link.name}
+                script={link.script}
+                className=""
+            />
     }
     return <div className="flex flex-col">
-        <RenderDownloadLinkBase
-            link={link.link}
-            icon={icon}
-            title={title}
-            badge={badge}
-        />
-        {isDirectLink(link) && (
-            <div className="flex flex-row items-center">
-                <DirectLinkQRCodes
+        {downloadBox}
+        <div className="flex flex-row items-center">
+            {
+                installationContainsLink(link) && <DirectLinkQRCodes
                     className="mt-1"
                     btnExtraClassName="ms-4"
                     link={link.link}
@@ -238,12 +307,14 @@ function RenderAppDownloadLink(
                     title={title}
                     badge={badge}
                 />
+            }
+            {isDirectLink(link) && (
                 <Checksums
                     className="mt-1"
                     btnExtraClassName="ms-4"
                     checksums={link.checksums}/>
-            </div>
-        )}
+            )}
+        </div>
     </div>
 }
 
@@ -301,10 +372,10 @@ function DirectLinkQRCodes(props: {
     const [isOpen, setIsOpen] = useState(false)
     const onClose = () => setIsOpen(false)
     const description = useMemo(
-        ()=>{
+        () => {
             const platformName = osInfo[props.platform].name
             return [platformName, props.badge].join(" - ")
-        },[props.platform, props.badge]
+        }, [props.platform, props.badge]
     )
     return <div className={props.className}>
         <div className="flex flex-col">
@@ -314,7 +385,7 @@ function DirectLinkQRCodes(props: {
                     "self-start hover:underline cursor-pointer text-xs sm:text-sm",
                     props.btnExtraClassName,
                 )}>
-                <Icon icon="material-symbols:qr-code-rounded"/>
+                <Icon height={16} width={16} icon="material-symbols:qr-code-rounded"/>
             </div>
             {isOpen && <Modal onClickOutside={onClose}>
                 <ModalHeader
@@ -356,7 +427,7 @@ function DownloadSection(
     const sortedLinks = _.sortBy(
         props.versionInfo.links,
         (link: LinkType) => {
-            const arch = link.arch;
+            const arch = getInstallationArch(link);
             if (!arch) {
                 return 999
             }
@@ -371,7 +442,7 @@ function DownloadSection(
         <span className="opacity-50">{t("or")}</span>
     </div>
     return <div>
-        <div className="flex flex-col py-2">
+        <div className="flex flex-col py-2 overflow-x-hidden">
             {sortedLinks.map((dlLink, index) => (
                 <div key={index}>
                     {index != 0 && orDivider}
@@ -499,7 +570,12 @@ function LoadedDownloadModal(
                 </div>
             </TopOfSection>
 
-            <TopOfSection step={2} title={t("download_select_download_method")}>
+            <TopOfSection
+                className={classNames(
+                    // use parent width
+                    "w-0 min-w-full"
+                )}
+                step={2} title={t("download_select_download_method")}>
                 <DownloadSection versionInfo={currentOsData!}/>
             </TopOfSection>
         </div>

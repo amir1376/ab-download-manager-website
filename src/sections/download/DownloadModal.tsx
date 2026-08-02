@@ -1,19 +1,26 @@
-import {Modal, ModalContent, ModalHeaderTitleAndClose} from "~/components/Modal";
+import {
+    Modal,
+    ModalActionIconButton,
+    ModalCloseButton,
+    ModalContent,
+    ModalHeader,
+    ModalHeaderTitleAndClose
+} from "~/components/Modal";
 import classNames from "classnames";
 import {Icon} from "@iconify/react";
-import {PropsWithChildren, ReactNode, useMemo, useState} from "react";
+import React, {PropsWithChildren, ReactNode, useMemo, useState} from "react";
 import {
-    providerInfo,
-    isThirdPartyLink,
-    LinkType,
-    PossiblePlatformsType,
     AppVersionData,
-    osInfo,
     BrowserExtensionVersionData,
     browserInfo,
-    VersionData,
+    ChecksumHash,
     isDirectLink,
-    ChecksumHash
+    isThirdPartyLink,
+    LinkType,
+    osInfo,
+    PossiblePlatformsType,
+    providerInfo,
+    VersionData
 } from "~/data/LatestAppVersionData.ts";
 import {MyLink} from "~/abstraction/navigation";
 import {useCurrentDirection, useTranslate} from "~/abstraction/i18n";
@@ -23,6 +30,7 @@ import {run} from "~/utils/functionalUtils.ts";
 import {useCopyToClipboard} from "usehooks-ts";
 import {archNameMapper, archPriorityPerPlatform} from "~/utils/ArchUtil.ts";
 import _ from "lodash";
+import {QRCodeSVG} from "qrcode.react";
 
 export type DownloadModalProps = {
     onClose: () => void
@@ -192,7 +200,7 @@ function RenderAppDownloadLink(
     const link = props.downloadLink;
     let icon: string
     let title: string
-    let badge: string|undefined = undefined
+    let badge: string | undefined = undefined
     if (link.arch) {
         badge = archNameMapper[props.platform][link.arch];
     }
@@ -221,10 +229,20 @@ function RenderAppDownloadLink(
             badge={badge}
         />
         {isDirectLink(link) && (
-            <Checksums
-                className="mt-1"
-                btnExtraClassName="ms-4"
-                checksums={link.checksums}/>
+            <div className="flex flex-row items-center">
+                <DirectLinkQRCodes
+                    className="mt-1"
+                    btnExtraClassName="ms-4"
+                    link={link.link}
+                    platform={props.platform}
+                    title={title}
+                    badge={badge}
+                />
+                <Checksums
+                    className="mt-1"
+                    btnExtraClassName="ms-4"
+                    checksums={link.checksums}/>
+            </div>
         )}
     </div>
 }
@@ -271,6 +289,65 @@ function Checksums(props: {
     </div>
 }
 
+function DirectLinkQRCodes(props: {
+    link: string,
+    btnExtraClassName?: string,
+    className?: string,
+    title: string,
+    platform: PossiblePlatformsType,
+    badge: string | undefined,
+}) {
+    const t = useTranslate()
+    const [, copyToClipboard] = useCopyToClipboard()
+    const [isOpen, setIsOpen] = useState(false)
+    const onClose = () => setIsOpen(false)
+    const description = useMemo(
+        ()=>{
+            const platformName = osInfo[props.platform].name
+            return [platformName, props.badge].join(" - ")
+        },[props.platform, props.badge]
+    )
+    return <div className={props.className}>
+        <div className="flex flex-col">
+            <div
+                onClick={() => setIsOpen(!isOpen)}
+                className={classNames(
+                    "self-start hover:underline cursor-pointer text-xs sm:text-sm",
+                    props.btnExtraClassName,
+                )}>
+                <Icon icon="material-symbols:qr-code-rounded"/>
+            </div>
+            {isOpen && <Modal onClickOutside={onClose}>
+                <ModalHeader
+                    title={props.title}
+                    actions={
+                        <div className="flex flex-row">
+                            <ModalActionIconButton icon="ic:round-content-copy"
+                                                   onClick={() => copyToClipboard(props.link)}/>
+                            <ModalCloseButton onClose={onClose}/>
+                        </div>
+                    }
+                />
+                <ModalContent>
+                    <div className="flex flex-col px-4 justify-center items-center">
+                        <div className="bg-white p-4 rounded-xl">
+                            <QRCodeSVG
+                                value={props.link}
+                                size={200}
+                                bgColor="#ffffff"
+                                fgColor="#000000"
+                            />
+                        </div>
+                        <div className="pt-2">
+                            {description}
+                        </div>
+                    </div>
+                </ModalContent>
+            </Modal>}
+        </div>
+    </div>
+}
+
 function DownloadSection(
     props: {
         versionInfo: AppVersionData
@@ -281,7 +358,7 @@ function DownloadSection(
         props.versionInfo.links,
         (link: LinkType) => {
             const arch = link.arch;
-            if (!arch){
+            if (!arch) {
                 return 999
             }
             const index = archPriorityPerPlatform[props.versionInfo.platform].indexOf(arch);

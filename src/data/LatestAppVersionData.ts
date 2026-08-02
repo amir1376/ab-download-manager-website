@@ -162,6 +162,12 @@ export type VersionData = {
     browser_extension: ReadonlyArray<BrowserExtensionVersionData>,
 }
 
+export function isBrowserExtensionSupportedInThisPlatform(
+    platform: PossiblePlatformsType
+): boolean {
+    return platform !== "android"
+}
+
 const defaultVersionData: {
     link: LinkType,
     platform: PossiblePlatformsType

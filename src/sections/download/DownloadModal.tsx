@@ -15,7 +15,7 @@ import {
     browserInfo,
     ChecksumHash,
     getInstallationArch,
-    installationContainsLink,
+    installationContainsLink, isBrowserExtensionSupportedInThisPlatform,
     isDirectLink,
     LinkType,
     osInfo,
@@ -442,7 +442,7 @@ function DownloadSection(
         <span className="opacity-50">{t("or")}</span>
     </div>
     return <div>
-        <div className="flex flex-col py-2 overflow-x-hidden">
+        <div className="flex flex-col py-2">
             {sortedLinks.map((dlLink, index) => (
                 <div key={index}>
                     {index != 0 && orDivider}
@@ -551,6 +551,7 @@ function LoadedDownloadModal(
             return appForPlatforms[0].platform
         }
     )
+    const shouldShowExtensions = isBrowserExtensionSupportedInThisPlatform(selectedPlatform)
     const currentOsData = useMemo(
         () => appForPlatforms.find(item => item.platform == selectedPlatform)
         , [selectedPlatform, appForPlatforms])
@@ -581,7 +582,7 @@ function LoadedDownloadModal(
         </div>
         <div className="flex flex-col space-y-6 md:space-y-8">
             {
-                browser_extension.length > 0 && <TopOfSection step={3} title={t("download_extension_for_browser")}>
+                shouldShowExtensions && browser_extension.length > 0 && <TopOfSection step={3} title={t("download_extension_for_browser")}>
                     <DownloadExtensionSection extensionLinks={browser_extension!}/>
                 </TopOfSection>
             }

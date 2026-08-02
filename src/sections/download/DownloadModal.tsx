@@ -297,7 +297,6 @@ function DirectLinkQRCodes(props: {
     platform: PossiblePlatformsType,
     badge: string | undefined,
 }) {
-    const t = useTranslate()
     const [, copyToClipboard] = useCopyToClipboard()
     const [isOpen, setIsOpen] = useState(false)
     const onClose = () => setIsOpen(false)

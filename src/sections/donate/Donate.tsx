@@ -5,7 +5,8 @@ import {QRCodeSVG} from "qrcode.react"
 import {useAsync} from "react-use"
 import {useTranslate} from "~/abstraction/i18n"
 import {DonationMethod} from "~/data/DonationMethods.ts"
-import {Modal, ModalActionIconButton, ModalCloseButton, ModalContent, ModalHeader} from "~/components/Modal.tsx";
+import {Modal, ModalCloseButton, ModalContent, ModalHeader} from "~/components/Modal.tsx";
+import {useCopyToClipboard} from "usehooks-ts";
 
 export function DonatePageContent(
     props: {
@@ -161,11 +162,12 @@ function CryptoAddressDialog(
     const t = useTranslate()
     const selectedCrypto = props.selectedCrypto
     const [copied, setCopied] = useState(false)
+    const [, copyToClipboard] = useCopyToClipboard()
     const handleCopy = async () => {
         if (!selectedCrypto.address) {
             return
         }
-        await navigator.clipboard.writeText(selectedCrypto.address)
+        await copyToClipboard(selectedCrypto.address)
         setCopied(true)
         setTimeout(() => {
             setCopied(false)

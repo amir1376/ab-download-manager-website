@@ -11,7 +11,7 @@ Puedes instalar AB Download Manager de las siguientes formas
 
 #### Linux (Recomendado)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/install.sh | bash
+bash <(curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/install.sh)
 ```
 
 ### Gestor de Paquetes

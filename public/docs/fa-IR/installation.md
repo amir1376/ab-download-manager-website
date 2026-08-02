@@ -34,7 +34,7 @@ Apple could not verify “ABDownloadManager” is free of malware that may harm 
 
 #### لینوکس (توصیه شده)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/install.sh | bash
+bash <(curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/install.sh)
 ```
 
 ### پکیج منیجر

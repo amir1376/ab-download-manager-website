@@ -11,7 +11,7 @@
 
 #### Linux（推荐）
 ```bash
-curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/install.sh | bash
+bash <(curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/install.sh)
 ```
 
 ### 包管理器

@@ -11,7 +11,7 @@ Az AB Download Manager telepíthető a következő módokon
 
 #### Linux (Ajánlott)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/install.sh | bash
+bash <(curl -fsSL https://raw.githubusercontent.com/amir1376/ab-download-manager/master/scripts/install.sh)
 ```
 
 ### Csomagkezelő

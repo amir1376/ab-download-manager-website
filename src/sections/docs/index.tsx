@@ -6,6 +6,7 @@ import classNames from "classnames";
 import {SidebarCategoryData} from "~/data/docsdata";
 import Markdown, {ExtraProps} from "react-markdown";
 import {run} from "~/utils/functionalUtils.ts";
+import {useCopyToClipboard} from "usehooks-ts";
 
 export interface DocsProps {
     data: SidebarCategoryData[];
@@ -251,6 +252,7 @@ function PreCopyCodeSupport(props: ExtraProps) {
     const ref = useRef<HTMLPreElement>(null);
     const [isDone, setIsDone] = useState(false)
     const [lastHandle, setLastHandle] = useState<any>(undefined)
+    const [, copyToClipboard] = useCopyToClipboard()
     const {node, ...restProps} = props
     const onButtonClick = () => {
         run(async () => {
@@ -259,7 +261,7 @@ function PreCopyCodeSupport(props: ExtraProps) {
                 if (!pre) return
                 const code = pre.querySelector("code")?.innerText || pre.innerText;
                 if (!code) return
-                await navigator.clipboard.writeText(code.trim());
+                await copyToClipboard(code.trim());
                 setIsDone(true);
             } catch (e) {
                 console.error(e);
